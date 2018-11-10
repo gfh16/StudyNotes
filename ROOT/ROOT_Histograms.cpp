@@ -14,6 +14,7 @@
    
    ***  // No show statistics box of a histogram
         h->SetStats(0); 
+        h->SetOptStat(0);
    
    ***  // Muliti Histograms Drawing
          THStack *hs = new THStack("hs","title");
