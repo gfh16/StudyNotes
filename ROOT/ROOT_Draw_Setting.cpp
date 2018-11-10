@@ -2,17 +2,19 @@
 ///  how to draw nice figures? How to present the results nicer ?
 ///////////////////////////////////////////////////////////////////
 
-{
- ****  //gPAD
+//________________________________________________________________
+//////////////////////////////////////////////////////////////////
+/// ****   gPAD
   gPad->SetLogx(1);//  same as  gPad->SetLogx(true)
   gPad->SetTicky(1); // set axis grid in four axises
  
 
-}
+//________________________________________________________________
 
 
-{
-  **** // Set Axis
+//________________________________________________________________
+//////////////////////////////////////////////////////////////////
+///   ****  Set Axis
   hs->Draw("pfc nostack");
   hs->GetXaxis()->SetTitle("E_{lab}(MeV)");
   hs->GetXaxis()->SetTitleSize(0.04);   
@@ -22,15 +24,42 @@
   hs->GetYaxis()->SetTitle("#frac{d^{2}N}{dEd#Omega}(a.u.)");
   hs->GetYaxis()->SetTitleSize(0.04);
   hs->GetYaxis()->SetLabelSize(0.03);
-  hs->GetYaxis()->CenterTitle(true);
-          
-}
+  hs->GetYaxis()->CenterTitle(true);          
+//__________________________________________________________________
 
-{
- *****  // TLine
- TLine * line = new TLine(double x1, double y1, double x2, double y2);
- line->SetLineColor(kRed);
- line->SetLineStyle(2);
-   
 
-}
+//__________________________________________________________________
+////////////////////////////////////////////////////////////////////
+////  *****   TLine
+  TLine * line = new TLine(double x1, double y1, double x2, double y2);
+  line->SetLineColor(kRed);
+  line->SetLineStyle(2);
+//___________________________________________________________________
+
+
+//___________________________________________________________________
+/// ****** TLagend
+  TLegend * legendario = new TLegend(double x1, double y1, double x2, double y2);
+  legendario->AddEntry(HistZ1, "Z = 1", "F");
+  legendario->AddEntry(HistZ2, "Z = 2", "F");
+  legendario->AddEntry(HistZ3, "Z = 3", "F");
+  legendario->AddEntry(HistZ4, "Z = 4", "F");
+  legendario->AddEntry(HistZ5, "Z = 5", "F");
+  legendario->SetBorderSize(0);
+  legendario->Draw("SAME");
+//____________________________________________________________________
+
+
+//____________________________________________________________________
+//////////////////////////////////////////////////////////////////////
+/// TLatex
+  TLatex * label_Z1_A01 = new TLatex(1.10, 2.42E6, "^{1}H");
+  label_Z1_A01->SetTextColor(kRed);
+  label_Z1_A01->SetTextAlign(21);
+  label_Z1_A01->SetTextFont(42);
+  label_Z1_A01->Draw("SAME");
+  
+
+
+
+
