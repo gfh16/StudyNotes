@@ -27,7 +27,7 @@
 }
 
 {
- *****  // TLatex
+ *****  // TLine
  TLine * line = new TLine(double x1, double y1, double x2, double y2);
  line->SetLineColor(kRed);
  line->SetLineStyle(2);
