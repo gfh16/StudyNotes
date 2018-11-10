@@ -1,0 +1,20 @@
+////////////////////////////////////////////////////////////////////
+///  how to draw nice figures? How to present the results nicer ?
+///////////////////////////////////////////////////////////////////
+
+{
+
+  gPad->SetLogx(1);//  same as  gPad->SetLogx(true)
+  gPad->SetTicky(1); // set axis grid in four axises
+  
+
+
+
+
+
+
+
+
+
+
+}
