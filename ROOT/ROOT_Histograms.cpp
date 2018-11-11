@@ -3,20 +3,20 @@
 /////////////////////////////////////////////////////////////
 {
 
-   ***  //cloning a histogram
-   TH1* hc = (TH1*)h1->Clone();  
+  ***  //cloning a histogram
+  TH1* hc = (TH1*)h1->Clone();  
    
-   ***  // Normalizing histograms
-   Double_t scale = norm/h->Integral();
-   h->Scale(scale);
+  ***  // Normalizing histograms
+  Double_t scale = norm/h->Integral();
+  h->Scale(scale);
    
-   h->Scale(1./h->Integral());
+  h->Scale(1./h->Integral());
    
-   ***  // No show statistics box of a histogram
-   h->SetStats(0); 
-   h->SetOptStat(0);
+  ***  // No show statistics box of a histogram
+  h->SetStats(0); 
+  h->SetOptStat(0);
    
-   ***  // Muliti Histograms Drawing
+  ***  // Muliti Histograms Drawing
   THStack *hs = new THStack("hs","title");
   hs->Add(h1);
   hs->Add(h2);
@@ -39,4 +39,23 @@
   h2->Fill(x,y,w);
   h3->Fill(x,y,z);
   h3->Fill(x,y,z,w);
+  
+  *** // Several ways to create histograms
+  /// 1) clone form existing histogram
+         TH1* hc = (TH1*)h1->Clone();
+  
+  /// 2) make a projection from a 2D or 3D histogram
+         TH1* hx = h2-ProjectionX();
+  
+  
+  *** // binning
+  h1->GetNbinsX();          // get the number of bins in X axis
+  h1->GetBinCenter(i);      // get the center of bin NO.i
+  h1->GetBinContent(i);     // get the Y value of bin NO.i 
+  h1->GetEntries();         // get the number of entry
+    
+  
+  
+   
+  
 }
