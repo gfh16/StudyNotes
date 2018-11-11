@@ -31,4 +31,12 @@
   hs->GetYaxis()->SetTitleSize(0.04);
   hs->GetYaxis()->SetLabelSize(0.03);
   hs->GetYaxis()->CenterTitle(true);
+  
+  *** // Fill histograms
+  h1->Fill(x);
+  h1->Fill(x,w); // with weight
+  h2->Fill(x,y);
+  h2->Fill(x,y,w);
+  h3->Fill(x,y,z);
+  h3->Fill(x,y,z,w);
 }
