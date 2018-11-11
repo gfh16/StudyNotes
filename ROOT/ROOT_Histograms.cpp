@@ -39,6 +39,8 @@
   h2->Fill(x,y,w);
   h3->Fill(x,y,z);
   h3->Fill(x,y,z,w);
+ 
+  h1->SetBinContent(Int_t binx, Double_t content);
   
   *** // Several ways to create histograms
   /// 1) clone form existing histogram
