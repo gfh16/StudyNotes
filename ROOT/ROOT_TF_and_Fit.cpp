@@ -81,5 +81,12 @@ void FitHiRA()
 
 }
 
+**** /// set fit parameters
+   f2_EneSpectra_DifferentAngle->SetParameters(par1,par2,....);  // required at most 11 arguments
+                                                               
+   double f2pars[12] = {0.2, 5.0, 0.332, 1.0,
+                           0.3, 3.0, 0.166, 5.0,
+                           0.5, 8.0, 0.010, 1.0}; // if moer arguments are provided, pass the arguments in an array
+   f2_EneSpectra_DifferentAngle->SetParameters(f2pars);
 
 
