@@ -25,6 +25,18 @@
   hs->GetYaxis()->SetTitleSize(0.04);
   hs->GetYaxis()->SetLabelSize(0.03);
   hs->GetYaxis()->CenterTitle(true);          
+
+  **** set display range of axis
+  /// 1) normal way : 
+         histogram->GetYaxis()->SetRangeUser(lower,upper);
+  /// 2) Y axis of a THStack: 
+         THStack *hs = new THStack("hs","test stacked histograms");
+         hs->SetMinimum(0.);
+         hs->SetMaximum(10.);
+  /// 3) X axis of TGraph
+         TGraph* myGraph = new TGraph();
+         ...
+         myGraph->GetXaxis()->SetLimits(lower,upper);
 //__________________________________________________________________
 
 
