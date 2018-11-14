@@ -24,7 +24,8 @@
   hs->GetYaxis()->SetTitle("#frac{d^{2}N}{dEd#Omega}(a.u.)");
   hs->GetYaxis()->SetTitleSize(0.04);
   hs->GetYaxis()->SetLabelSize(0.03);
-  hs->GetYaxis()->CenterTitle(true);          
+  hs->GetYaxis()->CenterTitle(true);    
+  hs->GetXaxis()->SetNdivisions(-505);   // 
 
   **** set display range of axis
   /// 1) normal way : 
@@ -69,6 +70,7 @@
   label_Z1_A01->SetTextColor(kRed);
   label_Z1_A01->SetTextAlign(21);
   label_Z1_A01->SetTextFont(42);
+  label_Z1_A01->SetTextSize(0.05);
   label_Z1_A01->Draw("SAME");
   
 
