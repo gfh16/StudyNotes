@@ -89,20 +89,20 @@ void ssd()
   h104018->Draw();
 
   //定义延迟线的节点总数
-	const int npeak=3;
-	double par[3*npeak];
-	double pos[2*npeak]={2168.,2232.,2315.,2366.,2456.,2494.};
+  const int npeak=3;
+  double par[3*npeak];
+  double pos[2*npeak]={2168.,2232.,2315.,2366.,2456.,2494.};
 
-	for(int i=0;i<npeak;++i)
-	{
-		h104018->Fit("gaus","R+","",pos[2*i],pos[2*i+1]);//高斯拟合，拟合函数叠加画图
-		gaus->GetParameters(&par[3*i]);//取出拟合参数
-	}
+  for(int i=0;i<npeak;++i)
+  {
+    h104018->Fit("gaus","R+","",pos[2*i],pos[2*i+1]);//高斯拟合，拟合函数叠加画图
+    gaus->GetParameters(&par[3*i]);//取出拟合参数
+  }
 
   cout<<"number"<<"\t\t"<<"mean"<<"\t\t"<<"sigma"<<"\t\t"<<"energyresolution"<<endl;
-	for(int i=0;i<npeak;++i)
-	{
-		 cout<<i+1<<"\t\t"<<setprecision(5)<<par[i*3+1]<<"\t\t"<<setprecision(5)<<par[i*3+2]
-		     <<"\t\t"<<setprecision(3)<<100*(par[i*3+2]/par[i*3+1])*2.355<<"%"<<endl;
-	}
+  for(int i=0;i<npeak;++i)
+  {
+    cout<<i+1<<"\t\t"<<setprecision(5)<<par[i*3+1]<<"\t\t"<<setprecision(5)<<par[i*3+2]
+        <<"\t\t"<<setprecision(3)<<100*(par[i*3+2]/par[i*3+1])*2.355<<"%"<<endl;
+  }
 }
