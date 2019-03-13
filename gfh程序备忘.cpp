@@ -170,3 +170,60 @@
 
 
 --------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+              /****************************************
+                           程序中遇到的问题解答
+              *****************************************/
+
+1. 在使用RIBLLDAQ的时候，make的时候，出现"未定义的引用"问题，例如：
+  
+   对‘TString::TString(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)’未定义的引用
+
+   问题的来源：C++ 版本库不兼容的问题。从GCC5 版本开始，就默认启用C++11. 但是由于C++11相对于C++03很多实现的数据结构都发生了改变，两者
+             不能完全混用
+            
+   解决办法：
+   0. 如果是在GCC5下使用了非GCC5编译的库，编译时关闭C++11特性
+   1. 在makefile里面增加下面的内容：
+      CXXFLAGS= -D_GLIBCXX_USE_CXX11_ABI=0
+      将他应用于每一个编译过程！！！
+      DAQPC:DIC $(OBJS) VMEDAQPC.o
+	$(CPP) -o $@ VMEDAQPC.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs)
+
+      ControlPC:DIC $(OBJS) ControlPC.o
+	$(CPP) -o ControlPC ControlPC.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs) $(CXXFLAGS)
+
+      OnlinePC:DIC $(OBJS) OnlinePC.o
+	$(CPP) -o $@ OnlinePC.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs) $(CXXFLAGS)
+
+      MonOnline:DIC $(OBJS) MonOnline.o
+	$(CPP) -o $@ MonOnline.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs) $(CXXFLAGS)
+
+      Raw2ROOT:DIC $(OBJS) Raw2ROOT.o
+	$(CPP) -o $@ Raw2ROOT.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs) $(CXXFLAGS)
+
+      ReadRootFile2D:DIC $(OBJS) ReadRootFile2D.o
+	$(CPP) -o $@ ReadRootFile2D.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs)  $(CXXFLAGS)
+
+
+      %.o: %.cpp
+	$(CPP) -c $(CFLAG) $(CRFLAG) $(CXXFLAGS) -o $@ $<
+      
+
+
+
+
+
+
+
+
+
+
