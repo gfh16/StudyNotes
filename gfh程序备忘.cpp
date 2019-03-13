@@ -183,7 +183,7 @@
                            程序中遇到的问题解答
               *****************************************/
 
-1. 在使用RIBLLDAQ的时候，make的时候，出现"未定义的引用"问题，例如：
+Q1. 在使用RIBLLDAQ的时候，make的时候，出现"未定义的引用"问题，例如：
   
    对‘TString::TString(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)’未定义的引用
 
@@ -218,10 +218,19 @@
 	$(CPP) -c $(CFLAG) $(CRFLAG) $(CXXFLAGS) -o $@ $<
       
 
+	      
+Q2. 在编译DEEFIT的时候，遇到了问题：
+ 【1】ROOT版本问题：在ROOT6版本下，主要问题在于：
+      deedict.cxx:163:65: error: ‘DefineBehavior’ was not declared in this scope
+      
+ 【2】在ROOT6中，‘DefineBehavior’等函数定义在命名空间ROOT::Internal中
+ 
+ 【3】解决办法：在 deedict.cxx 文件中，加入命名空间：
+      using namesapce ROOT::Internal;
 
-
-
-
+ 【4】至此，还可能出现 "未定义的引用" 问题， 解决方法如 Q1 所述。 
+ 
+ 【5】编译成功！
 
 
 
