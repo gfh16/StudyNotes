@@ -10,8 +10,8 @@
 
 3. 常量
    (1)C++中两种方法定义常量：
-      <1> #define 预处理器
-      <2> const 关键字
+      <1> #define 预处理器    e.g. #define LENGTH 10
+      <2> const 关键字        e.g. const int LENGTH = 10;
    (2)注意：将常量定义为大写字母形式，是一个良好的编程习惯。
 
 4. C++ 存储类
