@@ -267,57 +267,142 @@ int main()
 
 
 ////////////////////////////////////////////////////////////////////////////////
-///                    6. struct tm *gmtime(const time_t *time)
+///                    6. struct tm *gmtime(const time_t *timer)
+/// 使用 timer 的值来填充 tm 结构， 并且使用格林尼治时间（UTC)来表示
+#if 0
 
+#include<stdio.h>
+#include<time.h>
 
+#define BST (+1)    /* 伦敦时区 */
+#define CCT (+8)   /*  北京时区 */
 
+int main()
+{
+  time_t rawtime;
+  struct tm *info;
 
+  time(&rawtime);
 
+  //获取格林尼治时间
+  info = gmtime(&rawtime);
 
+  printf("当前的世界时钟：\n");
+  printf("伦敦：%2d:%2d\n", (info->tm_hour+BST)%24, info->tm_min);
+  printf("北京：%2d:%2d\n", (info->tm_hour+CCT)%24, info->tm_min);
+
+  return 0;
+}
+#endif
 ////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////
 ///                 7. time_t mktime(struct tm *time)
+///  返回一个time_t 值， 该值对应于以参数传递的日历时间
+///  输入日期判断是周几
+#if 0
 
+#include<iostream>
+#include<ctime>
 
+using namespace std;
 
+int main()
+{
+  time_t rawtime;
+  struct tm *info;
+  int year, month, day;
+  const char * weekday[] = {"周日","周一","周二","周三","周四","周五","周六"};
 
+  /* 用户输入日期*/
+  cout<<"年："; cin>> year;
+  cout<<"月："; cin>> month;
+  cout<<"日："; cin>> day;
 
+  /* 获取当前时间信息， 并修改用户输入的信息*/
+  time(&rawtime);
+  info = localtime(&rawtime);
+  info->tm_year = year - 1900;
+  info->tm_mon  = month - 1;
+  info->tm_mday  = day;
 
+  /* 调用 mktime: info->tm_wday*/
+  mktime(info);
 
+  cout<<"那一天是："<< weekday[info->tm_wday]<<endl;
+
+  return(0);
+}
+
+#endif
 ////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////
 ////              8. double difftime(time_t time2, time_t time1)
+///  返回以 double 型值表示的两个时间之间相差的秒数(time2 - time1)
+///  举例： 计算今年以来经过的 秒 数
+#if 0
 
+#include<iostream>
+#include<iomanip>
+#include<ctime>
 
+using namespace std;
 
+int main()
+{
+  time_t now;
+  double diff;
+  struct tm  *info;
 
+  time(&now);
 
+  info = localtime(&now);
 
+  info->tm_hour = 0;
+  info->tm_min  = 0;
+  info->tm_sec  = 0;
+  info->tm_mon  = 6;
+  info->tm_mday = 27;
+
+  diff = difftime(now, mktime(info));
+
+  cout<< diff << setw(50) <<"seconds since new year in the current timezone."<<endl;
+
+  return 0;
+}
+#endif
 ////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////
 ////              9. size_t strftime()
+//// strftime()函数声明：size_t strftime(char *str, size_t maxsize, const char *foemat, const struct tm *timeptr)
+#if 1
 
+#include<iostream>
+#include<time.h>
 
+using namespace std;
 
+int main()
+{
+  time_t rawtime;
+  struct tm *info;
 
+  char buffer[100];
 
+  time(&rawtime);
 
+  info = localtime(&rawtime);
 
-////////////////////////////////////////////////////////////////////////////////
+  strftime(buffer, 100, "%Y-%m-%d %H:%M:%S", info);
+  cout<<"格式化的日期 & 时间： |"<< buffer << "|"<< endl;
 
+  return 0;
+}
 
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////
