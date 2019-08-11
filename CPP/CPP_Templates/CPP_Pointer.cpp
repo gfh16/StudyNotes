@@ -1,5 +1,5 @@
 /*******************************************************************************
-                              指针
+                              指针知识点详解(一)
      参考资料： 让你不再害怕指针 —— C 指针详解
              https://blog.csdn.net/soonfly/article/details/51131141
 
@@ -373,7 +373,7 @@ int main()
 
 */
 
-#if 1
+#if 0
 
 #include<iostream>
 using namespace std;
@@ -400,24 +400,190 @@ int main()
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/*                      指针知识点详解(二)
 
+1. 什么是指针？为什么使用指针？
+   (1) 指针是一个可以用来存储内存地址的变量
+   (2) 指针比数组快；动态分配内存必须使用指针
 
+2. 指针的声明
+   (1) int *ptr;
 
-/*
-******************
-七. 指针类型转换
-******************
+3. 使用指针:
+   (1) 地址运算符
+       int number;
+       int* pnumber;
+       pnumber = &number;
 
+   (2) 间接运算符(即解除指针的作用)
+        *pnumber = number;
 
+4. 指针的初始化(使用指针一定要初始化)
+   (1) 初始化为已定义变量的地址
+       int number = 0;
+       int* pnumber = &number;
+
+   (2) 使用空指针
+        int* pnumber = 0;
+
+   (3) 利用 new 动态分配内存
+       int* pnum = 0;
+       pnum = new int;
+
+       int* pnum = new pnum(0);
+
+   (4) 把指针初始化为 char 类型
+        char* s = "hello world."  // 不要采取这样的方式初始化
+
+        const char* pproverb = "A miss s as good as a mile."  // 推荐采用这种方式
+
+        ===> 输出流cout把指向char的变量看做一个非空字符串，并显示该字符串，而不是显示地址！
+
+ 5. 常量指针与指向常量的指针
+    (1) 指向常量的指针：内容不能改，地址能改
+        const char* pstring = "Some text that cannot be changed."
+
+        const int value = 20;
+        const int* pvalue = &value;
+
+    (2) 常量指针：地址不能改，内容能改
+        int value = 20;
+        int* const pvalue = &value;
+
+    (3) 指向常量的常量指针：地址和内容都不能改
+        const int value = 20;
+        const int* const pvalue = &value;
+
+  6. 指针和数组
+     (1) 指针的算术运算：加、减法，比较指针=>逻辑结果
+     (2) 计算两个指针的差
+     (3) 使用数组名的指针表示法：data[i] = *(data+i);
+
+****  7. 动态分配内存  --- 指针最重要的作用
+     (1) 动态内存分配：在程序运行阶段(而不是编译阶段)进行决策
+     (2) 使用 new 来分配内存
+         <1> double* pvalue  = 0;
+             pvalue = new double;
+
+             double* pvalue = new double(0.0);
+     (3) 使用 delete释放内存
+         <1> 当指针pvalue使用完毕，释放内存：
+            delete pvalue;
+     (4) 数组的动态内存分配
+         <1> 动态数组初始化:
+            a. 对于内置数据类型元素的数组，必须使用()来初始化
+               int* pia = new int[10]; //每个元素都没有初始化
+               int* pia = new int[10](); //每个元素初始化为0
+            b. 类类型的数组，无论是否使用(),都会自动调用其默认构造函数来初始化
+              string* psa = new string[10];
+              string* psa = new string[10]();
+     (5) 动态内存分配的危险
+         <1> 内存泄露
+         <2> 内存碎块
+
+     (6) 关于new和delete的使用
+         <1> 一定要配对使用 new 和 delete，否则将发生内存泄露
+         <2> 不能使用 delete 来释放不是 new 分配的内存
+         <3> 不要使用delete释放同一块内存两次
+         <4> 如果使用 new[]为数组分配内存，则应使用delete[]来释放
+         <5> 如果使用 new为一个实体分配内存，则应使用delete来释放
+         <6> 对空指针应用 delete 是安全的
 
 */
 
+// 从键盘上读取一组单词，以预定义的顺序对他们进行排序
+#if 0
 
-/*
-******************
-八. 指针的安全问题
-******************
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+  string text;
+  const string separators = " , . \" \n";
+  const int max_words = 1000;
+  string words[max_words];
+  string* pwords[max_words];
+
+  cout<< endl << "Enter a string terminated by #:" << endl;
+  getline(cin, text, '#');
+
+  // Extract all the words from the text
+  int start = text.find_first_not_of(separators);
+  int end = 0;
+  int word_count = 0;
+  while(start != string::npos && word_count < max_words)
+  {
+    end = text.find_first_of(separators, start + 1);
+    if(end == string::npos)
+       end = text.length();
+
+    words[word_count] = text.substr(start, end - start);
+    pwords[word_count] = &words[word_count];
+    word_count++;
+
+    // Find the first character of the next word
+    start = text.find_first_not_of(separators, end + 1);
+  }
+
+  int lowest = 0;
+  for(int j=0; j<word_count - 1; j++)
+  {
+    lowest = j;
+
+    for(int i=j+1; i<word_count; i++)
+      if(*pwords[i]< *pwords[lowest])
+        lowest = i;
+
+    if(lowest !=j)
+    {
+      string* ptemp = pwords[j];
+      pwords[j] = pwords[lowest];
+      pwords[lowest] = ptemp;
+    }
+  }
+
+    // output the words in ascending sesquence
+  for(int i=0; i<word_count; i++)
+    cout<< endl << *pwords[i];
+    cout << endl;
+
+  return 0;
+}
+
+#endif
 
 
 
-*/
+#if 1
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+  double* p3 = new double[3]{0};
+  p3[0] = 0.2;
+  p3[1] = 0.5;
+  p3[2] = 0.8;
+
+  cout<<"p3[1] is "<< p3[1] << "." << endl;
+
+  p3 = p3+1;
+  cout<<"Now p3[0] is "<< p3[0]<<"." << endl;
+  cout<<"p3[1] is "<< p3[1] << "." << endl;
+  p3 = p3 -1;
+  delete [] p3;
+
+  return 0;
+}
+
+
+
+#endif
