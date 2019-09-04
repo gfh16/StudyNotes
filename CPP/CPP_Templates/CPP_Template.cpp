@@ -1,5 +1,5 @@
 /*******************************************************************************
-                        C++ 模板
+                        C++ 模板 (实现泛型编程)
 
 参考链接:
 https://blog.csdn.net/liitdar/article/details/80587058
@@ -30,12 +30,27 @@ https://blog.csdn.net/liitdar/article/details/80587058
     template <typename type>
     re-type func_name(parameter list)
     {
+        //函数主体
+    }
 
+(2)说明
+   <1>type是函数所使用的数据类型的占位符名称，这个占位符名称可以在函数定义中使用
+   <2>关键字"typename"可替换为"class"，两者作用一样
+   <3>ret-type为函数的返回值
+
+(3)实例
+    template <typename T>
+    T Max(T a, Tb)
+    {
+       return (a>b?a:b);
+    }
+
+4. 类模板的格式
+    template <typename type>
+    class class-namespace
+    {
+      //类的主体
     }
 
 
-
-
-
-(2)类模板
 *******************************************************************************/
