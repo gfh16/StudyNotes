@@ -37,3 +37,38 @@ def sortport():
 print(sortport())
 
   
+## 4.计算阶乘
+
+## 方法1
+def fac(n):
+	if n==1:
+		return 1
+	else:
+		return n*fac(n-1)
+print(fac(5))
+
+## 方法2
+def fac1(n):
+	result = n
+	for i in range(1,n):
+		result *= i
+	return result
+print(fac1(5))
+
+## 输入一个数, 计算它的阶乘
+def fac2():
+	num = int(input("请输入一个数字:"))
+	factorial = 1
+
+	## 判断数字是否为负数，0，或正数
+	if num < 0:
+		print("抱歉，负数没有阶乘")
+
+	elif num == 0:
+		print("0 的阶乘为1")
+
+	else:
+		for i in range(1, num+1):
+			factorial *= i
+		print("%d 的阶乘为 %d" % (num, factorial))
+fac2()
