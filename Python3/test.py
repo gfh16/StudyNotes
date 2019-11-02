@@ -1,7 +1,15 @@
 #!/usr/bin/python
 
+#########################################################
+# 菜鸟教程python实践实例:
+# https://www.runoob.com/python3/python3-examples.html
+#########################################################
+
+
+
 print("Hello World!")
 
+#========================================================
 ## 1.计算平方和1~n的平方和： 1^2+2^2+3^2+...+n^2
 def calc(n):
   sum = 0
@@ -9,9 +17,9 @@ def calc(n):
     sum += pow(i,2)
   return sum
 
-print(calc(10))
+#print(calc(10))
 
-
+#========================================================
 ## 2.计算数组中数据的平方和
 def cal1(*numbers):
   sum = 0
@@ -22,10 +30,13 @@ def cal1(*numbers):
 aa = [1,2,3]
 result = sum([c*c for c in aa])
 result1 = cal1(*aa)
-print(result)
-print(result1)
+#print(result)
+#print(result1)
 
+#========================================================
 ## 3.排序问题
+## 参见Python实现十大常用排序算法 
+## http://www.sohu.com/a/304883839_571478
 lis = [56, 12, 1, 6, 222, 34, 444]
 def sortport():
 	for i in range(len(lis)-1):
@@ -34,18 +45,17 @@ def sortport():
 				lis[j],lis[j+1] = lis[j+1], lis[j]
 	return lis
 
-print(sortport())
+#print(sortport())
 
-  
+#========================================================  
 ## 4.计算阶乘
-
 ## 方法1
 def fac(n):
 	if n==1:
 		return 1
 	else:
 		return n*fac(n-1)
-print(fac(5))
+#print(fac(5))
 
 ## 方法2
 def fac1(n):
@@ -53,7 +63,7 @@ def fac1(n):
 	for i in range(1,n):
 		result *= i
 	return result
-print(fac1(5))
+#print(fac1(5))
 
 ## 输入一个数, 计算它的阶乘
 def fac2():
@@ -71,4 +81,62 @@ def fac2():
 		for i in range(1, num+1):
 			factorial *= i
 		print("%d 的阶乘为 %d" % (num, factorial))
-fac2()
+#fac2()
+
+#=======================================================
+## 5.列出当前目录下的所有我呢见和目录
+###  python 中 os 模块的使用
+import os
+list = [d for d in os.listdir('.')]
+#print(list)
+
+#=======================================================
+## 6.把一个list中所有的字符串变成小写
+L1 = ['Hello']
+L2 = [s.lower() for s in L1]
+#print(L1)
+
+#=======================================================
+## 7.输出某个路径下的所有文件和文件夹的路径
+def print_dir():
+	filepath = input("请输入一个路径:")
+	if filepath == "":
+		print("请输入一个正确的路径")
+	else:
+		for i in os.listdir(filepath):      ##获取目录中的文件以及子目录列表
+			print(os.path.join(filepath,i)) ##把路径与文件名结合起来
+#print(print_dir())
+
+#========================================================
+## 8.输出某个路径及其子目录下的所有文件路径
+def show_dir(filepath):
+	for i in os.listdir(filepath):
+		path = (os.path.join(filepath,i))
+		print(path)
+		if os.path.isdir(path):
+		    show_dir(path)
+
+filepath="C:\Program Files\Internet Explorer"
+#show_dir(filepath)
+
+
+#=======================================================
+## 9.输出某路径及其子目录下所有以.html为后缀的文件
+def print_dir1(filepath):
+	for i in os.listdir(filepath):
+		path = os.path.join(filepath,i)
+		if os.path.isdir(path):
+			print_dir1(path)
+		if path.endswith(".html"):
+			print(path)
+
+filepath = "C:\Program Files\Git"
+#print_dir1(filepath)
+
+
+#=======================================================
+## 10.把原字典的键值对颠倒并产生新的字典
+dict1 = {"A":"a", "B":"b", "C":"c"}
+dict2 = {y:x for x,y in dict1.items()}
+print(dict1)
+print(dict2)
