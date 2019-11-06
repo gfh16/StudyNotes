@@ -12,6 +12,10 @@
 
 //---- See more details on website : https://root.cern.ch/root/htmldoc/guides/users-guide/FittingHistograms.html
 
+
+//==============================================================================
+//                                自定义函数拟合
+//==============================================================================
 Double_t fitf(Double_t *x, Double_t *par)
 {
    Double_t arg = 0;
@@ -23,7 +27,7 @@ Double_t fitf(Double_t *x, Double_t *par)
 void FittingWithUserDefinedFunction.cpp()
 {
    TFile *f = new TFile("hsimple.root");
-   
+
    TCanvas *c1 = new TCanvas("c1","the fit canvas",500,400);
 
    TH1F *hpx = (TH1F*)f->Get("hpx");
@@ -49,21 +53,21 @@ void FittingWithUserDefinedFunction.cpp()
 //  *****   Fitting with a user defined function  ********************************
 //---------------------------------------------------------------------------------
 
-// definition of the fiiting function, for 1D histograms, x[0] is used; 
+// definition of the fiiting function, for 1D histograms, x[0] is used;
 // for 2D, x[0],x[1] are used; for 3D, x[0], x[1], x[2] are used
 
 double HornFormula(Double_t *x, Double_t *par)
 {
   Double_t Z = par[3];
   Double_t A = par[4];
-  
+
   Double_t stoppingpower;
   Double_t nonlinearpart;
   Double_t lightresponse;
-  
+
   //For Combining Functions, it's better to set several parts
   stoppingpower = par[2]*A*pow(Z,2);
-  nonlinearpart = stoppingpower * log(abs((x[0] +stoppingpower)/stoppingpower)); 
+  nonlinearpart = stoppingpower * log(abs((x[0] +stoppingpower)/stoppingpower));
   lightresponse = par[0] + par[1] * (x[0] - nonlinearpart);
   return lightresponse;
 }
@@ -83,10 +87,20 @@ void FitHiRA()
 
 **** /// set fit parameters
    f2_EneSpectra_DifferentAngle->SetParameters(par1,par2,....);  // required at most 11 arguments
-                                                               
+
    double f2pars[12] = {0.2, 5.0, 0.332, 1.0,
                            0.3, 3.0, 0.166, 5.0,
                            0.5, 8.0, 0.010, 1.0}; // if moer arguments are provided, pass the arguments in an array
    f2_EneSpectra_DifferentAngle->SetParameters(f2pars);
 
 
+
+
+//==============================================================================
+//                   采用 ROOT 内置的函数拟合
+// 1.拟合  2.定义一个新函数,指向拟合函数  3.提取拟合参数
+PedestalHist[i][j]->Fit("gaus","","same",limit[0],limit[1]);
+TF1 *fit = PedestalHist[i][j]->GetFunction("gaus");
+double Mean  = fit->GetParameter(1);      // Par[1] = Mean
+double Sigma = fit->GetParameter(2);      // Par[2] = sigma
+double Chi2  = fit->GetChisquare();
