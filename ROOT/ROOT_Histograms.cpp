@@ -2,31 +2,31 @@
 ///  Notes of Histograms
 ///////////////////////////////////////////////////////////////////////
 **** 填充直方图后，所有的信息都保存下来了吗？能否找到任意entry的内容？
-**** We can only extract the day with an error (bin width). The bin in histogram is 
+**** We can only extract the day with an error (bin width). The bin in histogram is
 **** something like resolution.
 
 {
   *****************************************************************************
   ***  //cloning a histogram
-  TH1* hc = (TH1*)h1->Clone();  
+  TH1* hc = (TH1*)h1->Clone();
   *****************************************************************************
-   
-   
-  ***************************************************************************** 
+
+
+  *****************************************************************************
   ***  // Normalizing histograms
   Double_t scale = norm/h->Integral();
   h->Scale(scale);
   h->Scale(1./h->Integral());
-  ***************************************************************************** 
- 
- 
+  *****************************************************************************
+
+
   *****************************************************************************
   ***  // No show statistics box of a histogram
-  h->SetStats(0); 
+  h->SetStats(0);
   h->SetOptStat(0);
   *****************************************************************************
- 
- 
+
+
   *****************************************************************************
   ***  // Muliti Histograms Drawing
   THStack *hs = new THStack("hs","title");
@@ -44,8 +44,8 @@
   hs->GetYaxis()->SetLabelSize(0.03);
   hs->GetYaxis()->CenterTitle(true);
   *****************************************************************************
- 
-  
+
+
   ******************************************************************************
   *** // Fill histograms
   h1->Fill(x);
@@ -54,35 +54,35 @@
   h2->Fill(x,y,w);
   h3->Fill(x,y,z);
   h3->Fill(x,y,z,w);
- 
+
   h1->SetBinContent(Int_t binx, Double_t content);
   *******************************************************************************
-  
-   
+
+
   ******************************************************************************
   *** // Several ways to create histograms
   /// 1) clone form existing histogram
          TH1* hc = (TH1*)h1->Clone();
-  
+
   /// 2) make a projection from a 2D or 3D histogram
          TH1* hx = h2-ProjectionX();
   *******************************************************************************
-  
-  
+
+
   *******************************************************************************
   *** // binning
   h1->GetNbinsX();          // get the number of bins in X axis
   h1->GetBinCenter(i);      // get the center of bin NO.i
-  h1->GetBinContent(i);     // get the Y value of bin NO.i 
+  h1->GetBinContent(i);     // get the Y value of bin NO.i
   h1->GetEntries();         // get the number of entry
   *******************************************************************************
-  
-  
+
+
   *******************************************************************************
   **** set display range of axis
-  /// 1) normal way : 
+  /// 1) normal way :
          histogram->GetYaxis()->SetRangeUser(lower,upper);
-  /// 2) Y axis of a THStack: 
+  /// 2) Y axis of a THStack:
          THStack *hs = new THStack("hs","test stacked histograms");
          hs->SetMinimum(0.);
          hs->SetMaximum(10.);
@@ -91,6 +91,9 @@
          ...
          myGraph->GetXaxis()->SetLimits(lower,upper);
   *******************************************************************************
-   
-  
+
+  **********************************
+  gStyle->SetPalette(1) // make a great improvement for color
+
+
 }
