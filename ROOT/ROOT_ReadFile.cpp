@@ -39,3 +39,11 @@ infile.open("input.txt",ios::app);
 ================
 TFile * filein = new TFile("test.root");
 TFile filein("test.root")
+
+
+===============
+4. FILE
+================
+FILE * FileOut = fopen(Form("output/PulserCali_%s.dat", FileTag3.c_str()),"w");
+fprintf(FileOut,"# itel  icsi \n");
+fflush(FileOut); // 需要加上这句！！！ 否则由于缓存问题，内容不被写入
