@@ -5,7 +5,7 @@
 1.ifstream
 ===========
 ifstream infile("input.txt");
-while(1)
+while(1)   // while(infile.good()){}
 {
       infile>>var1>>var2>>var3>>var4>>var5>>var6;  //var1...可以是任何类型变量
       if (!infile.good() || infile.eof())  break;
