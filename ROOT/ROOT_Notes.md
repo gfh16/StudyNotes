@@ -1,6 +1,6 @@
 #  ROOT 学习笔记
 ### ROOT 是粒子物理与核物理数据分析的好工具！！！      
-ROOT的学习不是一朝一夕的事情,需要反复反复再反复使用，才可能较好地掌握它.                   
+> ROOT的学习不是一朝一夕的事情,需要反复反复再反复使用，才可能较好地掌握它.             
 这里是我学习使用ROOT的总结、感悟. 本文档的出发点是给初学者提供一种学习
 ROOT的思路如果C++基础好,学习ROOT会很快上手！这里简单介绍ROOT里面几个
 最常用到的类,以及这些类的基本操作方法对于一些重要的类,仔细研读源程序会
@@ -10,76 +10,53 @@ ROOT的思路如果C++基础好,学习ROOT会很快上手！这里简单介绍RO
 旧版本： https://root.cern.ch/root/html304/           
                                                          
 作者：小关                                            
-________________________________________________________________________________
+
+
+### 目录
+
+
+-------------
+## rootlogon.C
+
+> This script without a function declaration is executed automatically when ROOT is launched from the same directory as the file
+```
+{
+  gStyle->SetPalette(1);
+  cout << "Salut " << gSystem->Getenv("USER") << "!" << endl;
+  gSystem->Exec("date");
+}
+```
+
+
 ----------
-TCanvas
-----------
+## TCanvas
+
 gROOT->GetListOfCanvas()->FindObject("c1");
 gROOT->FindObject("c1");
 
 
-_______________________________________________________________________________
----------
-TStyle
----------
-gStyle->SetOptFit(kTRUE);  // 显示拟合参数
-gStyle->SetPalette(1)；    // To plot with nice colors
-
-
-
-________________________________________________________________________________
 ----------
-TSystem
-----------
-gSystem->Getenv("USER")  // returns the value of the system enviroment variable 'USER'
+## TCutG
 
-
-________________________________________________________________________________
-----------
-TPad
-----------
-gPad->SetLogy();     // 设置Log坐标
-gPad->Modified();    //
-gPad->Update();
-gPad->SetLogy(1);    // 设置对数坐标
-gPad->SetTicky(1);   // 给坐标轴设置网格
-gPad->SetLeftMargin(0.15);  //设置 pad 的偏置
-
-_______________________________________________________________________________
-----------
-TTree
-----------
+*  Int_t TCutG::IsInside(Double_t x, Double_t y) const
+   (1)用法:
+      if(mycut->IsInside(x,y)==1) // (x,y) is inside the cut region
+      if(mycut->IsInside(x,y)==0) // (x,y) is outside the cut region
 
 
 
-_______________________________________________________________________________
 ----------
-TFile
-----------
+## TFile
+
 TFile * file = new TFile("basic.root");
 file->ls();                              // print the contents of the file
 TH1F *Hist = (TH1F*)file->Get("h1");     // copy the object "h1" into the memory
 
-_______________________________________________________________________________
--------------
-rootlogon.C
--------------
-** This script without a function declaration is executed
-automatically when ROOT is launched from the same
-directory as the file
-//////////
-{
-gStyle->SetPalette(1);
-cout << "Salut " << gSystem->Getenv("USER") << "!" << endl;
-gSystem->Exec("date");
-}
-/////////
 
 
-_______________________________________________________________________________
----------------------
-TF1 and data fitting
----------------------
+-------------------------
+## TF1 and data fitting
+
 gStyle->SetOptFit(kTRUE);  // 显示拟合参数
 hist->Fit("gaus","V","E1",-1,1.5); // Fit("function name","fit options","drawing options",fit limits)
 
@@ -147,13 +124,23 @@ hist->Fit("gaus","V","E1",-1,1.5); // Fit("function name","fit options","drawing
 
 * 利用神经网络进行数据拟合
 
-________________________________________________________________________________
+
 ----------------
-TH1 (Histogram)
-TH2
+## TGraph
+####  TGraph2DErrors
+
+* I use TGraph2DErrors() to draw data(error value equal to 0), i try to fit
+  with TF2 function, error happens: "fill data empty"
+  // Reason: Reason: TF2 fit ignore data without an erro
+
+
+----------------
+# TH (Histogram)
+### TH1
+### TH2
 TH3
 THStack
----------------
+
 * 从已有root文件中读取histogram
   (1)打开root文件  ： TFile * in = new TFile();
   (2)读取需要的hist:  TH1F * h1 = (TH1F*)in->Get();
@@ -178,10 +165,15 @@ THStack
   THStack *hs = new THStack("hs","title");
   hs->Add(h1);
   hs->Add(h2);
-________________________________________________________________________________
-----------
-TLegend
-----------
+
+
+------------
+## TLatex
+
+
+------------
+## TLegend
+
 * How to add a legend to a figure
   (1)新建一个TLegend: TLegend * legend = new TLegend();
   (2)Fit function linked to the hist: TF1 * fun = hist->GetFunction();
@@ -190,46 +182,83 @@ TLegend
   (5)Drawing the TLegend: legend->Draw();
 
 
+-----------
+## TLine
 
-________________________________________________________________________________
----------
-TList
----------
+
+-----------
+## TList
+
 TList * list = gPad->GetLIstOfPrimitives(); // List of objects in the current canvas
 
 
-
-________________________________________________________________________________
---------
-TCutG
---------
-*  Int_t TCutG::IsInside(Double_t x, Double_t y) const
-   (1)用法:
-      if(mycut->IsInside(x,y)==1) // (x,y) is inside the cut region
-      if(mycut->IsInside(x,y)==0) // (x,y) is outside the cut region
-
-______________________________________________________________________________________
---------
-TMath
--------
-
-______________________________________________________________________________________
---------
-TLine
---------
-
-______________________________________________________________________________________
---------
-TLatex
---------
+-----------
+## TMath
 
 
+-----------
+## TPad
 
-______________________________________________________________________________________
-----------------
-TGraph
-TGraph2DErrors
-----------------
-* I use TGraph2DErrors() to draw data(error value equal to 0), i try to fit
-  with TF2 function, error happens: "fill data empty"
-  // Reason: Reason: TF2 fit ignore data without an erro
+gPad->SetLogy();     // 设置Log坐标
+gPad->Modified();    //
+gPad->Update();
+gPad->SetLogy(1);    // 设置对数坐标
+gPad->SetTicky(1);   // 给坐标轴设置网格
+gPad->SetLeftMargin(0.15);  //设置 pad 的偏置
+
+------------
+## TStyle
+
+gStyle->SetOptFit(kTRUE);  // 显示拟合参数
+gStyle->SetPalette(1)；    // To plot with nice colors
+
+
+-------------
+## TSystem
+
+gSystem->Getenv("USER")  // returns the value of the system enviroment variable 'USER'
+
+
+------------
+## TTree
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
