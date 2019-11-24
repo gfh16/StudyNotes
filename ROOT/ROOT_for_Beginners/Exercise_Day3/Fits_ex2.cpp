@@ -37,5 +37,4 @@ void Fits_ex2()
    dpol2->Draw("same");
    dexpo->Draw("same");
 
-   gMinuit->Command("SCAn 1");
 }

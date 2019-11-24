@@ -61,7 +61,7 @@ void exo_j2()
   pro_ey->Draw();
   c2->cd(3);
   pro_exy->Draw();
-/*
+
   in.close();
   f->WriteTObject(h1D_z,h1D_z->GetName());
   f->WriteTObject(h2D_yx,h2D_yx->GetName());
@@ -72,6 +72,6 @@ void exo_j2()
   f->WriteTObject(pro_ex,pro_ex->GetName());
   f->WriteTObject(pro_ey,pro_ey->GetName());
   f->WriteTObject(pro_exy,pro_exy->GetName());
-  delete f; */
+//  delete f; 
 
 }
