@@ -8,10 +8,10 @@ ROOT 学习笔记
 
 
 > ROOT学习资料
-> [1. ROOT_for_beginners](https://cloud.tsinghua.edu.cn/#my-libs/lib/30caa628-52df-4037-b791-39ba5b41bd65/0-%E7%A8%8B%E5%BA%8F%E5%85%A5%E9%97%A8/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%991--ROOT%E5%85%A5%E9%97%A8%E8%AE%AD%E7%BB%83/ROOT_for_Beginners) // 个人觉得这是最适合新手的学习资料,一共5篇
-> [2. 杨振伟老师ROOT课程讲义](https://cloud.tsinghua.edu.cn/#my-libs/lib/30caa628-52df-4037-b791-39ba5b41bd65/0-%E7%A8%8B%E5%BA%8F%E5%85%A5%E9%97%A8/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%991--ROOT%E5%85%A5%E9%97%A8%E8%AE%AD%E7%BB%83/Root%E4%B8%8A%E6%9C%BA%E8%AF%BEPPT) // 适合新手入门
+> [1. ROOT_for_beginners](https://cloud.tsinghua.edu.cn/d/bad40bc16faa4061ada3/) // 个人觉得这是最适合新手的学习资料,一共5篇
+> [2. 杨振伟老师ROOT课程讲义](https://cloud.tsinghua.edu.cn/d/9132b3d20f884fc59f1f/) // 适合新手入门
 > [3. ROOT-User-Guide](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html)
-> [4. $ROOTSYS/tutorials](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#rootsystutorials-1) // tutorials源代码在ROOT安装目录tutorials下，是非常好的学习资料！
+> [4. $ROOTSYS/tutorials](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#rootsystutorials-1) // tutorials源代码在root/tutorials下，是非常好的学习资料！
 > [5. 新版本Reference-Guide](https://root.cern/doc/master/annotated.html )  
 > [6. *旧版本Reference-Guide](https://root.cern.ch/root/html304/)
 
@@ -180,6 +180,7 @@ root[] f.Print()
 ```
 
 #### Object Ownership
+> 了解对象的所有权归属, 有助于对对象进行操作!
   
    ```C++
    2.1 By Current Directory (gDirectory)
@@ -292,42 +293,6 @@ c1->Print();   // 保存
 }
 ```
 
-
-
------------------------------------------------------------
-### Folders and Tasks
-#### Folders
-> To reduce class dependencies and improve modularity
-1. 创建文件夹
-
-```C++
-{
-   // Add the top folder of my hierary to //root
-   TFolder *aliroot=gROOT->GetRootFolder()->AddFolder("aliroot",
-                                   "aliroot top level folders");
-   // Add the hierarchy to the list of browsables
-   gROOT->GetListOfBrowsables()->Add(aliroot,"aliroot");
-
-   // Create and add the constants folder
-   TFolder *constants=aliroot->AddFolder("Constants",
-                                         "Detector constants");
-}
-```
-
-2. 在文件夹添加内容 (Producer)
-``` C++
-TObjArray *array;
-run_mc->Add(array);
-```
-
-3. 从文件夹读取内容 (Consumer)
-``` C++
-conf=(TFolder*)gROOT->FindObjectAny("/aliroot/Run/Configuration");
-// or ...
-conf=(TFolder*)gROOT->FindObjectAny("Configuration");
-```
-
-#### Tasks
 
 
 ### Input/Output
@@ -568,11 +533,45 @@ func->FixParameter();    // 固定某个参数
 ### Trees 树
 
 
+-----------------------------------------------------------
+# <font color=#DC143C> ROOT 提高篇 </font>
+
+### Folders and Tasks
+#### Folders
+> To reduce class dependencies and improve modularity
+1. 创建文件夹
+
+```C++
+{
+   // Add the top folder of my hierary to //root
+   TFolder *aliroot=gROOT->GetRootFolder()->AddFolder("aliroot",
+                                   "aliroot top level folders");
+   // Add the hierarchy to the list of browsables
+   gROOT->GetListOfBrowsables()->Add(aliroot,"aliroot");
+
+   // Create and add the constants folder
+   TFolder *constants=aliroot->AddFolder("Constants",
+                                         "Detector constants");
+}
+```
+
+2. 在文件夹添加内容 (Producer)
+``` C++
+TObjArray *array;
+run_mc->Add(array);
+```
+
+3. 从文件夹读取内容 (Consumer)
+``` C++
+conf=(TFolder*)gROOT->FindObjectAny("/aliroot/Run/Configuration");
+// or ...
+conf=(TFolder*)gROOT->FindObjectAny("Configuration");
+```
+
+#### Tasks
 
 
-----------------------------------------------------
-# ROOT 提高篇
-
+---------------------------------------------------
 ### Writing-GUI 手写GUI
 
 

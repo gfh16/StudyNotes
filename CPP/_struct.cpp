@@ -9,9 +9,6 @@ struct node
   //  三种形式创建构造函数(初始化函数)
   node(): x(),str(),data() {}
   node(int a, string b, char c): x(c), str(b), data(a){}
-
-
-
   char   x;
   string str;
   int    data;

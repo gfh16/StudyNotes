@@ -11,7 +11,7 @@ ROOT 有用并且有趣的代码实现
 -----
 [toc]
 
-
+----------------------------------------------------------------------
 ### 显示程序完成进度-1
 ```C++
   if(jentry%100000==0)
@@ -24,7 +24,6 @@ ROOT 有用并且有趣的代码实现
     std::cout << "]\r"; std::cout.flush();
 }
 ```
-
 
 ### 显示程序完成进度-2
 ```C++
@@ -53,7 +52,7 @@ ROOT 有用并且有趣的代码实现
  }
 ```
 
-
+----------------------------------------------------------------
 ### 写手动GUI界面
 ```C++
  c1->Connect("ProcessedEvent(Int_t,Int_t,Int_t,TObject*)",0,0,"SetPoints(Int_t,Int_t,Int_t,TObject*)");
@@ -65,14 +64,14 @@ ROOT 有用并且有趣的代码实现
  c1->Disconnect("ProcessedEvent(Int_t,Int_t,Int_t,TObject*)");
 ```
 
-
+---------------------------------------------------------------
 ### 求导数
 
  > 在 ROOT User's Guide 中 TMath 一章有详细介绍
  [Link to TMath Class](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#math-libraries-in-root)
 
  
-* <font color=#DC143C > 插值法： Interpolator </font>
+#### <font color=#DC143C > 插值法： Interpolator </font>
 ```C++
   * 创建插值的对象： ROOT::Math::Interpolator SplineInterpolator;
   * 插入数据点： SplineInterpolator.SetData();
@@ -80,7 +79,7 @@ ROOT 有用并且有趣的代码实现
   * 求导: SplineInterpolator.Deriv(x);
 ```
 
-* <font color=#DC143C > RichardsonDerivator </font>
+#### <font color=#DC143C > RichardsonDerivator </font>
 [Link to Function Derivation](https://root.cern.ch/function-derivation)
 ```C++
   * 定义需要求导的函数： Double_t myfunc(Double_t x) { };
@@ -93,7 +92,7 @@ ROOT 有用并且有趣的代码实现
         rd.Derivative3(x0);  // myfunc在 x0 处的三阶导数
 ```
 
-* <font color=#DC143C > Derivator </font>
+#### <font color=#DC143C > Derivator </font>
 ```C++
   * 定义需要求导的函数: Double_t myfunc(Double_t x) { };
   * 创建函数:         ROOT::Math::Functor1D f1D(&myfunc);
@@ -102,6 +101,7 @@ ROOT 有用并且有趣的代码实现
 ```
 
 
+-----------------------------------------------------------------
 ### 求积分分布
 > See the detials: tutorials/hist/cumulative.C
 [Link to cumulative.C](https://root.cern/doc/master/cumulative_8C.html)
@@ -109,10 +109,10 @@ ROOT 有用并且有趣的代码实现
 * 求直方图的积分分布：hist->GetCumulative();  // 结果返回 hist 的积分分布
 ```
 
-
+----------------------------------------------------------------
 ### 打开文件
 
- <font color=#DC143C > ifstream filein(path);  </font>
+#### <font color=#DC143C > ifstream filein(path);  </font>
 ```C++
  ifstream infile("input.txt");
  while(1)   // while(infile.good()){}
@@ -125,29 +125,28 @@ ROOT 有用并且有趣的代码实现
  infile.Close();
 ```
 
-<font color=#DC143C>ifstream filein;
-  filein.open(path,ios::mode) </font>
+#### <font color=#DC143C>ifstream filein; filein.open(path,ios::mode) </font>
 [Link to ifstream open open mode](https://www.runoob.com/cplusplus/cpp-files-streams.html)
 ```C++
 ifstream infile;
 infile.open("input.txt",ios::app);// open(const char *filename, ios::openmode mode)
 ```
 
-<font color=#DC143C> TFile </font>
+#### <font color=#DC143C> TFile </font>
 > 仅限于打开 .root 文件
 ```C++
 TFile * filein = new TFile("test.root");
 TFile filein("test.root")
 ```
 
-<font color=#DC143C> FILE </font>
+#### <font color=#DC143C> FILE </font>
 ```C++
 FILE * FileOut = fopen(Form("output/PulserCali_%s.dat", FileTag3.c_str()),"w");
 fprintf(FileOut,"# itel  icsi \n");
 fflush(FileOut); // 需要加上这句！！！ 否则由于缓存问题，内容不被写入
 ```
 
-
+----------------------------------------------------------
 ### Fitting 2 histograms with the same function
 ```C++
 #include "Fit/Fitter.h"
@@ -186,7 +185,7 @@ void Fit_SameFunc_2Hist()
 }
 ```
 
-
+-----------------------------------------------------------------
 ### 手动选择Cut范围
 ```C++
 void Step1_DEEPoints_1st_CutsForDEELines()
@@ -294,7 +293,7 @@ void Step1_DEEPoints_1st_CutsForDEELines()
 }
 ```
 
-
+------------------------------------------------------------
 ### make的时候，出现"未定义的引用"问题
 ```C++
 
@@ -329,10 +328,9 @@ void Step1_DEEPoints_1st_CutsForDEELines()
 
     %.o: %.cpp
     $(CPP) -c $(CFLAG) $(CRFLAG) $(CXXFLAGS) -o $@ $<
-
 ```
 
-
+---------------------------------------------------------------
 ### ROOT 版本问题导致编译出错
 ```C++
 1. ROOT版本问题：在ROOT6版本下，主要问题在于：
