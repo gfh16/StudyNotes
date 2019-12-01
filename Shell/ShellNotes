@@ -1,0 +1,210 @@
+#!/bin/bash
+
+# 这是我的bash学习笔记！
+
+echo "Hello world!"
+
+
+##_________________________________________________
+##                变量
+:<<!
+yourname="runoob.com"   ## = 前后不能有空格
+echo ${yourname}
+echo ${#yourname}       ## 输出字符长度
+!
+
+
+##__________________________________________________
+##               数组
+:<<!
+array=(a b c d e)
+length=${#array[*]}
+
+for ((i=0; i<length; i++)); do
+    echo ${array[i]}
+done
+
+my_array[0]=A
+my_array[1]=B
+my_array[2]=C
+my_array[3]=D
+
+echo "数组的元素为: ${my_array[@]}"
+!
+
+
+##__________________________________________________
+##               使用循环
+:<<!
+for file in $(ls /etc);do
+      ls -l /etc
+done
+!
+
+
+##_________________________________________________
+##             多行注释
+:<<!
+注释内容
+注释内容
+注释内容
+...
+...
+!
+
+
+#__________________________________________________
+#             Shell 传递参数
+:<<!
+echo "Shell 传递参数实例！"；
+echo "执行的文件名: $0";
+echo "第一个参数为: $1";
+echo "第二个参数为: $2";
+echo "第三个参数为: $3";
+
+echo "参数的个数：$#";
+echo "传递的参数作为字符串显示: $*";
+echo "脚本运行的当前ID号: $$"
+
+for i in "$*"; do
+    echo $i;
+done
+!
+
+
+#____________________________________________________
+#          Shell基本运算符
+
+# 算术运算符
+## 注意：表达式与算符之间要有空格, 表达式被反引号``包含
+:<<!
+a=10
+b=20
+
+val=`expr $a + $b`
+echo "a + b: $val"
+
+val=`expr $a - $b`
+echo "a - b: $val"
+
+val=`expr $a \* $b`
+echo "a * b: $val"
+
+val=`expr $a / $b`
+echo "a / b: $val"
+
+val=`expr $a % $b`
+echo "a % b: $val"
+
+if [ $a == $b ] 
+then
+  echo "a 等于 b"
+fi
+
+if [ $a != $b ] 
+then
+  echo "a 不等于 b"
+fi
+!
+
+# 关系运算符
+:<<!
+[ $a -eq $b ] 检测两个数是否相等，相等返回true
+[ $a -ne $b ] 检测两个数是否不相等，不相等返回true
+[ $a -gt $b ] 检测左边的数是否大于右边的，是则返回true
+[ $a -lt $b ] 检测左边的数是否小于右边的，是则返回true
+[ $a -ge $b ] 检测左边的数是否大于等于右边的，是则返回true
+[ $a -le $b ] 检测左边的数是否小于等于右边的，是则返回true
+!
+
+# 布尔运算符
+:<<!
+a=10
+b=20
+[ $a != $b ] 非运算，返回true
+[ $a -lt 20 -o $b -gt 100 ] 或运算，返回true
+[ $a -lt 20 -a $b -gt 100 ] 与运算，返回false
+!
+
+# 逻辑运算符
+:<<!
+[[ $a -lt 100 && $b -gt 100 ]] 逻辑的AND, 返回false
+[[ $a -lt 100 || $b -gt 100 ]] 逻辑的OR,  返回true
+!
+
+# 字符串运算符
+:<<!
+[ $a = $b ] 检测两个字符串是否相等，相等返回true
+[ $a != $b ] 检测两个字符串是否不相等，不相等返回true
+[ -z $a ] 检测字符串长度是否为0，为0返回true
+[ -n "$a" ] 检测字符串长度是否为0，不为0返回true
+[ $a ] 检测字符串是否为空，不为空返回true
+!
+
+# 文件测试运算符
+:<<!
+[ -d $file ] 检测文件是否是目录，是则返回true
+[ -r $file ] 检测文件是否可读，是则返回true
+[ -w $file ] 检测文件是否可写，是则返回true
+[ -x $file ] 检测文件是否可执行，是则返回true
+[ -s $file ] 检测文件是否为空(文件大小是否为0)，不空返回true
+[ -e $file ] 检测文件(包括目录)是否存在，是则返回true
+!
+
+:<<!
+file="/home/mobaxterm/StudyNotes/Shell/test191130.sh"
+
+if [ -d $file ] 
+then 
+  echo "这是一个目录"
+else
+  echo "这不是一个目录"
+fi
+
+
+if [ -w $file ]
+then
+  echo "文件可读"
+else
+  echo "文件不可读"
+  chmod +w $file
+fi
+!
+
+
+#________________________________________________________
+#          Shell echo 命令
+
+## 显示换行
+echo -e "OK! \n"      ## -e 开启转义
+echo "It is a test"
+
+## 显示不换行
+echo -e "OK! \c"     ## \c 不换行
+echo "It is a test"
+
+## 显示结果定向至文件
+echo "It is a file" > myfile.txt
+
+## 显示命令执行结果
+echo `date`
+
+
+
+
+# 输入输出
+:<<!
+# read 命令从标准输入中读取一行，并把输入行的 每个字段的值指定给shell变量
+read name
+
+
+!
+
+
+
+
+
+
+
+
+
