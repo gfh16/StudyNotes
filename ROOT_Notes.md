@@ -31,9 +31,9 @@ ROOT 学习笔记
 
 
 -------------------------------------------------------
-# <font color=#DC143C> ROOT 基础篇 </font>
+# <font color=#DC143C> 一. ROOT 基础篇 </font>
 
-### ROOT-Framework简介
+### 1.1 ROOT-Framework简介
 *  $ROOTSYS/bin : 二进制文件: 
 * $ROOTSYS/lib : ROOT库文件<font color=#DC143C> (写makefile时需要用到！！！)</font>
 * $ROOTSYS/tutorials: ROOT例子源代码 
@@ -42,7 +42,7 @@ ROOT 学习笔记
 
 
 --------------------------------------------------------
-### ROOT 终端常用命令(更多内容参见cling)
+### 1.2 ROOT 终端常用命令(更多内容参见cling)
 ```C++
 root -h  //help作用，查看root后面参数如何使用
 root -l  //关root的欢迎界面
@@ -57,8 +57,8 @@ root[].x myFile.C     // Load and execute myFile.C
 
 
 ------------------------------------------------------------
-### ROOT的代码规范
-#### 代码约定
+### 1.3 ROOT的代码规范
+#### 1.3.1 代码约定
 |  命名规则          | 代码规范  |
 |:---               |:---      |
 |类名以 "T" 开头     |TLine, TTree, ...|
@@ -74,7 +74,7 @@ root[].x myFile.C     // Load and execute myFile.C
 
 
 -----------------------------------------------------------
-#### 数据类型规范
+#### 1.3.2 数据类型规范
 > 为避免新老机器对同一种数据类型可能有不同的长度, ROOT使用下面的 pre-defined 类型
 ```C++
 * Char_t         //Signed Character 1 byte
@@ -92,9 +92,9 @@ root[].x myFile.C     // Load and execute myFile.C
 ```
 
 ------------------------------------------------------------
-### 全局变量
+### 1.4 全局变量
 
-#### gROOT
+#### 1.4.1 gROOT
 > By using gROOT pointer, you can get the access to every object created in a ROOT program
 ```C++
 root[] gROOT->ProcessLine(".x myHist.C");
@@ -103,7 +103,7 @@ root[] gROOT->GetListOfCanvases()->FindObject("c1");
 ...
 ```
 
-#### gPad
+#### 1.4.2 gPad
 > gPad is always pointing to the active pad
 ```C++
 {
@@ -114,7 +114,7 @@ root[] gROOT->GetListOfCanvases()->FindObject("c1");
 }
 ```
 
-#### gStyle
+#### 1.4.3 gStyle
 ```C++
 root[] gStyle->SetFillStyle(); 
 root[] gStyle->SetPalette(1);     // To plot with nice colors
@@ -124,7 +124,7 @@ root[] gStyle->SetOptStat(1);     // 显示详细的拟合参数
 
 ```
 
-#### gRandom
+#### 1.4.4 gRandom
 > A pointor to the current random number generator. Points to 'TRandom3' by default
 ```C++
 root[] gRandom->Print(); // 查看当前的 random number generator
@@ -133,19 +133,19 @@ root[] gRandom = new TRandom2(0); // seed = 0, 新的random number generator
 ...
 ```
 
-#### gSystem
+#### 1.4.5 gSystem
 ```C++
 root[] gSystem->Getenv("USER")  // returns the value of the system enviroment variable 'USER' 
 ```
 
-#### 其他全局变量
+#### 1.4.5 其他全局变量
 > 在 root 终端键入g, 按 Tab 补全可查看所有的全局变量！
 
 
 ------------------------------------------------------------
-### Environment Setup
+### 1.5 Environment Setup
 
-#### rootlogon.C
+#### 1.5.1 rootlogon.C
 > This script without a function declaration is executed automatically when ROOT is launched from the same directory as the file
 ```C++
 {
@@ -155,11 +155,11 @@ root[] gSystem->Getenv("USER")  // returns the value of the system enviroment va
 }
 ```
 
-#### rootlogoff.C
+#### 1.5.2 rootlogoff.C
 > rootlogoff.C is a script loaded at shutdown
 
 
-#### rootalias.C
+#### 1.5.3 rootalias.C
 > rootalias.C file is loaded but not executed at start-up, it contians small functions like:
 ```C++
 ls(path)
@@ -171,15 +171,15 @@ cd(path)
 
 
 -----------------------------------------------------------------
-### 对象
-#### Inspecting Objects
+### 1.6 对象
+#### 1.6.1 Inspecting Objects
 ```C++
 root[] TFile f("staff.root");
 root[] f.Inspect() 
 root[] f.Print()
 ```
 
-#### Object Ownership
+#### 1.6.2 Object Ownership
 > 了解对象的所有权归属, 有助于对对象进行操作!
   
    ```C++
@@ -209,8 +209,8 @@ root[] f.Print()
 
 
 --------------------------------------------------------------
-### ROOT中的C++
-#### C++ 解释器 -- Cling
+### 1.7 ROOT中的C++
+#### 1.7.1 C++ 解释器 -- Cling
 >+ Cling 是 ROOT 使用的 C++ 解释器. Cling 可以简化我们在root环境下的C++语法! 
 >+ Cling 是解释器, 不是编译器！ 它给我们在 root 环境下使用 C++ 带来便利! 比如：root 可以直接执行 ROOT 脚本(也叫"Macro")而不需要编译， 这样的 macro 甚至不需要包含必要的头文件， <font color=#DC143C>但且要求文件名与函数同名！ </font>
 >+ ROOT Macro 一般不能通过C++编译!!!  <font color=#DC143C> 所以在写需要编译的复杂程序是不能使用 cling 带来的这些便利！ 切记！</font>
@@ -242,7 +242,7 @@ void cernstaff()
 ```
 
 ----------------------------------------------------------------
-#### ACLiC: Compiling Scripts Into Libraries
+#### 1.7.2 ACLiC: Compiling Scripts Into Libraries
 1. 使用方法
 ```C++
 root[] .L MyScript.C+  // build and load a shared library containing your script
@@ -265,21 +265,21 @@ gSystem->Load("mydir/mylib"); // Load library
 
 
 -------------------------------------------------------
-### GUI 图形用户界面
+### 1.8 GUI 图形用户界面
 
 #### TCanvas && TPad
 > TCanvas 与 TPad 的关系
 >+ TCanvas 是 TPad 的子类. 一个 canvas 本身是一个大 pad, 这个大的 pad 可以分为多个小 pad
 >+ 任何时候，只能有一个 pad 处于 active 状态, 画图也将画在 active 的 pad 上
 
-##### TCanvas
+#### 1.8.1 TCanvas
 ```C++
 TCancas *c1 = new TCanvas("name","title",width, height); // 创建新的canvas
 c1->SaveAS();  // 保存
 c1->Print();   // 保存
 ```
 
-##### TPad
+#### 1.8.2 TPad
 ```C++
 {
   gPad->SetLogy();            // 设置Log坐标
@@ -295,16 +295,16 @@ c1->Print();   // 保存
 
 
 
-### Input/Output
+### 1.9 Input/Output
 
 
 
 
 
 --------------------------------------------------------
-# <font color=#DC143C> ROOT 功能篇 </font>
+# <font color=#DC143C> 二. ROOT 功能篇 </font>
 
-### Histograms 直方图
+### 2.1 Histograms 直方图
 #### TH1
 * 从已有root文件中读取histogram
 ```C++
@@ -349,7 +349,7 @@ hs->Add(h2);
 
 
 -------------------------------------------------------------------
-### Graphs 画图
+### 2.2 Graphs 画图
 #### TGraph2DErrors
 > I use TGraph2DErrors() to draw data(error value equal to 0), i try to fit with TF2 function, error happens: "fill data empty"  <font color=#DC143C>  // Reason: Reason: TF2 fit ignore data without an error </font>
 
@@ -377,7 +377,7 @@ hs->Add(h2);
 
 
 -------------------------------------------------------------------
-### Fitting 拟合
+### 2.3 Fitting 拟合
 
 > [Link-to-Root-User's-Guide](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#fitting-histograms)
 
@@ -387,7 +387,7 @@ hs->Add(h2);
 // Fit("function name","fit options","drawing options",fit limits) 
 ``` 
 
-#### Use_predefined_funtion 使用自带函数
+#### 2.3.1 Use_predefined_funtion 使用自带函数
 ```C++
 * Root 中自带的四类拟合函数： "gaus","expo","polN","landau"
 * 获取拟合参数
@@ -401,7 +401,7 @@ hs->Add(h2);
   gfit->GetParameter(par);
 ```
 
-#### Use user-defined function 使用自定义函数
+#### 2.3.2 Use user-defined function 使用自定义函数
 > 自定义函数必须初始化才能使用
 ```C++
 * Define the function 
@@ -412,7 +412,7 @@ hs->Add(h2);
 * Get fit results : mw->GetChisquare();mw->GetNDF(); // Number of Degrees of Freedom
 ```
 
-#### Use mixing functions 使用混合函数
+#### 2.3.3 Use mixing functions 使用混合函数
 ```C++
 * Pre-defined functions : TF1 *fc=new TF1("f5","pol3(0)+[4]*sin(gaus(5)+[8])",0,10)
 * User-defined functions: 
@@ -428,7 +428,7 @@ a.使用自定义函数拟合时，拟合结果对参数初始化很敏感
 b.一般需要给参数设定边界   
 ```
 
-#### Fittting options 拟合选项
+#### 2.3.4 Fittting options 拟合选项
 ```C++
 * "Q"   Quite model,终端不输出拟合结果
 * "V"   Verbose model, 详细的输出    <font color=#DC143C>//(默认的模式介于两者之间) </font>
@@ -439,7 +439,7 @@ b.一般需要给参数设定边界
 * "LL"  An Improved Log Likelihood fit for low statistics   <font color=#DC143C> //(当Bin content大于100时，不要使用这种方式)</font> 
 ```
 
-#### Set Bounds for Parameters 拟合参数设置
+#### 2.3.5 Set Bounds for Parameters 拟合参数设置
 ```C++
 func->SetParameter();    // 单独给某一个参数赋初值
 func->SetParameters();   // 同时给所有的参数赋初值
@@ -448,7 +448,7 @@ func->FixParameter();    // 固定某个参数
 ```
 
 
-#### Get the associated function 
+#### 2.3.6 Get the associated function 
 ```C++
 * TF1 *myfunc = h->GetFunction("myfunc");  // 从直方图的拟合函数中提取
 * Fit Statistics: gStyle->SetOptFit(mode)  mode = pcev (defaul = 0111)
@@ -458,7 +458,7 @@ func->FixParameter();    // 固定某个参数
       v=1   打印参数 name/values   
 ```
 
-#### ROOT::Fit::Fitter ROOT6拟合新方法
+#### 2.3.7 ROOT::Fit::Fitter ROOT6拟合新方法
 [应用举例](https://root.cern.ch/doc/v612/combinedFit_8C.html)
 >+ ROOT::Fit is a new ROOT Class in ROOT6
 >+ 相比于TH1::Fit， ROOT::Fit 能对Fit进行更多精细的操作和控制！
@@ -515,7 +515,7 @@ func->FixParameter();    // 固定某个参数
 }
 ```
 
-#### FUMILI Minimization Package  最小化算法
+#### 2.3.8 FUMILI Minimization Package  最小化算法
 >* To minimize Chi-square functio  <font color=#DC143C>   //(ROOT中默认的拟合方式是最小Chi2)  </font>
 >* To search maximum of likelihood function
 
@@ -530,14 +530,14 @@ func->FixParameter();    // 固定某个参数
 
 
 -----------------------------------------------------
-### Trees 树
+### 2.4 Trees 树
 
 
 -----------------------------------------------------------
-# <font color=#DC143C> ROOT 提高篇 </font>
+# <font color=#DC143C> 三. ROOT 提高篇 </font>
 
-### Folders and Tasks
-#### Folders
+### 3.1 Folders and Tasks
+#### 3.1.1 Folders
 > To reduce class dependencies and improve modularity
 1. 创建文件夹
 
@@ -568,52 +568,52 @@ conf=(TFolder*)gROOT->FindObjectAny("/aliroot/Run/Configuration");
 conf=(TFolder*)gROOT->FindObjectAny("Configuration");
 ```
 
-#### Tasks
+#### 3.1.2 Tasks
 
 
 ---------------------------------------------------
-### Writing-GUI 手写GUI
+### 3.2 Writing-GUI 手写GUI
 
 
 ----------------------------------------------------
-### Geometry Package
+### 3.3 Geometry Package
 
 
 ---------------------------------------------------
-### Python Interface
+### 3.4 Python Interface
 
 
 ---------------------------------------------------
-### Networking
+### 3.5 Networking
 
 ----------------------------------------------------
-### Threads 线程
+### 3.6 Threads 线程
 
 
 ---------------------------------------------------
-### Parallel-Processing 并行计算
+### 3.7 Parallel-Processing 并行计算
 
 
 
 ----------------------------------------------------
-# <font color=#DC143C> ROOT 运算篇 </font>
+# <font color=#DC143C> 四. ROOT 运算篇 </font>
 
-### Math-Libraries 数学库
-
-----------------------------------------------------
-### Matrix 矩阵
+### 4.1 Math-Libraries 数学库
 
 ----------------------------------------------------
-### Physics-Vectors 矢量运算
+### 4.2 Matrix 矩阵
+
+----------------------------------------------------
+### 4.3 Physics-Vectors 矢量运算
 
 
 
 
 
 ---------------------------------------------------
-# <font color=#DC143C> ROOT 其他篇 </font>
+# <font color=#DC143C> 五. ROOT 其他篇 </font>
 
-### TCutG  
+### 5.1 TCutG  
 > <font color=#DC143C> Int_t TCutG::IsInside(Double_t x, Double_t y) const  </font>
 
 1. 判断一个点是否在给定Cut范围内
@@ -628,7 +628,7 @@ TCutG cut = (TCutG*)gPad->GetPrimitive("CUTG")       // get a cut
 TCutG * mycut = (TCutG*)gPad->WaitPrimitive("CUTG"); // draw a new cut
 ```
 
-### TList 
+### 5.2 TList 
 ```C++
 TList * list = gPad->GetLIstOfPrimitives();   // List of objects in the current canvas
 ```
