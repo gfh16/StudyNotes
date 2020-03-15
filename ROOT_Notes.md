@@ -267,19 +267,97 @@ gSystem->Load("mydir/mylib"); // Load library
 -------------------------------------------------------
 ### 1.8 GUI 图形用户界面
 
-#### TCanvas && TPad
-> TCanvas 与 TPad 的关系
->+ TCanvas 是 TPad 的子类. 一个 canvas 本身是一个大 pad, 这个大的 pad 可以分为多个小 pad
->+ 任何时候，只能有一个 pad 处于 active 状态, 画图也将画在 active 的 pad 上
+#### 1.8.1 画图
+> 2D: lines, polygons(多边形), arrows, plots, histograms
+> 3D graphical objects
 
-#### 1.8.1 TCanvas
 ```C++
-TCancas *c1 = new TCanvas("name","title",width, height); // 创建新的canvas
-c1->SaveAS();  // 保存
-c1->Print();   // 保存
+  object.Draw()
 ```
 
-#### 1.8.2 TPad
+#### 1.8.2 操作画图对象
+> 对屏幕上的对象进行操作将会改变对象的内存
+
+##### 1.8.2.1 鼠标左键 -- Moving, Resizing and Modifying Objects 
+>+ 图形界面 -- 点击鼠标左键
+>+ 使用编程 -- 通过编程改变图形, 需要"Update the Pad"才能显示出来
+
+##### 1.8.2.2 鼠标中键 -- 选中画图对象
+>+ 图形界面 -- 点击鼠标中键
+>+ 使用变成 -- root[ ] cd->cd
+
+##### 1.8.2.3 鼠标右键 -- 快捷菜单
+>+ 右键单击图形中任何地方, 将会显示对应对象的菜单
+>+ 可以向一个类中添加菜单, 用  // \*MENU\* 标记注释
+
+
+#### 1.8.3 图形容器 -- TCanvas && TPad
+>+ Canvases 等同于窗口, 而 Pads 是图像的真正载体
+>+ TCanvas 是 TPad 的子类. 一个 canvas 本身是一个大 pad, 这个大的 pad 可以分为多个小 pad
+>+ 任何时候，只能有一个 pad 处于 active 状态, 画图也将画在 active 的 pad 上
+>+ 对 Pad 的操作会直接应用到Canvas上. Canvas 的使用可在 root 环境下右键查看.
+
+
+##### 1.8.3.1 The Global Pad -- gPad
+> gPad is always pointing to the active pad
+
++ Finding a n Object in a Pad
+```C++
+    root[] obj = gPad->GetPrimitive("myobjectname"); // 将myobjectname的指针返回给obj
+    root[] obg = (TPaveLabel*)(gPad->GetPrimitive("myobjectname")); // 只当返回类型
+```
+
++ Hinding an Object
+```C++
+   root[] li = gPad->GetListOfPrimitives();
+   root[] li->Remove(obj);
+```
+
+##### 1.8.3.2 Pad 的坐标系
++ 用户坐标系 (最常用)
+```C++
+   root[] gPad->Range(float x1,float y1,float x2,float y2);
+```
++ 归一化坐标系(NDC) 
+  >+ 与窗口大小、用户坐标系无关. 
+  >+ 横坐标范围(0,1), 纵坐标范围(0,1). 坐标原点(0,0)在左下角. 
+  >+ 如果需要将文本画在图中的固定地方, 需要用到NDC坐标
+
++ 像素坐标系
+  >+ 原点(0,0)在左上角
+
+##### 1.8.3.3 坐标转换
+  >+ 像素坐标: (px,py)
+  >+ 用户坐标: (ux,xy)
+  >+ 归一坐标: (apx,apy)
+  >+ 绝对像素坐标: (apx,apy)
+  > NDC to Pixel 
+  > Pixel to User
+  > Absolute pixel to user
+  > User to Pixel
+  > User to absolute pixel
+  
+##### 1.8.3.4 Divide a Pad into Sub-pads
++ 创建多个Pad, 画在同一个Canvas上
+```C++
+   root[] spad1 = new TPad("spad1","The first subpad",.1,.1,.5,.5);//NDC坐标
+   root[] spad1->Draw()
+```
++ 将同一个Pad分成多个Sub-Pads
+```C++
+   root[] pad1->Divide(3,2); // 3行2列
+   root[] pad1->Divide(3,2,0.1,0.1); // 设定sub-pad间隔, 10% of the parent width
+```
+
+##### 1.8.3.5 Updating the Pad
+> 默认地, a pad is not updated with every change
+
+>+ 
+
+
+
+
+#### 1.8.3.N gPad 的常见使用
 ```C++
 {
   gPad->SetLogy();            // 设置Log坐标
@@ -291,6 +369,15 @@ c1->Print();   // 保存
   gPad->Modified(); // Tell the canvas that an object it is displaying has changed
   gPad->Update();  // Force the canvas to refresh
 }
+```
+
+
+
+#### 1.8.3.N TCanvas
+```C++
+TCancas *c1 = new TCanvas("name","title",width, height); // 创建新的canvas
+c1->SaveAS();  // 保存
+c1->Print();   // 保存
 ```
 
 
@@ -519,12 +606,12 @@ func->FixParameter();    // 固定某个参数
 >* To minimize Chi-square functio  <font color=#DC143C>   //(ROOT中默认的拟合方式是最小Chi2)  </font>
 >* To search maximum of likelihood function
 
-##### MINUIT
+##### 2.3.8.1 MINUIT
 
-##### MINUIT2
+##### 2.3.8.2 MINUIT2
 
 
-#### 利用神经网络进行数据拟合
+#### 2.3.9 利用神经网络进行数据拟合
 
 
 
