@@ -295,7 +295,7 @@ gSystem->Load("mydir/mylib"); // Load library
 >+ Canvases 等同于窗口, 而 Pads 是图像的真正载体
 >+ TCanvas 是 TPad 的子类. 一个 canvas 本身是一个大 pad, 这个大的 pad 可以分为多个小 pad
 >+ 任何时候，只能有一个 pad 处于 active 状态, 画图也将画在 active 的 pad 上
->+ 对 Pad 的操作会直接应用到Canvas上. Canvas 的使用可在 root 环境下右键查看.
+>+ 对 TPad 的操作同样适用于 TCanvas. Canvas 的使用可在 root 环境下右键查看.
 
 
 ##### 1.8.3.1 The Global Pad -- gPad
@@ -350,35 +350,37 @@ gSystem->Load("mydir/mylib"); // Load library
 ```
 
 ##### 1.8.3.5 Updating the Pad
-> 默认地, a pad is not updated with every change
+> 默认地, 若对当前的 pad 进行操作, 图形界面并不会即时更新. 用鼠标点击一下 pad 即可刷新. 也可用代码实现:
 
->+ 
-
-
-
-
-#### 1.8.3.N gPad 的常见使用
 ```C++
-{
-  gPad->SetLogy();            // 设置Log坐标
-  gPad->Modified();           //
-  gPad->Update();
-  gPad->SetLogy(1);           // 设置对数坐标
-  gPad->SetTicky(1);          // 给坐标轴设置网格
-  gPad->SetLeftMargin(0.15);  //设置 pad 的偏置
-  gPad->Modified(); // Tell the canvas that an object it is displaying has changed
-  gPad->Update();  // Force the canvas to refresh
-}
+  root[] gPad->Modified();  // the pad has changed
+  root[] gPad->Update();    // update all modified pads 
+```
+
+##### 1.8.3.6 设置 Pad 的透明度
+
+```C
+  // istyle = 4000 - 4100, 4000完全透明，4100完全不透明
+  root[] pad->SetFillStyle(istyle);
+```
+
+##### 1.8.3.7 设置对数坐标
+>+ 对数坐标是对 pad 设置, 不是对直方图或者坐标轴
+>+ 如果一个 pad 分成多个 sub-pad, 需要分别对各个 sub-pad 进行设置
+
+```C++
+  root[] gPad->SetLogx(1);  // 1-对数坐标, 0-重置
+  root[] gPad->SetLogy(1);
+  root[] gPad->SetLogz(1);
+```
+
+##### 1.8.3.8 WaitPrimitive 方法
+
+```C++
+  canvas->WaitPrimitive(); // 处于"等待"状态, 双击 canvas 结束
 ```
 
 
-
-#### 1.8.3.N TCanvas
-```C++
-TCancas *c1 = new TCanvas("name","title",width, height); // 创建新的canvas
-c1->SaveAS();  // 保存
-c1->Print();   // 保存
-```
 
 
 
