@@ -30,10 +30,25 @@ ROOT 学习笔记
 [toc]
 
 
+---------------------------------------------------
+# <font color=#DC143C> 附录: </font>
+
+### <font color=#00BFFF> Markers  </font>
+![Markers](ROOT/pictures/030000B0.png)
+
+### <font color=#00BFFF> 希腊字母表  </font>
+![希腊字母表](ROOT/pictures/030000BD.png)
+
+### <font color=#00BFFF> 数学符号  </font>
+![数学符号](ROOT/pictures/030000BE.png)
+
+
+
+
 -------------------------------------------------------
 # <font color=#DC143C> 一. ROOT 基础篇 </font>
 
-### 1.1 ROOT-Framework简介
+### <font color=#00BFFF> 1.1 ROOT-Framework简介 </font>
 *  $ROOTSYS/bin : 二进制文件: 
 * $ROOTSYS/lib : ROOT库文件<font color=#DC143C> (写makefile时需要用到！！！)</font>
 * $ROOTSYS/tutorials: ROOT例子源代码 
@@ -42,7 +57,8 @@ ROOT 学习笔记
 
 
 --------------------------------------------------------
-### 1.2 ROOT 终端常用命令(更多内容参见cling)
+### <font color=#00BFFF> 1.2 ROOT 终端常用命令(更多内容参见cling) </font>
+
 ```C++
 root -h  //help作用，查看root后面参数如何使用
 root -l  //关root的欢迎界面
@@ -57,8 +73,10 @@ root[].x myFile.C     // Load and execute myFile.C
 
 
 ------------------------------------------------------------
-### 1.3 ROOT的代码规范
-#### 1.3.1 代码约定
+### <font color=#00BFFF> 1.3 ROOT的代码规范  </font>
+
+#### <font color=#FF00FF> 1.3.1 代码约定  </font>
+
 |  命名规则          | 代码规范  |
 |:---               |:---      |
 |类名以 "T" 开头     |TLine, TTree, ...|
@@ -74,7 +92,8 @@ root[].x myFile.C     // Load and execute myFile.C
 
 
 -----------------------------------------------------------
-#### 1.3.2 数据类型规范
+#### <font color=#FF00FF> 1.3.2 数据类型规范  </font>
+
 > 为避免新老机器对同一种数据类型可能有不同的长度, ROOT使用下面的 pre-defined 类型
 ```C++
 * Char_t         //Signed Character 1 byte
@@ -92,9 +111,10 @@ root[].x myFile.C     // Load and execute myFile.C
 ```
 
 ------------------------------------------------------------
-### 1.4 全局变量
+### <font color=#00BFFF>  1.4 全局变量  </font>
 
-#### 1.4.1 gROOT
+#### <font color=#FF00FF> 1.4.1 gROOT  </font>
+
 > By using gROOT pointer, you can get the access to every object created in a ROOT program
 ```C++
 root[] gROOT->ProcessLine(".x myHist.C");
@@ -103,7 +123,8 @@ root[] gROOT->GetListOfCanvases()->FindObject("c1");
 ...
 ```
 
-#### 1.4.2 gPad
+#### <font color=#FF00FF> 1.4.2 gPad  </font>
+
 > gPad is always pointing to the active pad
 ```C++
 {
@@ -114,7 +135,8 @@ root[] gROOT->GetListOfCanvases()->FindObject("c1");
 }
 ```
 
-#### 1.4.3 gStyle
+#### <font color=#FF00FF> 1.4.3 gStyle  </font>
+
 ```C++
 root[] gStyle->SetFillStyle(); 
 root[] gStyle->SetPalette(1);     // To plot with nice colors
@@ -124,7 +146,8 @@ root[] gStyle->SetOptStat(1);     // 显示详细的拟合参数
 
 ```
 
-#### 1.4.4 gRandom
+#### <font color=#FF00FF> 1.4.4 gRandom  </font>
+ 
 > A pointor to the current random number generator. Points to 'TRandom3' by default
 ```C++
 root[] gRandom->Print(); // 查看当前的 random number generator
@@ -133,19 +156,22 @@ root[] gRandom = new TRandom2(0); // seed = 0, 新的random number generator
 ...
 ```
 
-#### 1.4.5 gSystem
+#### <font color=#FF00FF> 1.4.5 gSystem  </font>
+
 ```C++
 root[] gSystem->Getenv("USER")  // returns the value of the system enviroment variable 'USER' 
 ```
 
-#### 1.4.5 其他全局变量
+#### <font color=#FF00FF> 1.4.6 其他全局变量  </font>
+
 > 在 root 终端键入g, 按 Tab 补全可查看所有的全局变量！
 
 
 ------------------------------------------------------------
-### 1.5 Environment Setup
+### <font color=#00BFFF> 1.5 环境设置  </font>
 
-#### 1.5.1 rootlogon.C
+#### <font color=#FF00FF> 1.5.1 rootlogon.C  </font>
+
 > This script without a function declaration is executed automatically when ROOT is launched from the same directory as the file
 ```C++
 {
@@ -155,11 +181,13 @@ root[] gSystem->Getenv("USER")  // returns the value of the system enviroment va
 }
 ```
 
-#### 1.5.2 rootlogoff.C
+#### <font color=#FF00FF> 1.5.2 rootlogoff.C  </font>
+
 > rootlogoff.C is a script loaded at shutdown
 
 
-#### 1.5.3 rootalias.C
+#### <font color=#FF00FF> 1.5.3 rootalias.C  </font>
+
 > rootalias.C file is loaded but not executed at start-up, it contians small functions like:
 ```C++
 ls(path)
@@ -171,15 +199,18 @@ cd(path)
 
 
 -----------------------------------------------------------------
-### 1.6 对象
-#### 1.6.1 Inspecting Objects
+### <font color=#00BFFF> 1.6 对象  </font>
+
+#### <font color=#FF00FF> 1.6.1 Inspecting Objects  </font>
+
 ```C++
 root[] TFile f("staff.root");
 root[] f.Inspect() 
 root[] f.Print()
 ```
 
-#### 1.6.2 Object Ownership
+#### <font color=#FF00FF> 1.6.2 Object Ownership  </font>
+
 > 了解对象的所有权归属, 有助于对对象进行操作!
   
    ```C++
@@ -209,8 +240,10 @@ root[] f.Print()
 
 
 --------------------------------------------------------------
-### 1.7 ROOT中的C++
-#### 1.7.1 C++ 解释器 -- Cling
+### <font color=#00BFFF> 1.7 ROOT中的C++  </font>
+
+#### <font color=#FF00FF> 1.7.1 C++ 解释器 -- Cling  </font>
+ 
 >+ Cling 是 ROOT 使用的 C++ 解释器. Cling 可以简化我们在root环境下的C++语法! 
 >+ Cling 是解释器, 不是编译器！ 它给我们在 root 环境下使用 C++ 带来便利! 比如：root 可以直接执行 ROOT 脚本(也叫"Macro")而不需要编译， 这样的 macro 甚至不需要包含必要的头文件， <font color=#DC143C>但且要求文件名与函数同名！ </font>
 >+ ROOT Macro 一般不能通过C++编译!!!  <font color=#DC143C> 所以在写需要编译的复杂程序是不能使用 cling 带来的这些便利！ 切记！</font>
@@ -242,7 +275,8 @@ void cernstaff()
 ```
 
 ----------------------------------------------------------------
-#### 1.7.2 ACLiC: Compiling Scripts Into Libraries
+#### <font color=#FF00FF> 1.7.2 ACLiC: Compiling Scripts Into Libraries  </font>
+
 1. 使用方法
 ```C++
 root[] .L MyScript.C+  // build and load a shared library containing your script
@@ -265,9 +299,9 @@ gSystem->Load("mydir/mylib"); // Load library
 
 
 -------------------------------------------------------
-### 1.8 GUI 图形用户界面
+### <font color=#00BFFF> 1.8 GUI 图形用户界面  </font>
 
-#### 1.8.1 画图
+#### <font color=#FF00FF> 1.8.1 画图  </font>
 > 2D: lines, polygons(多边形), arrows, plots, histograms
 > 3D graphical objects
 
@@ -275,8 +309,9 @@ gSystem->Load("mydir/mylib"); // Load library
   object.Draw()
 ```
 
-#### 1.8.2 操作画图对象
+#### <font color=#FF00FF> 1.8.2 操作画图对象  </font>
 > 对屏幕上的对象进行操作将会改变对象的内存
+
 
 ##### 1.8.2.1 鼠标左键 -- Moving, Resizing and Modifying Objects 
 >+ 图形界面 -- 点击鼠标左键
@@ -291,7 +326,8 @@ gSystem->Load("mydir/mylib"); // Load library
 >+ 可以向一个类中添加菜单, 用  // \*MENU\* 标记注释
 
 
-#### 1.8.3 图形容器 -- TCanvas && TPad
+
+#### <font color=#FF00FF> 1.8.3 图形容器 -- TCanvas && TPad  </font>
 >+ Canvases 等同于窗口, 而 Pads 是图像的真正载体
 >+ TCanvas 是 TPad 的子类. 一个 canvas 本身是一个大 pad, 这个大的 pad 可以分为多个小 pad
 >+ 任何时候，只能有一个 pad 处于 active 状态, 画图也将画在 active 的 pad 上
@@ -381,10 +417,125 @@ gSystem->Load("mydir/mylib"); // Load library
 ```
 
 
+#### <font color=#FF00FF> 1.8.4 图形  </font>
+
+##### 1.8.4.1 线条: 直线, 箭头, 折线
+```C++
+  直线：
+      TLine* line = new TLine(Double_t x1, Double_t y1, 
+                              Double_t x2, Double_t y2);  
+  
+  箭头：
+      TArrow* arr = new TArrow(Double_t x1, Double_t y1,
+                               Double_t x2, Double_t y2,
+                               Float_t arrowsize, Option_t* option) 
+             // Option选项: ">" "|>" "<" "<|" "<>" "<|>"
+             // "|" 表示家头加粗, "<", ">" 分别表示左右箭头
+      arr->SetFillColor(icolor); // 设置箭头的填充颜色
+      arr->SetAngle(angle);      // 设置箭头的角度,默认 60 度
+    
+  折线:
+      TPolyLine* polyl = new TPolyLine(Int_t n, Double_t* x,
+                                       Double_t* y, Option_t* option)
+                                       // n 是数据点的数目
+```
+
+
+##### 1.8.4.2 椭圆、扇形、圆
+>+ 通过 TEllipse 来创建椭圆, 然后通过设置椭圆的 phi 角度范围定义扇形.
+>+ ROOT 里面没有直接画圆的函数.
+>+ 通过 TAttLine 设置图形的边界, TAttFill 设置填充方式
+
+```C++
+   TEllipse(Double_t x1, Double_t y1, Double_t r1, Double_t r2);
+   TEllipse(Double_t x1, Double_t y1, Double_t r1, Double_t r2
+            Double_t phimin, Double_t phimax, Double_t theta);
+   // (x1,y1)为中心点, r1,r2分别是长轴和短轴, phimin,phimax是扇形张角范围
+   // theta 是旋转角度
+
+```
+![Different types of ellipses](ROOT/pictures/030000AE.png)
 
 
 
-### 1.9 Input/Output
+##### 1.8.4.2 方形
+```C++
+   TBox* box = new TBox(Double_t x1, Double_t x2,
+                        Double_t y1, Double_t y2);
+   // (x1,y1)是左下角顶点,(x2,y2)是右上角顶点
+```
+
+
+##### 1.8.4.3 Markers
+> 通过 TMarker 方式创建. 点类型的 marker(1, 6, 7)不能调节大小
+```C++
+   TMarker* mark = new TMarker(Double_t x, Double_t y, Int_t marker);
+```
+![Markers](ROOT/pictures/030000B0.png)
+
+
+
+##### 1.8.4.4 Feymann 图
+> 两个有用的类: TCurlyLine, TCurlyArc
+> 费曼图的例子参见: $ROOTSYS/tutorials/graphics/feyman.C
+
+
+##### 1.8.4.5 文本与 Latex 数学公式
+> ROOT 的文本输入采用 TLatex, 与 Latex的使用方法一致
+>+ 常用 TLatex 用法 
+
+| 名称  | 用法  | 效果  | 备注 |
+|:-------:|:-------:|:---------:| :-------: |
+| 上角标  |  x\^{y^{2}}    | $x^{y^{2}}$ |
+| 下角标  |  x_{2y}        | $x_{2y}$    |
+| 分数   |  #frac{x}{y} | $\frac{x}{y}$ |
+| 根号   |  #sqrt{x}, #sqrt[3]{x}    | $\sqrt{x}, \sqrt[3]{3}$  |
+| 大写括号| #{}{...}, #(){...}, #\| \|{...}|  
+| 希腊字母 | #gamma, #Gamma | $\gamma, \Gamma$ | 见附录希腊字母表 | 
+
+>+ 脚本 $ROOTSYS/tutorials/graphics/latex.C
+![macro latex.C](ROOT/pictures/020000C1.jpg)
+
+>+ 脚本 $ROOTSYS/tutorials/graphics/latex2.C
+![macro latex2.C](ROOT/pictures/020000C2.jpg)
+
+>+ 脚本 $ROOTSYS/tutorials/graphics/latex3.C
+![macro latex3.C](ROOT/pictures/020000C3.jpg)
+
+
+##### 1.8.4.6 Text in a Pad
+>+ TPaveLabel: Text 只有一行
+>+ TPaveText: Text 有多行
+>+ TPavesText: 多个 TPaveText 组成
+>+ Option:
+   option = "T" top frame
+   option = "B" bottom frame
+   option = "R" right frame
+   option = "L" left frame
+   option = "NDC" x1,y1,x2,y2 are given in NDC
+
+```C++
+  TPaveLabel(Double_t x1, Double_t y1, Double_t x2, Double_t y2,
+             const char* label, Option_t* option);
+
+  TPaveText pt1(Double_t x1, Double_t y1, Double_t x2, Double_t y2);
+  TText* t1 = pt1.AddText("some text");
+
+  TPavesText(Double_t x1, Double_t y1, Double_t x2, Double_t y2
+             Int_t npaves, Option_t* option);
+```
+
+
+
+#### <font color=#FF00FF> 1.8.5 坐标设置  </font>
+
+
+
+#### <font color=#FF00FF> 1.8.6 图形属性  </font>
+
+
+
+### <font color=#00BFFF> 1.9 Input/Output  </font>
 
 
 
@@ -393,8 +544,9 @@ gSystem->Load("mydir/mylib"); // Load library
 --------------------------------------------------------
 # <font color=#DC143C> 二. ROOT 功能篇 </font>
 
-### 2.1 Histograms 直方图
-#### TH1
+### <font color=#00BFFF> 2.1 Histograms 直方图  </font>
+
+#### <font color=#FF00FF> 2.1.1 TH1 </font>
 * 从已有root文件中读取histogram
 ```C++
  TFile * in = new TFile("文件路径");
@@ -424,9 +576,11 @@ h->SetOptStat(0);                      //
 h->GetListOfFunctions()->Add(func); h->Draw(); // Draw the histo with the fit function
 ```
 
-#### TH2
+#### <font color=#FF00FF> 2.1.2 TH2  </font>
 
-#### THStack
+
+
+#### <font color=#FF00FF> 2.1.3 THStack </font>
 
 * 同时画出多个直方图：THStack
 ```C++
@@ -438,16 +592,17 @@ hs->Add(h2);
 
 
 -------------------------------------------------------------------
-### 2.2 Graphs 画图
-#### TGraph2DErrors
+### <font color=#00BFFF> 2.2 Graphs 画图  </font>
+
+#### <font color=#FF00FF> TGraph2DErrors  </font>
 > I use TGraph2DErrors() to draw data(error value equal to 0), i try to fit with TF2 function, error happens: "fill data empty"  <font color=#DC143C>  // Reason: Reason: TF2 fit ignore data without an error </font>
 
 
-#### TLatex
+#### <font color=#FF00FF> TLatex  </font>
 
 
 
-#### TLegend
+#### <font color=#FF00FF> TLegend  </font>
 
 * How to add a legend to a figure
 ```C++
@@ -459,14 +614,13 @@ hs->Add(h2);
 ```
 
 
-#### TLine
 
 
 
 
 
 -------------------------------------------------------------------
-### 2.3 Fitting 拟合
+### <font color=#00BFFF> 2.3 Fitting 拟合  </font>
 
 > [Link-to-Root-User's-Guide](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#fitting-histograms)
 
@@ -476,7 +630,8 @@ hs->Add(h2);
 // Fit("function name","fit options","drawing options",fit limits) 
 ``` 
 
-#### 2.3.1 Use_predefined_funtion 使用自带函数
+#### <font color=#FF00FF> 2.3.1 Use_predefined_funtion 使用自带函数  </font>
+
 ```C++
 * Root 中自带的四类拟合函数： "gaus","expo","polN","landau"
 * 获取拟合参数
@@ -490,7 +645,8 @@ hs->Add(h2);
   gfit->GetParameter(par);
 ```
 
-#### 2.3.2 Use user-defined function 使用自定义函数
+#### <font color=#FF00FF> 2.3.2 Use user-defined function 使用自定义函 </font>
+
 > 自定义函数必须初始化才能使用
 ```C++
 * Define the function 
@@ -501,7 +657,7 @@ hs->Add(h2);
 * Get fit results : mw->GetChisquare();mw->GetNDF(); // Number of Degrees of Freedom
 ```
 
-#### 2.3.3 Use mixing functions 使用混合函数
+#### <font color=#FF00FF> 2.3.3 Use mixing functions 使用混合函数  </font>
 ```C++
 * Pre-defined functions : TF1 *fc=new TF1("f5","pol3(0)+[4]*sin(gaus(5)+[8])",0,10)
 * User-defined functions: 
@@ -517,7 +673,7 @@ a.使用自定义函数拟合时，拟合结果对参数初始化很敏感
 b.一般需要给参数设定边界   
 ```
 
-#### 2.3.4 Fittting options 拟合选项
+#### <font color=#FF00FF> 2.3.4 Fittting options 拟合选项  </font>
 ```C++
 * "Q"   Quite model,终端不输出拟合结果
 * "V"   Verbose model, 详细的输出    <font color=#DC143C>//(默认的模式介于两者之间) </font>
@@ -528,7 +684,8 @@ b.一般需要给参数设定边界
 * "LL"  An Improved Log Likelihood fit for low statistics   <font color=#DC143C> //(当Bin content大于100时，不要使用这种方式)</font> 
 ```
 
-#### 2.3.5 Set Bounds for Parameters 拟合参数设置
+#### <font color=#FF00FF> 2.3.5 Set Bounds for Parameters 拟合参数设置 </font>
+ 
 ```C++
 func->SetParameter();    // 单独给某一个参数赋初值
 func->SetParameters();   // 同时给所有的参数赋初值
@@ -536,8 +693,7 @@ func->SetParLimits();    // 给某一个参数设定边界
 func->FixParameter();    // 固定某个参数
 ```
 
-
-#### 2.3.6 Get the associated function 
+#### <font color=#FF00FF> 2.3.6 Get the associated function </font> 
 ```C++
 * TF1 *myfunc = h->GetFunction("myfunc");  // 从直方图的拟合函数中提取
 * Fit Statistics: gStyle->SetOptFit(mode)  mode = pcev (defaul = 0111)
@@ -547,7 +703,7 @@ func->FixParameter();    // 固定某个参数
       v=1   打印参数 name/values   
 ```
 
-#### 2.3.7 ROOT::Fit::Fitter ROOT6拟合新方法
+#### <font color=#FF00FF> 2.3.7 ROOT::Fit::Fitter ROOT6拟合新方法 </font>
 [应用举例](https://root.cern.ch/doc/v612/combinedFit_8C.html)
 >+ ROOT::Fit is a new ROOT Class in ROOT6
 >+ 相比于TH1::Fit， ROOT::Fit 能对Fit进行更多精细的操作和控制！
@@ -604,29 +760,30 @@ func->FixParameter();    // 固定某个参数
 }
 ```
 
-#### 2.3.8 FUMILI Minimization Package  最小化算法
+#### <font color=#FF00FF> 2.3.8 FUMILI Minimization Package  最小化算法 </font>
 >* To minimize Chi-square functio  <font color=#DC143C>   //(ROOT中默认的拟合方式是最小Chi2)  </font>
 >* To search maximum of likelihood function
 
 ##### 2.3.8.1 MINUIT
-
 ##### 2.3.8.2 MINUIT2
 
 
-#### 2.3.9 利用神经网络进行数据拟合
+#### <font color=#FF00FF> 2.3.9 利用神经网络进行数据拟合 </font>
 
 
 
 
 -----------------------------------------------------
-### 2.4 Trees 树
+### <font color=#00BFFF> 2.4 Trees 树  </font>
+
 
 
 -----------------------------------------------------------
 # <font color=#DC143C> 三. ROOT 提高篇 </font>
 
-### 3.1 Folders and Tasks
-#### 3.1.1 Folders
+### <font color=#00BFFF> 3.1 Folders and Tasks  </font>
+
+#### <font color=#FF00FF> 3.1.1 Folders </font>
 > To reduce class dependencies and improve modularity
 1. 创建文件夹
 
@@ -657,43 +814,54 @@ conf=(TFolder*)gROOT->FindObjectAny("/aliroot/Run/Configuration");
 conf=(TFolder*)gROOT->FindObjectAny("Configuration");
 ```
 
-#### 3.1.2 Tasks
+#### <font color=#FF00FF> 3.1.2 Tasks </font>
 
 
 ---------------------------------------------------
-### 3.2 Writing-GUI 手写GUI
+### <font color=#00BFFF> 3.2 Writing-GUI 手写GUI  </font>
+
 
 
 ----------------------------------------------------
-### 3.3 Geometry Package
+### <font color=#00BFFF> 3.3 Geometry Package  </font>
 
-
----------------------------------------------------
-### 3.4 Python Interface
 
 
 ---------------------------------------------------
-### 3.5 Networking
+### <font color=#00BFFF> 3.4 Python Interface  </font>
+
+
+
+---------------------------------------------------
+### <font color=#00BFFF> 3.5 Networking  </font>
+
 
 ----------------------------------------------------
-### 3.6 Threads 线程
+### <font color=#00BFFF> 3.6 Threads 线程  </font>
+
 
 
 ---------------------------------------------------
-### 3.7 Parallel-Processing 并行计算
+### <font color=#00BFFF> 3.7 Parallel-Processing 并行计算  </font>
+
 
 
 
 ----------------------------------------------------
 # <font color=#DC143C> 四. ROOT 运算篇 </font>
 
-### 4.1 Math-Libraries 数学库
+
+### <font color=#00BFFF> 4.1 Math-Libraries 数学库  </font>
+
+
 
 ----------------------------------------------------
-### 4.2 Matrix 矩阵
+### <font color=#00BFFF> 4.2 Matrix 矩阵  </font>
+
 
 ----------------------------------------------------
-### 4.3 Physics-Vectors 矢量运算
+### <font color=#00BFFF>  4.3 Physics-Vectors 矢量运算 </font>
+
 
 
 
@@ -702,7 +870,8 @@ conf=(TFolder*)gROOT->FindObjectAny("Configuration");
 ---------------------------------------------------
 # <font color=#DC143C> 五. ROOT 其他篇 </font>
 
-### 5.1 TCutG  
+
+### <font color=#00BFFF>  5.1 TCutG   </font>
 > <font color=#DC143C> Int_t TCutG::IsInside(Double_t x, Double_t y) const  </font>
 
 1. 判断一个点是否在给定Cut范围内
@@ -717,13 +886,12 @@ TCutG cut = (TCutG*)gPad->GetPrimitive("CUTG")       // get a cut
 TCutG * mycut = (TCutG*)gPad->WaitPrimitive("CUTG"); // draw a new cut
 ```
 
-### 5.2 TList 
+
+### <font color=#00BFFF>  5.2 TList  </font>
+
 ```C++
 TList * list = gPad->GetLIstOfPrimitives();   // List of objects in the current canvas
 ```
-
-
-
 
 
 
