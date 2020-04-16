@@ -309,7 +309,7 @@ void Step1_DEEPoints_1st_CutsForDEELines()
        将他应用于每一个编译过程！！！
 
     DAQPC:DIC $(OBJS) VMEDAQPC.o
-    $(CPP) -o $@ VMEDAQPC.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs)
+    $(CPP) -o $@ VMEDAQPC.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs) $(CXXFLAGS)
 
     ControlPC:DIC $(OBJS) ControlPC.o
     $(CPP) -o ControlPC ControlPC.o $(OBJS) $(CFLAG) $(ROOTLIB) $(SYSLIB) $(CAENLibs) $(CXXFLAGS)

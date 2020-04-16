@@ -529,6 +529,42 @@ gSystem->Load("mydir/mylib"); // Load library
 
 #### <font color=#FF00FF> 1.8.5 坐标设置  </font>
 
+##### 1.8.5.1 坐标选项与常见属性
+```C++
+  TAxis *axis = histo->GetXaxis();
+  axis->SetAxisColor(Color_t color = 1);
+  axis->SetLabelColor(Color_t color = 1);
+  axis->SetLabelFont(Style_t font = 62);
+  axis->SetLabelOffset(Float_t offset = 0.005);
+  axis->SetLabelSize(Float_t size = 0.04);
+  axis->SetNdivisions(Int_t n = 510, Bool_t optim = kTRUE);
+  axis->SetNoExponent(Bool_t noExponent = kTRUE);
+  axis->SetTickLength(Float_t length = 0.03);
+  axis->SetTitleOffset(Float_t offset = 1);
+  axis->SetTitleSize(Float_t size = 0.02);
+
+```
+
+##### 1.8.5.2 坐标轴刻度 -- TAxis::SetNdivisions()
+```C++
+  TAxis *axis = histo->GetXaxis();
+  axis->Saxis->SetNdivisions(ndiv, optim); //默认值: ndiv=510,optim=kTRUE
+  // ndiv = N1 + 100*N2 + 10000*N3
+  // N1 = 一级刻度,即大刻度, 比如(-100,100)分成10大格,则 N1=10, 每一个是20
+  // N2 = 二级刻度,即小刻度, 比如 N2 = 10，则每大格分成10小格, 最小分度值 2.
+  // N3 = 三级刻度     
+  //
+```
+
+##### 1.8.5.2 坐标轴放缩
+>+ SetRange() 设定的是 bin 值, SetRangeUser() 设定的是坐标值
+
+```C++
+  TAxis *axis = histo->GetXaxis();
+  axis->SetRange(Int_t binfirst, Int_t binlast); 
+  axis->SetRangeUser(Axis_t ufirst, Axis_t ulast);
+```
+
 
 
 #### <font color=#FF00FF> 1.8.6 图形属性  </font>
