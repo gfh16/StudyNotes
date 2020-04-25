@@ -347,4 +347,11 @@ void Step1_DEEPoints_1st_CutsForDEELines()
 
 ```
 
+-------------------------------------------------------------
+### Error in <TBufferFile::CheckByteCount>: object of class TProtoClass read too many bytes
+> 使用 DEEFIT 时, make 成功, 但执行 ./deefit_S 时, 报错
+```C++
+Error in <TBufferFile::CheckByteCount>: object of class TProtoClass read too many bytes
+```
+
  

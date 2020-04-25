@@ -1,5 +1,13 @@
-ROOT 学习笔记
-=================
+<div style="text-align: left">
+<font face="微软雅黑" size=5 color=#FF00FF>
+  小关的读书笔记
+</font> 
+</div>
+
+
+<center> ROOT 教程 </font>
+===========================
+
 > ROOT 是粒子物理与核物理数据分析的好工具！！！      
 > ROOT的学习不是一朝一夕的事情,需要反复反复再反复使用，才可能较好地掌握它.             
 这里是我学习使用ROOT的总结、感悟. 本文档的出发点是给初学者提供一种学习ROOT的思路如果C++基础好,学习ROOT会很快上手！这里简单介绍ROOT里面几个
@@ -20,14 +28,13 @@ ROOT 学习笔记
 > 1. 入门阶段：建议阅读顺序，ROOT_for_beginners，杨振伟老师ROOT课程讲义, 完成里面的练习
 > 2. 提高阶段: ROOT-User-Guide 与 tutorials 结合使用 ( <font color=#DC143C >User-Guide不适合从头到尾阅读!!!</font>)
 > 3. 熟练阶段： 在root环境下善用Tag键不全，必要时查阅Reference-Guide
-  
- 
-作者：小关                                            
+                                             
 
 
 目录
 -----
 [toc]
+
 
 
 ---------------------------------------------------
@@ -43,6 +50,122 @@ ROOT 学习笔记
 ![数学符号](ROOT/pictures/030000BE.png)
 
 
+### <font color=#00BFFF> 填充格式  </font>
+![FillingStyle](ROOT/pictures/030000D2.png)
+
+### <font color=#00BFFF> 填充颜色  </font>
+![参考颜色](ROOT/pictures/030000D3.png)
+
+
+------------------------------------------------------
+# <font color=#DC143C> ROOT 安装步骤 </font>
+
+## make 安装方法
+```C++
+1. 必须安装的软件包
+   sudo apt-get install git dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev libxft-dev libxext-dev   //安装 Required packages
+
+2. 选择安装的软件包
+   sudo apt-get install gfortran libssl-dev libpcre3-dev xlibmesa-glu-dev libglew1.5-dev libftgl-dev
+              libmysqlclient-dev libfftw3-dev libcfitsio-dev  graphviz-dev libavahi-compat-libdnssd-dev
+              libldap2-dev python-dev libxml2-dev libkrb5-dev libgsl0-dev libqt4-dev
+   // 安装Optional packages // libcfitsio-dev可能出错，则改为libcfitsio3-dev
+
+3. 下载需要的ROOT版本 <https://root.cern.ch/releases>
+   解压到指定文件夹，比如：/home/gfh16/Packages/root/
+
+4. ./configure   ##在/home/gfh16/Packages/root/ 下打开终端
+     （或者 ./configure --all  ### 安装更多的功能）
+
+5. make -j4   ### jn 根据自己的电脑情况而定  ### 这一步可能需要等很长时间
+
+6. 配置环境变量： source /home/gfh16/Packages/root/bin/thisroot.sh 添加到 .bashrc文件中
+
+7. 安装成功
+
+```
+
+## cmake 安装方法
+```C++
+1. 必须安装的软件包
+   sudo apt-get install git dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev libxft-dev libxext-dev   //安装 Required packages
+
+2. 选择安装的软件包
+   sudo apt-get install gfortran libssl-dev libpcre3-dev xlibmesa-glu-dev libglew1.5-dev libftgl-dev
+              libmysqlclient-dev libfftw3-dev libcfitsio-dev  graphviz-dev libavahi-compat-libdnssd-dev
+              libldap2-dev python-dev libxml2-dev libkrb5-dev libgsl0-dev libqt4-dev
+   // 安装Optional packages // libcfitsio-dev可能出错，则改为libcfitsio3-dev
+
+3. 下载需要的ROOT版本：https://root.cern.ch/releases
+   需要注意几个问题：
+   (1) root 版本有source版本(源代码)、binary版本。一定要下载source版
+   (2) ubuntu18.04, ubuntu16.04, ubuntu14.04 对root版本要求不一样，要选择配套的root版本
+
+4. 如下载：root_v6.18.00.source.tar.gz
+   解压： tar zxvf root_v6.18.00.source.tar.gz
+   解压后自动生成文件：root_v6.18.00.source
+
+5. 在root_v6.18.00.source所在的路径新建文件夹，用来安装root;进入新建文件夹：
+   mkdir root_install
+   cd root_install
+
+6. cmake ../root_v6.18.00.source/
+
+7. cmake --build . -- -jN      // N is the number of available cores
+
+8. 设置环境变量：source /home/sea/Packages/root6.18/root_install/bin/thisroot.sh
+```
+
+
+## 附录： 配置环境变量
+
+```C++
+#!/bin/bash
+#export cadmesh_DIR=/home/nuclearresearch/MyPrograms/CADMesh/install/lib/cmake/cadmesh-.
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/nuclearresearch/MyPrograms/CADMesh/install/lib
+
+#for root setting
+#!/bin/bash
+#export ROOTSYS=$PACKAGES_PATH/root
+source  /home/sea/Packages/root6.18/root_install/bin/thisroot.sh
+
+#######################################
+##for xerces-c-3.1.1
+#export XERCESC_LIBRARY=/usr/local/lib
+#export XERCESC_INCLUDE_DIR=/usr/local/include/xercesc
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+#################################################
+##for Geant4.9.6.p03
+#export Geant4_9_6_path=/home/gfh16/Packages/Geant4/geant4.9.6.p03-install
+#source $Geant4_9_6_path/bin/geant4.sh
+#source $Geant4_9_6_path/share/Geant4-9.6.3/geant4make/geant4make.sh
+
+
+####for data
+#export  G4ABLA3=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4ABLA3.0
+#export  G4EMLOW=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4EMLOW6.50
+#export  G4ENSDFSTATE=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4ENSDFSTATE2.1
+#export  G4NDL=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4NDL4.5
+#export  G4PII=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4PII1.3
+#export  G4NEUTRONXS=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4NEUTRONXS1.4
+#export  G4SAIDDATA=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4SAIDDAT1.1
+#export  G4TENDL=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4TENDL1.3
+#export  PhotonEvaporation=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4PhotonEvaporation4.3.2
+#export  RadioactiveDecay=/home/gfh16/Geant4/geant4.9.6.p03-install/data/RadioactiveDecay5.1.1
+#export  RealSurface=/home/gfh16/Geant4/geant4.9.6.p03-install/data/RealSurface1.0
+
+##for Geant4.9.6.p03// for /home/gfh16/Geant4
+#export Geant4_9_6_path=/home/gfh16/Packages/geant4/geant4.9.6.p03-install
+#source $Geant4_9_6_path/bin/geant4.sh
+#source $Geant4_9_6_path/share/Geant4-9.6.3/geant4make/geant4make.sh
+
+##for Geant4.9.6.p03// for /home/gfh16/Geant4
+#export Geant4_9_6_path=/home/gfh16/Packages/GEANT4/geant4.10.03.p01-install
+#source $Geant4_9_6_path/bin/geant4.sh
+#source $Geant4_9_6_path/share/Geant4-10.3.1/geant4make/geant4make.sh
+```
+
 
 
 -------------------------------------------------------
@@ -56,7 +179,7 @@ ROOT 学习笔记
 * $ROOTSYS/include: 包含所有的头文件
 
 
---------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 1.2 ROOT 终端常用命令(更多内容参见cling) </font>
 
 ```C++
@@ -72,7 +195,7 @@ root[].x myFile.C     // Load and execute myFile.C
 ```
 
 
-------------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 1.3 ROOT的代码规范  </font>
 
 #### <font color=#FF00FF> 1.3.1 代码约定  </font>
@@ -91,11 +214,11 @@ root[].x myFile.C     // Load and execute myFile.C
 |Getters and Setters 分别以 "Get" "Set" 开头|SetLast(), GetFirst(), ...|
 
 
------------------------------------------------------------
+&emsp;
 #### <font color=#FF00FF> 1.3.2 数据类型规范  </font>
-
-> 为避免新老机器对同一种数据类型可能有不同的长度, ROOT使用下面的 pre-defined 类型
 ```C++
+// 为避免新老机器对同一种数据类型可能有不同的长度, ROOT使用下面的 pre-defined 类型
+
 * Char_t         //Signed Character 1 byte
 * UChar_t        //Unsigned Character 1 byte
 * Short_t        //Signed Short integer 2 bytes
@@ -110,13 +233,14 @@ root[].x myFile.C     // Load and execute myFile.C
 * Bool_t         //Boolean (0=false, 1=true)
 ```
 
-------------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF>  1.4 全局变量  </font>
 
 #### <font color=#FF00FF> 1.4.1 gROOT  </font>
-
-> By using gROOT pointer, you can get the access to every object created in a ROOT program
 ```C++
+// By using gROOT pointer, you can get the access
+// to every object created in a ROOT program
+
 root[] gROOT->ProcessLine(".x myHist.C");
 root[] gROOT->GetListOfFunctions();
 root[] gROOT->GetListOfCanvases()->FindObject("c1");
@@ -124,9 +248,8 @@ root[] gROOT->GetListOfCanvases()->FindObject("c1");
 ```
 
 #### <font color=#FF00FF> 1.4.2 gPad  </font>
-
-> gPad is always pointing to the active pad
 ```C++
+// gPad is always pointing to the active pad
 {
   gPad->SetFillColor(38);
   gPad->Modified(); // Tell the canvas that an object it is displaying has changed
@@ -142,14 +265,21 @@ root[] gStyle->SetFillStyle();
 root[] gStyle->SetPalette(1);     // To plot with nice colors
 root[] gStyle->SetOptFit(kTRUE);  // 显示拟合参数
 root[] gStyle->SetOptStat(1);     // 显示详细的拟合参数
+root[] gStyle->SetOptDate(Int_t optdate); 
+               // optdate = 10 * format + mode
+               // mode = 1  显示位置 bottom/left
+               // mode = 2  显示位置 bottom/right
+               // mode = 3  显示位置 top/right
+               // format = 0(默认), 1, 2  日期显示格式
 ...
 
 ```
 
 #### <font color=#FF00FF> 1.4.4 gRandom  </font>
- 
-> A pointor to the current random number generator. Points to 'TRandom3' by default
 ```C++
+// A pointor to the current random number generator.
+// Points to 'TRandom3' by default
+
 root[] gRandom->Print(); // 查看当前的 random number generator
 root[] delete gRandom;   // 删除当前的 random number generator
 root[] gRandom = new TRandom2(0); // seed = 0, 新的random number generator
@@ -167,13 +297,13 @@ root[] gSystem->Getenv("USER")  // returns the value of the system enviroment va
 > 在 root 终端键入g, 按 Tab 补全可查看所有的全局变量！
 
 
-------------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 1.5 环境设置  </font>
 
 #### <font color=#FF00FF> 1.5.1 rootlogon.C  </font>
-
-> This script without a function declaration is executed automatically when ROOT is launched from the same directory as the file
 ```C++
+// 运行 root 时自动加载当前目录下 rootlogon.C 里面的代码
+
 {
    gStyle->SetPalette(1);                                      // 使画图颜色更加好看
    cout << "Salut " << gSystem->Getenv("USER") << "!" << endl;
@@ -187,9 +317,10 @@ root[] gSystem->Getenv("USER")  // returns the value of the system enviroment va
 
 
 #### <font color=#FF00FF> 1.5.3 rootalias.C  </font>
-
-> rootalias.C file is loaded but not executed at start-up, it contians small functions like:
 ```C++
+// rootalias.C file is loaded but not executed at start-up, 
+// it contians small functions like:
+
 ls(path)
 edit(filename)
 dir(path)
@@ -198,7 +329,7 @@ cd(path)
 ```
 
 
------------------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 1.6 对象  </font>
 
 #### <font color=#FF00FF> 1.6.1 Inspecting Objects  </font>
@@ -210,36 +341,27 @@ root[] f.Print()
 ```
 
 #### <font color=#FF00FF> 1.6.2 Object Ownership  </font>
+```C++
+// 了解对象的所有权归属, 有助于对对象进行操作!
 
-> 了解对象的所有权归属, 有助于对对象进行操作!
-  
-   ```C++
-   2.1 By Current Directory (gDirectory)
-       所有权归当前目录的有: histograms, tree, event list(TEventList)
-    
-       TH1F *h = (TH1F*)gDirectory->GetList()->FindObject("myHist");
-   ```
+// 1.By Current Directory (gDirectory)
+// 所有权归当前目录的有: histograms, tree, event list(TEventList)
+TH1F *h = (TH1F*)gDirectory->GetList()->FindObject("myHist");
 
-   ```C++
-   2.2 By the Master TROOT Object (gROOT)
-       所有权归gROOT的有: 一些列 "collections of objects",比如 fCanvases， fColors,...
-  
-       TCanvas *cc = (TCanvas*)gROOT->GetListOfCanvases()->FindObject("c1");
-   ```
+// 2.By the Master TROOT Object (gROOT)
+// 所有权归gROOT的有: 一些列 "collections of objects",比如 fCanvases， fColors,... 
+TCanvas *cc = (TCanvas*)gROOT->GetListOfCanvases()->FindObject("c1");
+ 
+// 3.By Other Objcets
+// When an object creates another, the creating object
+// is the owner of the created one
+myHisto->Fit("gaus");
 
-   ```C++
-   2.3 By Other Objcets
-       When an object creates another, the creating object is the owner of the created one
-       
-       myHisto->Fit("gaus");
-   ```
-
-   ```C++
-   2.4 By the user
-   ```
+// 4.By the user
+```
 
 
---------------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 1.7 ROOT中的C++  </font>
 
 #### <font color=#FF00FF> 1.7.1 C++ 解释器 -- Cling  </font>
@@ -249,21 +371,18 @@ root[] f.Print()
 >+ ROOT Macro 一般不能通过C++编译!!!  <font color=#DC143C> 所以在写需要编译的复杂程序是不能使用 cling 带来的这些便利！ 切记！</font>
 >+ [链接到cling](https://root.cern.ch/cling)
 
-1. 解释器命令以"."开头, 在root终端可产看所有的命令
 ```C++
+// 1.解释器命令以"."开头, 在root终端可产看所有的命令
 root[] .?  // 查看所有的命令
-```
-2. 命令行模式使用多行代码：以 "{" 开头,以 "}" 结尾
-```C++
+
+// 2.命令行模式使用多行代码：以 "{" 开头,以 "}" 结尾
 root[] {
 root[] ? for(int i=0; i<5; i++){
 root[] ?    cout<< i << endl;
 root[] ?}
-```
 
-3. ROOT脚本的执行
-> ROOT script files 通常也叫作 "Macros". 可以在一个脚本中执行另一个脚本.
-```C++
+// 3.ROOT脚本的执行
+// ROOT script files 通常也叫作 "Macros". 可以在一个脚本中执行另一个脚本.
 // calls a script to build the root file if it does not exist
 void cernstaff()
 {
@@ -274,18 +393,14 @@ void cernstaff()
 }
 ```
 
-----------------------------------------------------------------
+
 #### <font color=#FF00FF> 1.7.2 ACLiC: Compiling Scripts Into Libraries  </font>
-
-1. 使用方法
 ```C++
+// 1.使用方法
 root[] .L MyScript.C+  // build and load a shared library containing your script
-
 gROOT->ProcessLine(".L MyScript.C+");
-```
 
-2. 设置头文件路径
-```C++
+// 2.设置头文件路径
 root[] .include  // get the include path
 root[] .include $HOME/mypackage/inlcude  // append to the include path
 
@@ -293,76 +408,90 @@ gSystem->AddIncludePath(" -I$HOME/mypackage/inlcude");// 在脚本中添加
 gSystem->SetIncludePath(" -I$HOME/mypackage/inlcude"); // overwrite the existing include path
 gSystem->AddLinkedLibs("-L/my/path -lanylib"); // Add library
 gSystem->Load("mydir/mylib"); // Load library
-
 ```
 
 
-
--------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 1.8 GUI 图形用户界面  </font>
 
 #### <font color=#FF00FF> 1.8.1 画图  </font>
-> 2D: lines, polygons(多边形), arrows, plots, histograms
-> 3D graphical objects
-
 ```C++
-  object.Draw()
+// 2D: lines, polygons(多边形), arrows, plots, histograms
+// 3D graphical objects
+object.Draw()
 ```
 
+
+&emsp;
 #### <font color=#FF00FF> 1.8.2 操作画图对象  </font>
 > 对屏幕上的对象进行操作将会改变对象的内存
 
-
-##### 1.8.2.1 鼠标左键 -- Moving, Resizing and Modifying Objects 
+**1.8.2.1 鼠标左键 -- Moving, Resizing and Modifying Objects** 
 >+ 图形界面 -- 点击鼠标左键
->+ 使用编程 -- 通过编程改变图形, 需要"Update the Pad"才能显示出来
+>+ 使用代码 -- 通过编程改变图形, 需要"Update the Pad"才能显示出来
 
-##### 1.8.2.2 鼠标中键 -- 选中画图对象
+**1.8.2.2 鼠标中键 -- 选中画图对象**
 >+ 图形界面 -- 点击鼠标中键
->+ 使用变成 -- root[ ] cd->cd
+>+ 使用代码 -- root[ ] cd->cd
 
-##### 1.8.2.3 鼠标右键 -- 快捷菜单
+**1.8.2.3 鼠标右键 -- 快捷菜单**
 >+ 右键单击图形中任何地方, 将会显示对应对象的菜单
 >+ 可以向一个类中添加菜单, 用  // \*MENU\* 标记注释
 
 
-
+&emsp;
 #### <font color=#FF00FF> 1.8.3 图形容器 -- TCanvas && TPad  </font>
+
+
 >+ Canvases 等同于窗口, 而 Pads 是图像的真正载体
 >+ TCanvas 是 TPad 的子类. 一个 canvas 本身是一个大 pad, 这个大的 pad 可以分为多个小 pad
 >+ 任何时候，只能有一个 pad 处于 active 状态, 画图也将画在 active 的 pad 上
 >+ 对 TPad 的操作同样适用于 TCanvas. Canvas 的使用可在 root 环境下右键查看.
 
 
-##### 1.8.3.1 The Global Pad -- gPad
-> gPad is always pointing to the active pad
-
-+ Finding a n Object in a Pad
 ```C++
-    root[] obj = gPad->GetPrimitive("myobjectname"); // 将myobjectname的指针返回给obj
-    root[] obg = (TPaveLabel*)(gPad->GetPrimitive("myobjectname")); // 只当返回类型
+//常见用法
+root[] obj = gPad->GetPrimitive("myobjectname"); // 将myobjectname的指针返回给obj
+root[] obg = (TPaveLabel*)(gPad->GetPrimitive("myobjectname")); // 只当返回类型
+root[] li = gPad->GetListOfPrimitives();
+root[] gPad->Range(float x1,float y1,float x2,float y2); //改变 pad 大小
+root[] pad->Divide(n1,n2); // 分成n1列, n2行
+root[] gPad->Modified();  // the pad has changed
+root[] gPad->Update();    // update all modified pads 
+root[] gPad->SetLogx(1);  // 1-对数坐标, 0-重置
+root[] gPad->SetLogy(1);
+root[] gPad->SetLogz(1);
 ```
 
-+ Hinding an Object
+
+**1.8.3.1 The Global Pad -- gPad**
 ```C++
-   root[] li = gPad->GetListOfPrimitives();
-   root[] li->Remove(obj);
+// gPad is always pointing to the active pad
+
+// 1.Finding a n Object in a Pad
+root[] obj = gPad->GetPrimitive("myobjectname"); // 将myobjectname的指针返回给obj
+root[] obg = (TPaveLabel*)(gPad->GetPrimitive("myobjectname")); // 只当返回类型
+
+// 2.Hinding an Object
+root[] li = gPad->GetListOfPrimitives();
+root[] li->Remove(obj);
 ```
 
-##### 1.8.3.2 Pad 的坐标系
-+ 用户坐标系 (最常用)
+**1.8.3.2 Pad 的坐标系**
 ```C++
-   root[] gPad->Range(float x1,float y1,float x2,float y2);
+// 1.用户坐标系 (最常用)
+root[] gPad->Range(float x1,float y1,float x2,float y2);
+
+// 2.归一化坐标系(NDC) 
+(1)与窗口大小、用户坐标系无关. 
+(2)横坐标范围(0,1), 纵坐标范围(0,1). 坐标原点(0,0)在左下角. 
+(3)如果需要将文本画在图中的固定地方, 需要用到NDC坐标
+
+// 3.像素坐标系
+原点(0,0)在左上角
 ```
-+ 归一化坐标系(NDC) 
-  >+ 与窗口大小、用户坐标系无关. 
-  >+ 横坐标范围(0,1), 纵坐标范围(0,1). 坐标原点(0,0)在左下角. 
-  >+ 如果需要将文本画在图中的固定地方, 需要用到NDC坐标
 
-+ 像素坐标系
-  >+ 原点(0,0)在左上角
-
-##### 1.8.3.3 坐标转换
+**1.8.3.3 坐标转换**
   >+ 像素坐标: (px,py)
   >+ 用户坐标: (ux,xy)
   >+ 归一坐标: (apx,apy)
@@ -372,115 +501,119 @@ gSystem->Load("mydir/mylib"); // Load library
   > Absolute pixel to user
   > User to Pixel
   > User to absolute pixel
+
   
-##### 1.8.3.4 Divide a Pad into Sub-pads
-+ 创建多个Pad, 画在同一个Canvas上
+**1.8.3.4 Divide a Pad into Sub-pads**
 ```C++
-   root[] spad1 = new TPad("spad1","The first subpad",.1,.1,.5,.5);//NDC坐标
-   root[] spad1->Draw()
+// 1.创建多个Pad, 画在同一个Canvas上
+root[] spad1 = new TPad("spad1","The first subpad",.1,.1,.5,.5);//NDC坐标
+root[] spad1->Draw()
+
+// 2.将同一个Pad分成多个Sub-Pads
+root[] pad1->Divide(3,2); // 3行2列
+root[] pad1->Divide(3,2,0.1,0.1); // 设定sub-pad间隔, 10% of the parent width
 ```
-+ 将同一个Pad分成多个Sub-Pads
+
+**1.8.3.5 Updating the Pad**
 ```C++
-   root[] pad1->Divide(3,2); // 3行2列
-   root[] pad1->Divide(3,2,0.1,0.1); // 设定sub-pad间隔, 10% of the parent width
+// 默认地, 若对当前的 pad 进行操作, 图形界面并不会即时更新. 
+// 用鼠标点击一下 pad 即可刷新. 也可用代码实现:
+root[] gPad->Modified();  // the pad has changed
+root[] gPad->Update();    // update all modified pads 
 ```
 
-##### 1.8.3.5 Updating the Pad
-> 默认地, 若对当前的 pad 进行操作, 图形界面并不会即时更新. 用鼠标点击一下 pad 即可刷新. 也可用代码实现:
-
+**1.8.3.6 设置 Pad 的透明度**
 ```C++
-  root[] gPad->Modified();  // the pad has changed
-  root[] gPad->Update();    // update all modified pads 
+// istyle = 4000 - 4100, 4000完全透明，4100完全不透明
+root[] pad->SetFillStyle(istyle);
 ```
 
-##### 1.8.3.6 设置 Pad 的透明度
-
-```C
-  // istyle = 4000 - 4100, 4000完全透明，4100完全不透明
-  root[] pad->SetFillStyle(istyle);
-```
-
-##### 1.8.3.7 设置对数坐标
->+ 对数坐标是对 pad 设置, 不是对直方图或者坐标轴
->+ 如果一个 pad 分成多个 sub-pad, 需要分别对各个 sub-pad 进行设置
-
+**1.8.3.7 设置对数坐标**
 ```C++
-  root[] gPad->SetLogx(1);  // 1-对数坐标, 0-重置
-  root[] gPad->SetLogy(1);
-  root[] gPad->SetLogz(1);
+// 对数坐标是对 pad 设置, 不是对直方图或者坐标轴
+// 如果一个 pad 分成多个 sub-pad, 需要分别对各个 sub-pad 进行设置
+root[] gPad->SetLogx(1);  // 1-对数坐标, 0-重置
+root[] gPad->SetLogy(1);
+root[] gPad->SetLogz(1);
 ```
 
-##### 1.8.3.8 WaitPrimitive 方法
-
+**1.8.3.8 WaitPrimitive 方法**
 ```C++
-  canvas->WaitPrimitive(); // 处于"等待"状态, 双击 canvas 结束
+canvas->WaitPrimitive(); // 处于"等待"状态, 双击 canvas 结束
 ```
 
-
+&emsp;
 #### <font color=#FF00FF> 1.8.4 图形  </font>
 
-##### 1.8.4.1 线条: 直线, 箭头, 折线
 ```C++
-  直线：
-      TLine* line = new TLine(Double_t x1, Double_t y1, 
-                              Double_t x2, Double_t y2);  
-  
-  箭头：
-      TArrow* arr = new TArrow(Double_t x1, Double_t y1,
-                               Double_t x2, Double_t y2,
-                               Float_t arrowsize, Option_t* option) 
-             // Option选项: ">" "|>" "<" "<|" "<>" "<|>"
-             // "|" 表示家头加粗, "<", ">" 分别表示左右箭头
-      arr->SetFillColor(icolor); // 设置箭头的填充颜色
-      arr->SetAngle(angle);      // 设置箭头的角度,默认 60 度
+//常见图形构造函数
+TLine* line = new TLine();          //直线
+TArrow* arr = new TArrow();         //箭头
+TPolyLine* polyl = new TPolyLine(); //折线
+TEllipse* ellipse = new TEllipse(); //椭圆、扇形、圆
+TBox* box = new TBox();             //方形
+TMarker* mark = new TMarker();
+
+```
+
+**1.8.4.1 线条: 直线, 箭头, 折线**
+```C++
+// 1.直线
+TLine* line = new TLine(Double_t x1, Double_t y1, 
+                        Double_t x2, Double_t y2);  
+// 2.箭头
+TArrow* arr = new TArrow(Double_t x1, Double_t y1,
+                         Double_t x2, Double_t y2,
+                         Float_t arrowsize, Option_t* option) 
+        // Option选项: ">" "|>" "<" "<|" "<>" "<|>"
+        // "|" 表示家头加粗, "<", ">" 分别表示左右箭头
+arr->SetFillColor(icolor); // 设置箭头的填充颜色
+arr->SetAngle(angle);      // 设置箭头的角度,默认 60 度
     
-  折线:
-      TPolyLine* polyl = new TPolyLine(Int_t n, Double_t* x,
-                                       Double_t* y, Option_t* option)
-                                       // n 是数据点的数目
+// 3.折线
+TPolyLine* polyl = new TPolyLine(Int_t n, Double_t* x,
+                                 Double_t* y, Option_t* option)
+                          // n 是数据点的数目
 ```
 
 
-##### 1.8.4.2 椭圆、扇形、圆
->+ 通过 TEllipse 来创建椭圆, 然后通过设置椭圆的 phi 角度范围定义扇形.
->+ ROOT 里面没有直接画圆的函数.
->+ 通过 TAttLine 设置图形的边界, TAttFill 设置填充方式
-
+**1.8.4.2 椭圆、扇形、圆**
 ```C++
-   TEllipse(Double_t x1, Double_t y1, Double_t r1, Double_t r2);
-   TEllipse(Double_t x1, Double_t y1, Double_t r1, Double_t r2
-            Double_t phimin, Double_t phimax, Double_t theta);
-   // (x1,y1)为中心点, r1,r2分别是长轴和短轴, phimin,phimax是扇形张角范围
-   // theta 是旋转角度
-
+// 1.通过 TEllipse 来创建椭圆, 然后通过设置椭圆的 phi 角度范围定义扇形.
+// 2.ROOT 里面没有直接画圆的函数.
+// 3.通过 TAttLine 设置图形的边界, TAttFill 设置填充方式
+TEllipse(Double_t x1, Double_t y1, Double_t r1, Double_t r2);
+TEllipse(Double_t x1, Double_t y1, Double_t r1, Double_t r2,
+        Double_t phimin, Double_t phimax, Double_t theta);
+       // (x1,y1)为中心点, r1,r2分别是长轴和短轴, phimin,phimax是扇形张角范围
+       // theta 是旋转角度
 ```
 ![Different types of ellipses](ROOT/pictures/030000AE.png)
 
 
 
-##### 1.8.4.2 方形
+**1.8.4.2 方形**
 ```C++
-   TBox* box = new TBox(Double_t x1, Double_t x2,
-                        Double_t y1, Double_t y2);
-   // (x1,y1)是左下角顶点,(x2,y2)是右上角顶点
+TBox* box = new TBox(Double_t x1, Double_t x2,
+                    Double_t y1, Double_t y2);
+      // (x1,y1)是左下角顶点,(x2,y2)是右上角顶点
 ```
 
 
-##### 1.8.4.3 Markers
-> 通过 TMarker 方式创建. 点类型的 marker(1, 6, 7)不能调节大小
+**1.8.4.3 Markers**
 ```C++
-   TMarker* mark = new TMarker(Double_t x, Double_t y, Int_t marker);
+// 通过 TMarker 方式创建. 点类型的 marker(1, 6, 7)不能调节大小
+TMarker* mark = new TMarker(Double_t x, Double_t y, Int_t marker);
 ```
 ![Markers](ROOT/pictures/030000B0.png)
 
 
-
-##### 1.8.4.4 Feymann 图
+**1.8.4.4 Feymann 图**
 > 两个有用的类: TCurlyLine, TCurlyArc
 > 费曼图的例子参见: $ROOTSYS/tutorials/graphics/feyman.C
 
 
-##### 1.8.4.5 文本与 Latex 数学公式
+**1.8.4.5 文本与 Latex 数学公式**
 > ROOT 的文本输入采用 TLatex, 与 Latex的使用方法一致
 >+ 常用 TLatex 用法 
 
@@ -503,76 +636,352 @@ gSystem->Load("mydir/mylib"); // Load library
 ![macro latex3.C](ROOT/pictures/020000C3.jpg)
 
 
-##### 1.8.4.6 Text in a Pad
->+ TPaveLabel: Text 只有一行
->+ TPaveText: Text 有多行
->+ TPavesText: 多个 TPaveText 组成
->+ Option:
-   option = "T" top frame
-   option = "B" bottom frame
-   option = "R" right frame
-   option = "L" left frame
-   option = "NDC" x1,y1,x2,y2 are given in NDC
-
+**1.8.4.6 Text in a Pad**
 ```C++
-  TPaveLabel(Double_t x1, Double_t y1, Double_t x2, Double_t y2,
-             const char* label, Option_t* option);
+// TPaveLabel: Text 只有一行
+// TPaveText: Text 有多行
+// TPavesText: 多个 TPaveText 组成
+// Option:
+// option = "T" top frame
+// option = "B" bottom frame
+// option = "R" right frame
+// option = "L" left frame
+// option = "NDC" x1,y1,x2,y2 are given in NDC
 
-  TPaveText pt1(Double_t x1, Double_t y1, Double_t x2, Double_t y2);
-  TText* t1 = pt1.AddText("some text");
+TPaveLabel(Double_t x1, Double_t y1, Double_t x2, Double_t y2,
+          const char* label, Option_t* option);
 
-  TPavesText(Double_t x1, Double_t y1, Double_t x2, Double_t y2
-             Int_t npaves, Option_t* option);
+TPaveText pt1(Double_t x1, Double_t y1, Double_t x2, Double_t y2);
+TText* t1 = pt1.AddText("some text");
+
+TPavesText(Double_t x1, Double_t y1, Double_t x2, Double_t y2
+          Int_t npaves, Option_t* option);
 ```
 
 
-
+&emsp;
 #### <font color=#FF00FF> 1.8.5 坐标设置  </font>
+![AxisExample1.C](ROOT/pictures/030000CC.png)
+![AxisExample2.C](ROOT/pictures/030000CD.png)
 
-##### 1.8.5.1 坐标选项与常见属性
+
+**1.8.5.1 坐标选项与常见属性**
 ```C++
-  TAxis *axis = histo->GetXaxis();
-  axis->SetAxisColor(Color_t color = 1);
-  axis->SetLabelColor(Color_t color = 1);
-  axis->SetLabelFont(Style_t font = 62);
-  axis->SetLabelOffset(Float_t offset = 0.005);
-  axis->SetLabelSize(Float_t size = 0.04);
-  axis->SetNdivisions(Int_t n = 510, Bool_t optim = kTRUE);
-  axis->SetNoExponent(Bool_t noExponent = kTRUE);
-  axis->SetTickLength(Float_t length = 0.03);
-  axis->SetTitleOffset(Float_t offset = 1);
-  axis->SetTitleSize(Float_t size = 0.02);
-
+TAxis *axis = histo->GetXaxis();
+axis->SetAxisColor();
+axis->SetLabelColor();
+axis->SetLabelFont();
+axis->SetLabelOffset();
+axis->SetLabelSize();
+axis->SetNdivisions();  // 设置坐标轴刻度
+axis->SetNoExponent();
+axis->SetTickLength();
+axis->SetTitleOffset();
+axis->SetTitleSize();
+axis->SetRange();   //设置坐标轴范围,设置 bin 值
+axis->SetRangeUser();  //设置坐标轴范围,设置坐标值
 ```
 
-##### 1.8.5.2 坐标轴刻度 -- TAxis::SetNdivisions()
+**1.8.5.2 坐标轴刻度 -- TAxis::SetNdivisions()**
 ```C++
-  TAxis *axis = histo->GetXaxis();
-  axis->Saxis->SetNdivisions(ndiv, optim); //默认值: ndiv=510,optim=kTRUE
-  // ndiv = N1 + 100*N2 + 10000*N3
-  // N1 = 一级刻度,即大刻度, 比如(-100,100)分成10大格,则 N1=10, 每一个是20
-  // N2 = 二级刻度,即小刻度, 比如 N2 = 10，则每大格分成10小格, 最小分度值 2.
-  // N3 = 三级刻度     
-  //
+TAxis *axis = histo->GetXaxis();
+axis->Saxis->SetNdivisions(ndiv, optim); //默认值: ndiv=510,optim=kTRUE
+// ndiv = N1 + 100*N2 + 10000*N3
+// N1 = 一级刻度,即大刻度, 比如(-100,100)分成10大格,则 N1=10, 每一个是20
+// N2 = 二级刻度,即小刻度, 比如 N2 = 10，则每大格分成10小格, 最小分度值 2.
+// N3 = 三级刻度     
 ```
 
-##### 1.8.5.2 坐标轴放缩
->+ SetRange() 设定的是 bin 值, SetRangeUser() 设定的是坐标值
-
+**1.8.5.3 坐标轴放缩**
 ```C++
-  TAxis *axis = histo->GetXaxis();
-  axis->SetRange(Int_t binfirst, Int_t binlast); 
-  axis->SetRangeUser(Axis_t ufirst, Axis_t ulast);
+// SetRange() 设定的是 bin 值, SetRangeUser() 设定的是坐标值
+TAxis *axis = histo->GetXaxis();
+axis->SetRange(Int_t binfirst, Int_t binlast); 
+axis->SetRangeUser(Axis_t ufirst, Axis_t ulast);
 ```
 
+**1.8.5.4 坐标轴独立于图形或直方图**
+```C++
+TGaxis* gaxis = new TGaxis(Double_t xmin, Double_t ymin, Double_t xmax, Double_t ymax,
+                           const char* funcname, Int_t ndiv=510,
+                           Option_t* chopt, Double_t gridlength=0) 
+```
+
+**1.8.5.5 坐标轴刻度线方向**
+```C++
+// chopt: 设置刻度线的方向
+if `xmin = xmax`, then negative.
+chopt = '+': tick marks are drawn on Positive side. (Default)  
+chopt = '-': tick marks are drawn on the negative side.
+chopt = '+-': tick marks are drawn on both sides of the axis.
+chopt = ‘U': unlabeled axis, default is labeled.
+```
+
+**1.8.5.6 坐标标记**
+```C++
+// 1.设置刻度线的位置
+默认情况, 坐标标记与刻度线在相反一侧;
+if chopt = '=', 则在同一侧;
+
+// 2.设置指数坐标标记
+TAxis::SetNoExponent(kTRUE)
+
+// 3.设置坐标数字位数
+TGaxis::SetMaxDigits(num); // 默认位数是 5
+
+// 4.设置小数坐标
+TStyle::SetStripDecimals(Bool_t strip=kTRuE);
+```
+
+**1.8.5.7 坐标设置为时间格式**
+```C++
+// hist 为直方图
+h->GetXaxis()->SetTimeDisplay(1); // X axis is a time axis
+
+// 1.设置时间格式
+h->GetXaxis()->SetTimeFormat("%d/%m/%y"); // 多种时间格式可调
+
+// 2.设置 Time offset (3 种方式设置时间起点)
+//(1) 使用系统时间起点
+TDatime da(2003,02,28,12,00,00);
+gStyle->SetTimeOffset(da.Convert());
+
+//(2) 使用自定义时间起点
+TDatime dh(2001,09,23,15,00,00);
+h->GetXaxis()->SetTimeOffset(dh.Convert());
+
+//(3) 使用 SetTimeFormat 方式
+//    使用控制符: %F 
+//    具体格式: yyyy-mm-dd hh:mm:ss
+h->GetXaxis()->SetTimeFormat("%d/%m/%y%F2000-02-28 13:00:01");
+
+//(4) 将时间格式分成两行显示
+axis->SetLabelOffset(0.02);
+axis->SetTimeFormat("#splitline{%Y}{%d/%m}");
+```
+&emsp;
+#### <font color=#FF00FF> 1.8.6 图形属性设置  </font>
+
+**1.8.6.1 文本属性**
+```C++
+// 文本属性主要包括: font, size, color
+root[] TLatex* la = TLatex();
+
+// 1.对齐方式
+root[] la->SetTextAlign(align);
+       // align = 10 * 水平对齐 + 竖直对齐;
+       // 水平对齐: 1=向左对齐, 2=居中对齐, 3=向右对齐
+       // 竖直对齐: 1=底部对齐, 2=居中对齐, 3=顶部对齐
+// 2.设置角度
+root[] la->SetTextAngle(angle); //角度单位:度
+
+// 3.设置颜色
+root[] la->SetTextColor(color); // 颜色设置查看调色板
+
+// 4.设置字体格式
+root[] la->SetTextFont(font); 
+       // font = 10 * fontID + precision
+       // precision = 0, 1, 2
+       // fontID: 查看下图
+
+// 5.设置字体大小
+root[] la->SetTextSize(size); // size 是当前 pad 大小的百分比
+```
+![Font's examples](ROOT/pictures/030000CF.png)
 
 
-#### <font color=#FF00FF> 1.8.6 图形属性  </font>
+**1.8.6.2 线条属性**
+```C++
+// 线条属性主要包括: color, style, width
+TLine* li = new TLine();
+
+// 1.设置颜色
+root[] li->SetLineColor(color);  // 颜色设置查看调色板
+
+// 2.设置 style
+root[] li->SetLineStyle(style);
+       // 1=solid, 2=dash, 3=dot, 4=dash-dot
+
+// 3.设置 width
+root[] li->SetLineWidth(width); // width 以 pixel 为单位
+```
+
+**1.8.6.3 填充格式**
+```C++
+// 直方图, 图形等, 有时候需要填充
+TH1F* h = new TH1F();
+
+// 1.填充颜色
+root[] h->SetFillColor(color); // 颜色设置查看调色板
+
+// 2.填充形状
+root[] h->SetFillStyle(style); 
+       // 0 : hollow （空）
+       // 1001: solid （实填充）
+       // 2001: hatch style
+       // 3000+number: 3ijk (见下图)
+       // 4000-4100： 透明度, 4000完全透明, 4100 完全不透明
+```
+![FillingStyle](ROOT/pictures/030000D2.png)
 
 
+**1.8.6.4 颜色属性**
+```C++
+// 1.使用参考颜色
 
+// 2.root[] 环境下查看
+root[] auto color = gROOT->GetListOfColors();
+root[] color->Print()
+
+// 3.自定义颜色
+TColor(Int_t color, Float_t r, Float_t g, Float_t b, const char* name)
+     // color： 颜色用一个数字表示
+     // r,g,b: 红绿蓝三种颜色比分, 取值0-1
+     // name： 颜色名称, 可选
+// 如果自定义颜色已存在, 需要将其从列表中清除, 并重新设置颜色
+root[] color=(TColor*)(gROOT->GetListOfColors()->At(index_color))
+root[] color->SetRGB(r,g,b)
+
+// 4.使用调色板(直方图) - palette
+TStyle::SetPallette(Int_t ncolors, Int_t* color_indexes) // 设置调色板
+root[] gStyle->SetPallette(1); // 设置当前调色板为 "美观".
+```
+![参考颜色](ROOT/pictures/030000D3.png)
+
+
+**1.8.6.5 图形编辑器(略)**
+> 可打开一个 root 窗口, 自行摸索
+
+
+**1.8.6.6 图例属性 - Legends**
+```C++
+// 构造函数
+TLegend(Double_t x1, Double_t y1, Double_t x2, Double_t y2,
+        const char* header, Option_t* option)
+        // NDC 坐标: x1,y1,x2,y2
+        // header: 标题, 默认无标题
+
+// Legend 属性(默认): 
+对齐(Alignment): 12 左中对齐
+角度(Angle): 0 (度)
+颜色（Color）： 1 (黑色)
+尺寸(Size)： 根据图例数目而定
+字体(Font): helvetica-medium-r-normal scalable font = 42, and bold = 62
+
+// 添加图例 AddEntry()
+// 方式1: TObject* obj
+root[] TLegend* legend = new TLegend();
+root[] legend->AddEntry(TObject* obj, const char* label, Option_t* option);
+       // obj: 需要添加图例的对象, 可以是 histogram 或 graph
+       // label: 图例名称
+       // option: 图例显示方式
+       //   "L"： 线
+       //   "P"： marker
+       //   "F"： 填充 fill
+
+// 方式2: const char* name
+root[] legend->AddEntry(const char* name, const char* label, Option_t* option);
+       // name： 需要添加图例的对象名称
+```
+
+&emsp;
+#### <font color=#FF00FF> 1.8.7 图片输出格式  </font>
+> 常用的图片输出格式: .eps, .pdf, .png, .jpg, .C
+
+
+**1.8.7.1 eps/ps 格式 - TPostScript**
+```C++
+// 1.保存 ps 格式图片
+c1->Print("xxx.ps"); // or 
+c1->Print("xxx.eps");
+
+// 2.设置图片大小
+TPostScript myps("myfile.ps",111)；
+   // 格式 111: ps portrait 
+   // 格式 112: ps landscape
+   // 格式 113: ps eps
+myps.Range(xsize,ysize);
+object->Draw();
+myps.Close();
+
+
+// 3.将多个图片保存到同一个 ps 文件中
+// 方法1: TCanvas::Print("file.ps(")
+文件名以 "(" 结束, 文件保持 "open" 状态;
+文件名以 ")" 结束, 文件关闭
+{
+   TCanvas c1("c1");
+   h1.Draw();
+   c1.Print("c1.ps("); // write canvas and keep the ps file open
+   h2.Draw();
+   c1.Print("c1.ps");  // canvas is added to "c1.ps"
+   h3.Draw();
+   c1.Print("c1.ps)"); // canvas is added to "c1.ps"
+                       // and ps file is closed
+}
+
+
+// 方法2: TCanvas::Print("file.ps[")
+文件名以 "[" 结束, 文件保持 "open" 状态;
+文件名以 "]" 结束, 文件关闭
+
+
+// 方法3: 如果使用循环, 文件开头和结尾需要特别处理
+c1.Print("file.ps[");      // no actual print; just open file.ps
+for (i=0; i<10; ++i) {
+   // fill canvas for context i
+   ...
+   c1.Print("file.ps");   // actually print canvas to file.ps
+}  // end loop
+c1.Print("file.ps]");     // no actual print; just close file.ps
+
+
+// 方法4: c1.Update()
+{
+   TFile f("hsimple.root");
+   TCanvas c1("c1","canvas",800,600);
+
+   //select PostScript  output type
+   Int_t type = 111;         //portrait  ps
+
+   //create a PostScript  file and set the paper size
+   TPostScript ps("test.ps",type);
+   ps.Range(16,24);          //set x,y of printed page
+
+   //draw 3 histograms from file hsimple.root on separate pages
+   hpx->Draw();
+   c1.Update();              //force drawing in a script
+   hprof->Draw();
+   c1.Update();
+   hpx->Draw("lego1");
+   c1.Update();
+   ps.Close();
+}
+
+// 4.Color Models
+//  (1) TPostScript and TPDF 支持两种 color model: RGB, CMYK
+//  (2) CMYK 拥有更丰富的黑色
+//  (3) 更改 color model:
+gStyle->SetColorModelPS(c);
+        // c=0  RGB model (默认)
+        // c=1  CMYK model 
+//  (4) 两者可以相互转换
+ Double_t Black   = TMath::Min(TMath::Min(1-Red,1-Green),1-Blue);
+ Double_t Cyan    = (1-Red-Black)/(1-Black);
+ Double_t Magenta = (1-Green-Black)/(1-Black);
+ Double_t Yellow  = (1-Blue-Black)/(1-Black);
+```
+
+**1.8.7.2 pdf 格式**
+>+ pdf 格式使用方法与 eps 一致
+
+
+&emsp;
+#### <font color=#FF00FF> 1.8.8 3D Viewers(略)  </font>
+
+
+&emsp;
 ### <font color=#00BFFF> 1.9 Input/Output  </font>
-
 
 
 
@@ -800,8 +1209,8 @@ func->FixParameter();    // 固定某个参数
 >* To minimize Chi-square functio  <font color=#DC143C>   //(ROOT中默认的拟合方式是最小Chi2)  </font>
 >* To search maximum of likelihood function
 
-##### 2.3.8.1 MINUIT
-##### 2.3.8.2 MINUIT2
+**2.3.8.1 MINUIT**
+**2.3.8.2 MINUIT2**
 
 
 #### <font color=#FF00FF> 2.3.9 利用神经网络进行数据拟合 </font>
