@@ -58,9 +58,9 @@
 
 
 ------------------------------------------------------
-# <font color=#DC143C> ROOT 安装步骤 </font>
+## <font color=#DC143C> ROOT 安装步骤 </font>
 
-## make 安装方法
+### make 安装方法
 ```C++
 1. 必须安装的软件包
    sudo apt-get install git dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev libxft-dev libxext-dev   //安装 Required packages
@@ -85,7 +85,7 @@
 
 ```
 
-## cmake 安装方法
+### cmake 安装方法
 ```C++
 1. 必须安装的软件包
    sudo apt-get install git dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev libxft-dev libxext-dev   //安装 Required packages
@@ -117,7 +117,7 @@
 ```
 
 
-## 附录： 配置环境变量
+### 附录： 配置环境变量
 
 ```C++
 #!/bin/bash
@@ -991,7 +991,15 @@ gStyle->SetColorModelPS(c);
 
 ### <font color=#00BFFF> 2.1 Histograms 直方图  </font>
 
-#### <font color=#FF00FF> 2.1.1 TH1 </font>
+#### <font color=#FF00FF> 2.1.1 直方图概述 </font>
+#### <font color=#FF00FF> 2.1.2 直方图创建-填充-画图-保存 </font>
+#### <font color=#FF00FF> 2.1.3 直方图的操作 </font>
+#### <font color=#FF00FF> 2.1.4 THStack </font>
+#### <font color=#FF00FF> 2.1.5 TH2  </font>
+#### <font color=#FF00FF> 2.1.5 直方图其他功能与设置  </font>
+
+
+
 * 从已有root文件中读取histogram
 ```C++
  TFile * in = new TFile("文件路径");
@@ -1021,47 +1029,245 @@ h->SetOptStat(0);                      //
 h->GetListOfFunctions()->Add(func); h->Draw(); // Draw the histo with the fit function
 ```
 
-#### <font color=#FF00FF> 2.1.2 TH2  </font>
 
 
-
-#### <font color=#FF00FF> 2.1.3 THStack </font>
-
-* 同时画出多个直方图：THStack
-```C++
-THStack *hs = new THStack("hs","title");
-hs->Add(h1);
-hs->Add(h2);
-```
 
 
 
 -------------------------------------------------------------------
 ### <font color=#00BFFF> 2.2 Graphs 画图  </font>
 
-#### <font color=#FF00FF> TGraph2DErrors  </font>
-> I use TGraph2DErrors() to draw data(error value equal to 0), i try to fit with TF2 function, error happens: "fill data empty"  <font color=#DC143C>  // Reason: Reason: TF2 fit ignore data without an error </font>
+> 常用的 graph 类有: TGraph, TGraphErrors, TGraphAsymmErrors, TMuiltiGraph, TGraph2D
 
-
-#### <font color=#FF00FF> TLatex  </font>
-
-
-
-#### <font color=#FF00FF> TLegend  </font>
-
-* How to add a legend to a figure
+#### <font color=#FF00FF> 2.2.1 TGraph </font>
+ 
+**2.2.1.1 Build a graph**
 ```C++
-* 新建一个TLegend: TLegend * legend = new TLegend();
-* Fit function linked to the hist: TF1 * fun = hist->GetFunction();
-* 创建legend内容 :      sprintf(message,"#chi^{2}=%.2f", fun->GetChisquare())
-* AddEntry:            legend->AddEntry(fun,message);
-* Drawing the TLegend: legend->Draw();
+// 方法1: 创建时指定数据
+TGraph *gr1 = new TGraph(n, x, y); 
+            // n 是数据点的数目
+            // x,y 是个点的坐标,都是数组,x=x[n],y=y[n]
+
+// 方法2: 创建后, 再逐点指定数据
+TGraph *gr2 = new TGraph(n); // 或者 TGraph *gr2 = new TGraph(n);
+gr2->SetPoint(Int_t i, Double_t x, Double_t y);
+```
+
+**2.2.1.2 Graph Draw Options**
+```C++
+// Graph 的 draw option 都在 TGraph::PaintGraph 下
+// 这些 draw option 可以结合使用
+
+// Draw Options
+"L"   A simple poly-line between every points is draw
+
+"F"   A fill area is drawn
+
+"F1"  Idem as "F" but fill area is no more repartee around
+      X=0 or Y=0
+
+"F"   draw a fill area poly line connecting the center of bins
+
+"A"   Axis are drawn around the graph
+
+"C"   A smooth curve is drawn
+
+"*"   A star is plotted at each point
+
+"P"   The current marker of the graph is plotted at each point
+
+"B"   A bar chart is drawn at each point
+
+"[]"  Only the end vertical/horizontal lines of the error bars
+      are drawn. This option only applies to the TGraphAsymmErrors
+
+"1"   ylow = rwymin
+
+// Some Examples:
+graph->Draw("AC*");  // 坐标轴,光滑连线,数据点标星号 
+graph->Draw("AB");   // Bar graphs
+graph->Draw("AF");   // Filled graphs 
+graph->Draw("AB"); 
+
+// Marker Options
+graph->SetMarkerStyle(style);  // 见 1.8.4.3 Markers
+```
+
+
+**2.2.1.3 Graph Draw Options**
+```C++
+// 将两个/多个 graph 画在一起
+// 坐标轴只需要画一次
+graph1->Draw("AC*");
+graph2->Draw("CP");
+```
+
+
+#### <font color=#FF00FF> 2.2.2 带误差的 graph  </font>
+**2.2.2.1 创建带带有对称误差棒的 graph**
+```C++
+// 创建带带有对称误差棒的 graph
+TGraphErrors *gr = new TGraphErrors(n,x,y,ex,ey); // x,y,ex,ey都是数组
+
+// TGraphErrors 的 draw options
+// 除了与 TGraph 的 draw options 以外, 还有
+"z"   leave off the small lines at the end of the error bars
+">"   an arrow is drawn at the end of the error bars
+"|>"  a full arrow is drawn at the end of the error bars, 
+      //its size is 2/3 of the marker size 
+ 
+//control the size of the lines at the end of the error bars
+gr->SetEndErrorSize(np);  // by default, np=1; 
+```
+
+**2.2.2.2 创建带带有非对称误差棒的 graph**
+```C++
+// 创建带带有非对称误差棒的 graph
+// x,y,exl,exh,eyl,eyh 都是数组, exl,exh,eyl,eyh 分别是左、右、下、上误差
+TGraphAsymmErrors *gr = new TGraphAsymmErrors(n,x,y,exl,exh,eyl,eyh);
+```
+
+**2.2.2.3 Graphs with Asymmetric Bent Errors**
+```C++
+// Graphs with Asymmetric Bent Errors
+TGraphBentErrors *gr = new TGraphBentErrors(n,x,y,exl,exh,
+                                            eyl,eyh,exld,exhd,eyld,eyhd);
 ```
 
 
 
+#### <font color=#FF00FF> 2.2.3 TMuiltiGraph </font>
+```C++
+// TMultiGraph is a collection of TGraph
+TGraph *gr1 = new TGraph(n,x1,y1);
+TGraphErrors *gr2 = new TGraphErrors(n,x,y,ex,ey);
+TMultiGraph *mg = new TMultiGraph();
+mg->Add(gr1);
+mg->Add(gr2);
+mg->Draw("APL");
+```
+
+#### <font color=#FF00FF> 2.2.4 TGraphPolar</font>
+```C++
+// 创建 TGraphPolar
+TGraphPolar *grP1 = new TGraphPolar(n,r,theta); // r,theta 是数组.
+// An Example
+{
+   TCanvas *CPol = new TCanvas("CPol","TGraphPolar Examples",700,700);
+   Double_t rmin=0;
+   Double_t rmax=TMath::Pi()*2;
+   Double_t r[1000];
+   Double_t theta[1000];
+   TF1 * fp1 = new TF1("fplot","cos(x)",rmin,rmax);
+   for (Int_t ipt = 0; ipt < 1000; ipt++) {
+      r[ipt] = ipt*(rmax-rmin)/1000+rmin;
+      theta[ipt] = fp1->Eval(r[ipt]);
+   }
+   TGraphPolar * grP1 = new TGraphPolar(1000,r,theta);
+   grP1->SetLineColor(2);
+   grP1->Draw("AOL");
+}
+
+// Draw Options:
+"O"  Polar labels are paint orthogonally to the polagram radius
+"P"  Polar labels are paint at each point position
+"E"  Paint error bars
+"F"  Paint fill area
+"A"  Force axis redrawing even if a polagram already exists
+```
 
 
+#### <font color=#FF00FF> 2.2.5 禁区/阴影</font>
+```C++
+// 当 graph option 是 "C" 或 "L", 可以在线的一端画出阴影
+// 当 graph 的线宽大于 99 时, 阴影被自动画出来
+// 例如: SetLineWidth(-2002)表示阴影在线的下方
+//      SetLineWidth(2002)表示阴影在线的上方
+```
+![参考颜色](ROOT/pictures/03000055.png)
+
+
+#### <font color=#FF00FF> 2.2.6 TGraphQQ</font>
+>+ TGrapgQQ allows drawing quantile-quantile plots
+>+ Such plots can be drawn for two datasets, or for one dataset and a  theoretical distribution function.
+
+
+#### <font color=#FF00FF> 2.2.7 TGraph2D </font>
+>+ I use TGraph2DErrors() to draw data(error value equal to 0), i try to fit with TF2 function, error happens: "fill data empty"  <font color=#DC143C>  // Reason: Reason: TF2 fit ignore data without an error </font>
+
+**2.2.7.1 Build a 2D Graph**
+```C++
+// 方法1: 数组
+TGraph2D *gr = new TGraph2D(n,x,y,z);  // x,y,z 是数组
+
+// 方法2: SetPoint() 
+TGraph2D *gr = new TGraph2D(n);  // 带参数 n
+gr->SetPoint(i,x,y,z);
+
+// 方法3: SetPoint() 只能使用整数数组
+TGraph2D *gr = new TGraph2D();  // 不带参数
+
+// 方法4: 读取文件
+// "graph.dat" 数据格式 "%lg  %lg  %lg".
+TGraph2D *gr = new TGraph2D("graph.dat");
+```
+
+**2.2.7.2 2D Graph Draw Options**
+```C++
+// A TGraph2D can be also drawn with ANY options valid for
+// 2D histogram drawing.
+// An Example: $ROOTSYS/tutorials/fit/graph2dfit.C
+"TRI"   the Delaunay triangles are drawn using filled area. 
+"TRIW"  the Delaunay triangles are drawn as wire frame.
+"TRI1"  the Delaunay triangles are painted with color levels. 
+"TRI2"  the Delaunay triangles are painted with color levels.
+"P"     draws a marker at each vertex.
+"P0"    draws a circle at each vertex. Each circle background is white.
+```
+
+**2.2.7.2 TGraph2DErrors**
+```C++
+// An Example: $ROOTSYS/tutorials/graphs/graph2derrorsfit.C
+```
+
+
+#### <font color=#FF00FF> 2.2.8 画图的基本设置 </font>
+**2.2.8.1 Graph 拟合**
+>+ Graph 的拟合与一般的 Fitting 完全一样！
+
+**2.2.8.2 Graph 坐标轴设置**
+```C++
+// 设置坐标轴, 首先要画出坐标轴, draw option "A"
+root[] gr5 = new TGraph(n,x,y)
+root[] gr5->Draw("ALP")
+root[] gr5->GetXaxis()->SetTitle("X-Axis")
+root[] gr5->GetYaxis()->SetTitle("Y-Axis")
+root[] gr5->GetXaxis()->CenterTitle()
+root[] gr5->GetYaxis()->CenterTitle()
+... // 更多的设置可在 root 环境下 Tag 键补全查看！ 
+root[] gr5->Draw("ALP")
+```
+
+**2.2.8.3 Graph 放缩**
+```C++
+// Graph 不能直接放缩, 一般做法如下:
+// 1.创建一个空的直方图, 在直方图设置坐标显示范围
+// 2.画 graph 不带坐标轴, 即使用空 histogram 的坐标轴
+// An Example：
+{
+   c1 = new TCanvas("c1","A Zoomed Graph",200,10,700,500);
+   hpx = new TH2F("hpx","Zoomed Graph Example",10,0,0.5,10,1.0,8.0);
+   hpx->SetStats(kFALSE);   // no statistics
+   hpx->Draw();
+   Int_t n = 10;
+   Double_t x[n] = {-.22,.05,.25,.35,.5,.61,.7,.85,.89,.95};
+   Double_t y[n] = {1,2.9,5.6,7.4,9,9.6,8.7,6.3,4.5,1};
+   gr = new TGraph(n,x,y);
+   gr->SetMarkerColor(4);
+   gr->SetMarkerStyle(20);
+   gr->Draw("LP");// and draw it without an axis
+}
+```
 
 
 -------------------------------------------------------------------
