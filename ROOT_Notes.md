@@ -966,10 +966,10 @@ gStyle->SetColorModelPS(c);
         // c=0  RGB model (默认)
         // c=1  CMYK model 
 //  (4) 两者可以相互转换
- Double_t Black   = TMath::Min(TMath::Min(1-Red,1-Green),1-Blue);
- Double_t Cyan    = (1-Red-Black)/(1-Black);
- Double_t Magenta = (1-Green-Black)/(1-Black);
- Double_t Yellow  = (1-Blue-Black)/(1-Black);
+Double_t Black   = TMath::Min(TMath::Min(1-Red,1-Green),1-Blue);
+Double_t Cyan    = (1-Red-Black)/(1-Black);
+Double_t Magenta = (1-Green-Black)/(1-Black);
+Double_t Yellow  = (1-Blue-Black)/(1-Black);
 ```
 
 **1.8.7.2 pdf 格式**
@@ -992,42 +992,259 @@ gStyle->SetColorModelPS(c);
 ### <font color=#00BFFF> 2.1 Histograms 直方图  </font>
 
 #### <font color=#FF00FF> 2.1.1 直方图概述 </font>
-#### <font color=#FF00FF> 2.1.2 直方图创建-填充-画图-保存 </font>
-#### <font color=#FF00FF> 2.1.3 直方图的操作 </font>
-#### <font color=#FF00FF> 2.1.4 THStack </font>
-#### <font color=#FF00FF> 2.1.5 TH2  </font>
-#### <font color=#FF00FF> 2.1.5 直方图其他功能与设置  </font>
-
-
-
-* 从已有root文件中读取histogram
++ **2.1.1.1 直方图数据类型**
 ```C++
- TFile * in = new TFile("文件路径");
- TH1F  * h1 = (TH1F*)in->Get("ObjectName");
- TF1F  * h1 = (TH1F*)gROOT->FindObject("ObjectName"); //在ROOT环境下使用
+1.TH1C, TH2C, TH3C : one byte per bin, maximum bin content = 255
+2.TH1S, TH2S, TH3S : one short per bin, maximum bin content = 65535
+3.TH1I, TH2I, TH3I : one integer per bin, maximum bin content = 2147483647
+4.TH1F, TH2F, TH3F : one float per bin, maximum precision = 7 digits
+5.TH1D, TH2D, TH3D : one integer per bin, maximum precision = 14 digits
 ```
 
-* 创建并保存root文件
++ **2.1.1.2 剖面直方图**
+  >+ 两组量 X，Y 之间的关联可以用二维直方图、或散点图表示
+  >+ 在多数情况下, 剖面直方图(profile histograms)可以更好地替代二维直方图
+  >+ Profile histogram: used to display the mean value of Y and its RMS for each bin in X
+  >+ If Y is an unknown but single-valued approximate function of X, it will have greater precision in a profile histogram than in a scatter plot.
+
 ```C++
-h1->GetNbinsX();          // get the number of bins in X axis
-h1->GetBinCenter(i);      // get the center of bin NO.i
-h1->GetBinContent(i);     // get the Y value of bin NO.i
-h1->GetEntries();         // get the number of entry
+TProfile :   one-dimensional profiles
+TProfile2D : two-dimensional profiles
 ```
 
-* 直方图有用的用法
+
+#### <font color=#FF00FF> 2.1.2 直方图创建-填充-保存 </font>
++ **创建直方图**
 ```C++
-TH1F *hist = (TH1F*)h1->Clone();  // 克隆一个直方图
+// 方法1：使用构造函数
+TH1I* h1 = new TH1I("h1","h1 title",100,0.0,4.0);
+TH2F* h2 = new TH2F("h2","h2 title",40,0.0,2.0,20,-1.5,3.5);
+TH1D* h3 = new TH3D("h3","h3 title",80,0.0,1.0,100,-2.0,2.0,50,0.0,3.0);
+
+
+// 方法2：克隆一个已知直方图
+TH1* hc = (TH1*)h1->Clone();
+
+
+// 方法3：2-D 或 3-D 直方图作投影
+TH1* hx = h2->ProjectionX(); // 投影得到的直方图数据类型是 TH1D
+TH1* hy = h2->ProjectionY(); // 投影得到的直方图数据类型是 TH1D
+
+
+// 方法4：从文件中读取直方图 
+TFile* filein = new TFile("histo.root");
+TH1F* h1 = (TH1F*)filein->Get("ObjectName");
+TF1F* h1 = (TH1F*)gROOT->FindObject("ObjectName"); //在ROOT环境下使用
+```
+
++ **Bin 的设置**
+```C++
+1. Bin with 可以是常数, 也可以是数组
+// 固定 bin 宽 
+// X 区间[0.0, 4.0]被分成 100 个bin, 每个 bin 宽度为(4.0-0.0)/100=0.04
+// bin 区间个数必须是整数, (4.0-0.0)/100 表示精度！
+TH2* h = new TH2D(
+   /* name  */  "h2",
+   /* title */  "Hist with constant bin width",
+   /* X-dimension */ 100, 0.0, 4.0,
+   /* Y-dimension */ 200, -3.5, 1.5);
+
+
+2. 可变 bin 宽
+// 如果直方图有 n 个 bin 区间, 则共有 n+1 个边界
+// 使用数组时, 数组长度必须为 n+1
+// bin 区间的边界通常使用 double 类型
+const Int_t NBINS = 5;
+Double_t edges[NBINS + 1] = {0.0, 0.2, 0.3, 0.6, 0.8, 1.0};
+// Bin 1 corresponds to range [0.0, 0.2]
+// Bin 2 corresponds to range [0.2, 0.3] etc...
+
+TH1* h = new TH1D(
+   /* name */ "h1",
+   /* title */ "Hist with variable bin width",
+   /* number of bins */ NBINS,
+   /* edge array */ edges
+);
+
+
+3.Re-binning 
+// 使用 TH1::Rebin()方法
+// rebin 只能将 bin 区间越分越宽.
+// 如: 原来 bin=100, h1->Rebin(2), 则 bin=50
+h1->Rebin(Int_t n); // n 为整数, 实际有效的 rebin 应该是 n >= 2
+```
+
++ **填充直方图**
+```C++
+1. Fill() 方法
+// 填充思路: 例如，给定 x 值, 先计算该 x 值在那个 bin 区间内,
+// 然后在该 bin 区间内计数 +1 或 根据权重增加 
+h1->Fill(x);
+h1->Fill(x,w);  // with weight
+h2->Fill(x,y);
+h2->Fill(x,y,w);
+h3->Fill(x,y,z);
+h3->Fill(x,y,z,w);
+
+
+2.AddBinContent() 方法
+//   直接在某个 bin 上 +1 或 根据权重增加
+h1->AddBinContent(Int_t bin);
+h1->AddBinContent(Int_t bin, Double_t weight);
+
+
+3.SetBinContent()
+//   replace the existing bin content
+h1->SetBinContent(Int_t bin, Double_t content);
+
+// 可以通过 GetBinContent() 读取每个 bin 区间内的计数
+// 虽然 bin content 是 double 型, 当实际往往是整数
+Double_t bincontent = h1->GetBinContent(bin); // get the Y value of bin 
+
+
+4.随机数方法
+// 使用 root 已有的随机数分布
+TH1D* h1 = new TH1D("h1","Histo from a Gaussian",100,-3,3);
+h1->FillRandom("gaus",10000); // 默认的 gaus 分布 mean=0, sigma=1
+                             
+// 从已有的 histogram 生成随机数
+TH1D* h2 = new TH1D("h2","Histo from a existing histo",100,-3,3);
+h2->FillRandom(h1,10000);
+
+// TH1::GetRandomm() 
+// used to get a random number distributed according to
+// the contents of a histogram
+(1) generate a random number between 0 and 1 (记为 r1)
+(2) Find the bin in the normalized integral for r1
+(3) Fill histogram channel 
+```
+
++ **保存直方图**
+```C++
+// 先写入 .root file, 在保存
+// 1.先创建 .root 文件
+// 2.创建、填充直方图
+// 3.将直方图写入 .root 文件
+
+TFile* fileout("/路径/hist.root","new");
+TH1D* h1 = new TH1D("hgaus","hist from a gaussian",100,-3,3);
+h1->FillRandom("gaus",10000);  // 填充直方图
+h1->Write();   // 写入直方图
+```
+
+#### <font color=#FF00FF> 2.1.3 直方图画图常用设置 </font>
+
++ **Statistics Display**
+
++ **坐标轴-标题等设置**
+
++ **Z选项 - Display the Color Pallette on the Pad**
+
++ **设置 Style**
+
++ **画图选项 - Draw Options**
+
++ **误差选项 - Error Bars Options**
+
++ **颜色选项 - Color Options**
+
++ **文本选项 - Text Options**
+
++ **等高线选项 - Contour Options**
+
++ **LEGO选项**
+
++ **Surfac选项**
+
++ **Bar选项**
+
+
+
+
+
+
+#### <font color=#FF00FF> 2.1.4 直方图其他设置  </font>
+
++ **散点图选项 - Scatter Plot Options**
++ **箭头选项 - Arrow Option**
++ **SPEC 选项**
++ **Miscellaneous 操作**
++ **Alphanumeric Bin Labels**
+
+
+
+
+#### <font color=#FF00FF> 2.1.5 直方图的操作 </font>
++ **直方图的运算**
+```C++
+
+// 直方图的加法、乘法、除法
+// 非指针才能进行运算, 因此运算的结果必须是非指针
+
+// 非指针形式
+TH1D h1; TH1D h2;
+TH1D h3 = h1 + h2;
+h1.Scale(const);  // h1改变, 乘以一个常数
+TH1D h3=8*h1;     // 新h3, h3=h1*常数， h3必须是非指针形式
+TH1D h4=h1*h2;    // 两个直方图相乘， h4必须是非指针形式
+
+
+// 指针形式
+TH1D* h1; TH1D* h2;
+h1->Scale(const);
+TH1D h3=8 * (*h1);
+TH1D h4=(*h1) * (*h2);
+
+
+// TH1 自带的 Add(), Multiply, Divide() 函数可以直接使用
+```
+
+
++ **直方图归一化**
+```C++
+Double_t scale = norm/h->Intergral(); // 归一化到 norm
+h->Scale(scale);
+
+// 或者直接使用
 h->Scale(1./h->Integral());       // 归一化
 ```
 
-* 直方图的画图技巧
++ **直方图克隆**
 ```C++
-hs->GetXaxis()->SetNdivisions(-505);   // 设置坐标值分度值
-h->SetStats(0);                        // 关闭直方图右上方显示的box
-h->SetOptStat(0);                      //
-h->GetListOfFunctions()->Add(func); h->Draw(); // Draw the histo with the fit function
+TH1D* hclone = (TH1D*)h->Clone();
+hclone->SetName("hclone"); // 克隆后，强烈建议重命名，否则有两个直方图同名
 ```
+
+
++ **直方图投影**
+```C++
+// 常用的投影方式有: TProjection 与 TProfile 两种
+// 以 2D histogram 为例
+TH2D* h2d;
+
+// 1. TProjection
+h2d->ProjectionX(); // Projection 是单纯的投影
+h2d->ProjectionY(); 
+
+// 2. TProfile
+h2d->TProfileX(); // Profile 的纵坐标是 h2d 中 Y 的平均值
+h2d->TProfileY();
+```
+
++ **直方图叠加**
+
+
+
+#### <font color=#FF00FF> 2.1.6 THStack </font>
+
+#### <font color=#FF00FF> 2.1.7 TProfile </font>
+
+#### <font color=#FF00FF> 2.1.8 TH2, TH3 </font>
+
+#### <font color=#FF00FF> 2.1.9 直方图用户图形界面(略)  </font>
+
+
+
 
 
 
