@@ -16,12 +16,13 @@
 
 
 > ROOT学习资料
-> [1. ROOT_for_beginners](https://cloud.tsinghua.edu.cn/d/bad40bc16faa4061ada3/) // 个人觉得这是最适合新手的学习资料,一共5篇
+> [1. ROOT_for_beginners](https://cloud.tsinghua.edu.cn/d/bad40bc16faa4061ada3/) // 个人觉得这是比较适合新手的学习资料,一共5篇
 > [2. 杨振伟老师ROOT课程讲义](https://cloud.tsinghua.edu.cn/d/9132b3d20f884fc59f1f/) // 适合新手入门
 > [3. ROOT-User-Guide](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html)
 > [4. $ROOTSYS/tutorials](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#rootsystutorials-1) // tutorials源代码在root/tutorials下，是非常好的学习资料！
 > [5. 新版本Reference-Guide](https://root.cern/doc/master/annotated.html )  
 > [6. *旧版本Reference-Guide](https://root.cern.ch/root/html304/)
+> [7. ROOT 官网上的 cources 资料](https://root.cern/courses)
 
 
 >  <font color=#DC143C >ROOT学习方法参考!!!</font>
@@ -976,7 +977,6 @@ Double_t Yellow  = (1-Blue-Black)/(1-Black);
 >+ pdf 格式使用方法与 eps 一致
 
 
-&emsp;
 #### <font color=#FF00FF> 1.8.8 3D Viewers(略)  </font>
 
 
@@ -986,7 +986,7 @@ Double_t Yellow  = (1-Blue-Black)/(1-Black);
 
 
 
---------------------------------------------------------
+&emsp;
 # <font color=#DC143C> 二. ROOT 功能篇 </font>
 
 ### <font color=#00BFFF> 2.1 Histograms 直方图  </font>
@@ -1013,7 +1013,7 @@ TProfile2D : two-dimensional profiles
 ```
 
 
-#### <font color=#FF00FF> 2.1.2 直方图创建-填充-保存 </font>
+#### <font color=#FF00FF> 2.1.2 直方图创建-填充-画图-保存 </font>
 + **创建直方图**
 ```C++
 // 方法1：使用构造函数
@@ -1067,11 +1067,18 @@ TH1* h = new TH1D(
 );
 
 
-3.Re-binning 
+3. Re-binning 
 // 使用 TH1::Rebin()方法
 // rebin 只能将 bin 区间越分越宽.
 // 如: 原来 bin=100, h1->Rebin(2), 则 bin=50
 h1->Rebin(Int_t n); // n 为整数, 实际有效的 rebin 应该是 n >= 2
+
+
+4. 对 Bin 的操作
+TAixs *axis = h1->GetXaxis();
+axis->GetNbins(); 
+bin_number = axis->FinBin(x_value);
+
 ```
 
 + **填充直方图**
@@ -1119,6 +1126,16 @@ h2->FillRandom(h1,10000);
 (3) Fill histogram channel 
 ```
 
++ **Drawing直方图**
+```C++
+// Draw Options 请见 2.1.3 直方图画图常用设置
+
+// 1.TH1::Draw
+// 2.TH1::DrawClone()
+// 3.TH1::DrawNormalized()
+```
+
+
 + **保存直方图**
 ```C++
 // 先写入 .root file, 在保存
@@ -1134,29 +1151,314 @@ h1->Write();   // 写入直方图
 
 #### <font color=#FF00FF> 2.1.3 直方图画图常用设置 </font>
 
-+ **Statistics Display**
-
-+ **坐标轴-标题等设置**
-
-+ **Z选项 - Display the Color Pallette on the Pad**
-
-+ **设置 Style**
 
 + **画图选项 - Draw Options**
+```C++
+// draw options 对大小写不敏感！
+// 下面的 draw option 适用于所有的直方图
+
+"AXIS": Draw only the axis.
+
+"HIST": When a histogram has errors, it is visualized by default
+   with error bars. To visualize it without errors use `HIST`
+   together with the required option (e.g. "`HIST SAME C`").
+
+"SAME": Superimpose on previous picture in the same pad.
+
+"CYL": Use cylindrical coordinates.
+
+"POL": Use polar coordinates.
+
+"SPH": Use spherical coordinates.
+
+"PSR": Use pseudo-rapidity/phi coordinates.
+
+"LEGO": Draw a lego plot with hidden line removal.
+
+"LEGO1": Draw a lego plot with hidden surface removal.
+
+"LEGO2": Draw a lego plot using colors to show the cell contents.
+
+"SURF": Draw a surface plot with hidden line removal.
+
+"SURF1": Draw a surface plot with hidden surface removal.
+
+"SURF2": Draw a surface plot using colors to show the cell contents.
+
+"SURF3": Same as `SURF` with a contour view on the top.
+
+"SURF4": Draw a surface plot using `Gouraud` shading.
+
+"SURF5": Same as `SURF3` but only the colored contour is drawn.
+    Used with option `CYL` , `SPH` or `PSR` it allows to draw colored
+    contours on a sphere, a cylinder or in a pseudo rapidly space. In
+    Cartesian or polar coordinates, option `SURF3` is used.
+
+"X+"	The X-axis is drawn on the top side of the plot.
+
+"Y+"	The Y-axis is drawn on the right side of the plot
+
+// 下面的 draw option 仅适用于 1D 直方图
+
+"AH": Draw the histogram, but not the axis labels and tick marks
+
+"B": Draw a bar chart
+
+"C": Draw a smooth curve through the histogram bins
+
+"E": Draw the error bars
+
+"E0": Draw the error bars including bins with 0 contents
+
+"E1": Draw the error bars with perpendicular lines at the edges
+
+"E2": Draw the error bars with rectangles
+
+"E3": Draw a fill area through the end points of the vertical
+            error bars
+
+"E4": Draw a smoothed filled area through the end points of the error bars
+
+"L": Draw a line through the bin contents
+
+"P": Draw a (poly)marker at each bin using the histogram current marker style
+
+"P0": Draw current marker at each bin including empty bins
+
+"PIE": Draw a Pie Chart
+
+"*H": Draw histogram with a  at each bin
+
+"LF2": Draw histogram as with option "L" but with a fill
+    area. Note that "L" also draws a fill area if the histogram fill
+    color is set but the fill area corresponds to the histogram
+    contour.
+
+"9": Force histogram to be drawn in high resolution mode. By
+    default, the histogram is drawn in low resolution in case the
+    number of bins is greater than the number of pixels in the current
+    pad
+
+"][": Draw histogram without the vertical lines for the first
+    and the last bin. Use it when superposing many histograms on the
+    same picture.
+
+
+// 下面的 draw option 仅适用于 2D 直方图
+
+"ARR": Arrow mode. Shows gradient between adjacent cells
+
+"BOX": Draw a box for each cell with surface proportional to
+    contents
+
+"BOX1": A sunken button is drawn for negative values, a raised
+    one for positive values
+
+"COL": Draw a box for each cell with a color scale varying with
+    contents
+
+"COLZ": Same as "`COL`" with a drawn color palette
+
+"CONT": Draw a contour plot (same as `CONT0` )
+
+"CONTZ": Same as "`CONT`" with a drawn color palette
+
+"CONT0": Draw a contour plot using surface colors to distinguish contours
+
+"CONT1": Draw a contour plot using line styles to distinguish contours
+
+"CONT2": Draw a contour plot using the same line style for all contours
+
+"CONT3": Draw a contour plot using fill area colors
+
+"CONT4": Draw a contour plot using surface colors
+    (`SURF2` option at theta = 0)
+
+"CONT5": Use Delaunay triangles to compute the contours
+
+"LIST": Generate a list of **`TGraph`** objects for each contour
+
+"FB": To be used with `LEGO` or `SURFACE` , suppress the
+    Front-Box
+
+"BB": To be used with `LEGO` or `SURFACE` , suppress the
+    Back-Box
+
+"A": To be used with `LEGO` or `SURFACE` , suppress the axis
+
+"SCAT": Draw a scatter-plot (default)
+
+"SPEC": Use **`TSpectrum2Painter`** tool for drawing
+
+"TEXT": Draw bin contents as text
+    (format set via `gStyle->SetPaintTextFormat)` .
+
+"TEXTnn": Draw bin contents as text at angle `nn` ( `0<nn<90` ).
+
+"[cutg]": Draw only the sub-range selected by the **`TCutG`**
+    name "`cutg`".
+
+"Z": The "Z" option can be specified with the options: `BOX`,
+    `COL`, `CONT`, `SURF`, and `LEGO` to display the color palette
+    with an axis indicating the value of the corresponding color on
+    the right side of the picture.
+
+
+// 下面的 draw option 仅适用于 3D 直方图
+
+ " " : Draw a 3D scatter plot.
+
+"`BOX`": Draw a box for each cell with volume proportional to
+    contents
+
+"LEGO": Same as "`BOX`"
+
+"ISO": Draw an iso surface
+
+"FB": Suppress the Front-Box
+
+"BB": Suppress the Back-Box
+
+"A": Suppress the axis
+
+```
+
++ **Statistics Display**
+
+
++ **Z Option: Display the Color Palette on the Pad**
+```C++
+// "Z" 选项可以设置为: COL,CONT,SURF,LEGO
+hist2->Draw("COL");  // 彩图，不带参考调色板
+hist2->Draw("COLZ"); // 彩图，带参考调色板
+hist2->Draw("CONTZ");
+hist2->Draw("SURFZ");
+hist2->Draw("LEGOZ");
+```
+
+
++ **坐标轴-标题等设置**
+  >+ 当 small非常小(如 $1e^{-5}$), 使用以下方法可实现多个 subpad 相连的效果.
+  // 根据实际情况设置
+  gPad->SetBottomMargin(small);
+  gPad->SetTopMargin(small);
+  gPad->SetLeftMargin(small);
+  gPad->SetRightMargin(small);
+![效果图](ROOT/pictures/SSD_Coverage.png)
 
 + **误差选项 - Error Bars Options**
+```C++
+// gStyle->SetErrorX(dx); //to control the size of the error along x
+// gStyle->SetEndErrorSize(np); //to control the size of the lines 
+//                                at the end of error bars 
+
+"E"  Default. Draw only error bars, without markers
+
+"E0" Draw also bins with 0 contents (turn off the symbols clipping).
+
+"E1" Draw small lines at the end of error bars
+
+"E2" Draw error rectangles
+
+"E3" Draw a fill area through the end points of vertical error bars
+
+"E4" Draw a smoothed filled area through the end points of error bars
+
+```
 
 + **颜色选项 - Color Options**
+```C++
+// For each cell (i,j), a box is drawn with a color proportional to 
+// the cell content
+
+// 1.使得颜色更加好看
+gStyle->SetPalette(1);
+
+// Set the color palette with TStyle::SetPalette
+gStyle->SetPalette(ncolors,colors);
+
+```
 
 + **文本选项 - Text Options**
+```C++
+// Text 属性包括:
+Text font = current font set by TStyle
+Text size = 0.02 * pad-height * marker-size
+Text color = marker color
+```
 
 + **等高线选项 - Contour Options**
+```C++
+// 建议使用调色板: gStyle->SetPalette(1);
+
+"CONT": Draw a contour plot (same as CONT0)
+
+"CONT0": Draw a contour plot using surface colors to distinguish
+    contours
+
+"CONT1": Draw a contour plot using line styles to distinguish
+    contours
+
+"CONT2": Draw a contour plot using the same line style for all
+    contours
+
+"CONT3": Draw a contour plot using fill area colors
+
+"CONT4": Draw a contour plot using surface colors (SURF2 option
+    at theta = 0); see also options "`AITOFF`", "`MERCATOR`", etc.
+    below
+
+"CONT5": Use Delaunay triangles to compute the contours
+```
+![Different contour options](ROOT/pictures/02000032.png)
+
 
 + **LEGO选项**
+```C++
+// In a lego plot, the cell contents are drawn as 3D boxes
+// the height of the box is proportional to the content
+
+"LEGO": Draw a lego plot with hidden line removal
+
+"LEGO1": Draw a lego plot with hidden surface removal
+
+"LEGO2": Draw a lego plot using colors to show the cell contents
+
+"CYL": Cylindrical coordinates: x-coordinate is mapped on the
+    angle; y-coordinate - on the cylinder length.
+
+"POL": Polar coordinates: x-coordinate is mapped on the angle;
+    y-coordinate - on the radius.
+
+"SPH": Spherical coordinates: x-coordinate is mapped on the
+    latitude; y-coordinate - on the longitude.
+
+"PSR": PseudoRapidity/Phi coordinates: x-coordinate is mapped on
+    Phi.
+```
+!["LEGO" and "SURF" options](ROOT/pictures/02000034.png)
+
+
 
 + **Surfac选项**
+```C++
+// 建议使用调色板: gStyle->SetPalette(1);
 
-+ **Bar选项**
+"SURF": Draw a surface plot with hidden line removal
+
+"SURF1": Draw a surface plot with hidden surface removal
+
+"SURF2": Draw a surface plot using colors to show the cell
+    contents
+
+"SURF3": Same as `SURF` with a contour view on the top
+
+"SURF4": Draw a surface plot using `Gouraud` shading
+
+"SURF5": Same as `SURF3` but only the colored contour is drawn.
+
+```
+
 
 
 
@@ -1166,8 +1468,44 @@ h1->Write();   // 写入直方图
 #### <font color=#FF00FF> 2.1.4 直方图其他设置  </font>
 
 + **散点图选项 - Scatter Plot Options**
+```C++
+// 默认情况下，2D 直方图是散点图
+1.For each cell (i,j), a number of points proportional to 
+  the cell content are drawn.
+2.A maximum of 500 points per cell are drawn.
+3.If the maximum is above 500 contents are normalized to 500.
+```
+
 + **箭头选项 - Arrow Option**
+```C++
+// The ARR option shows the gradient between adjacent cells.
+1.For each cell (i,j) an arrow is drawn.
+2.The orientation of the arrow follows the cell gradient.
+```
+
++ **BOX Option**
+```C++
+1.For each cell (i,j) a box is drawn with surface proportional to contents.
+2.The size of the box is proportional to the absolute value of the cell contents.
+3.The cellls with negative contents are drawn with an X on top of the boxes.
+4.With option `BOX1` a button is drawn for each cell with surface proportional to contents absolute value.
+5.A sunken button is drawn for negative values, a raised one for positive values.
+```
+
+
 + **SPEC 选项**
+```C++
+// SPEC 选项用于 2D 直方图的可视化
+// 可以使用 "SPEC" 关键字下的 “operators” 来进行设置 
+// 常用的 "operators"
+"a"    // angle, h2->Draw("SPEC a(30,30,0)");
+"dm"   // h2->Draw("SPEC dm(1,2)");
+"pa"   // pen attributes, h2->Draw("SPEC dm(1,2) pa(2,1,2)");
+"n"    // nodes, h2->Draw("SPEC n(40,40)");
+...
+```
+
+
 + **Miscellaneous 操作**
 + **Alphanumeric Bin Labels**
 
@@ -1197,6 +1535,17 @@ TH1D h4=(*h1) * (*h2);
 
 
 // TH1 自带的 Add(), Multiply, Divide() 函数可以直接使用
+TH1D *h3 = new TH1D("h3","h1+h2",nbin,xmin,xmax);
+h3->Add(h1,h2);        // h1 + h2
+h3->Add(h1,h2,1.,-1.)  // h1 - h2
+
+TH1D *h3 = new TH1D("h3","h1/h2",nbin,xmin,xmax);
+h3->Divide(h1,h2);
+h3->Divide(h1,h2,1.,1.,"B"); 
+// if h1 is a subset of h2, the content of h3 is binomially distributed
+// use option "B" to get the correct bin errors
+ 
+
 ```
 
 
@@ -1241,6 +1590,20 @@ h2d->TProfileY();
 
 #### <font color=#FF00FF> 2.1.8 TH2, TH3 </font>
 
++ **Drawing a Sub-range of a 2-D Histogram**
+```C++
+// 使用 TCutG 方法
+// cut 的使用： 使用 "[" 和 "]"
+// "[...]" 最多可以使用 16 个 cut
+// 参考代码：$ROOTSYS/tutorials/fit/fit2a.C
+
+myhist->Draw("surf1 [cutg]");
+
+h1->Draw("lego");
+h2->Draw("[cut1,-cut2],surf,same"); 
+// "surf" for all the bis inside cut1, and all the bins outside cut2
+```
+
 #### <font color=#FF00FF> 2.1.9 直方图用户图形界面(略)  </font>
 
 
@@ -1251,7 +1614,7 @@ h2d->TProfileY();
 
 
 
--------------------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 2.2 Graphs 画图  </font>
 
 > 常用的 graph 类有: TGraph, TGraphErrors, TGraphAsymmErrors, TMuiltiGraph, TGraph2D
@@ -1487,10 +1850,9 @@ root[] gr5->Draw("ALP")
 ```
 
 
--------------------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 2.3 Fitting 拟合  </font>
 
-> [Link-to-Root-User's-Guide](https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#fitting-histograms)
 
 ```C++
  gStyle->SetOptFit(kTRUE);           // 显示拟合参数
@@ -1641,12 +2003,12 @@ func->FixParameter();    // 固定某个参数
 
 
 
------------------------------------------------------
+&emsp;
 ### <font color=#00BFFF> 2.4 Trees 树  </font>
 
 
 
------------------------------------------------------------
+&emsp;
 # <font color=#DC143C> 三. ROOT 提高篇 </font>
 
 ### <font color=#00BFFF> 3.1 Folders and Tasks  </font>

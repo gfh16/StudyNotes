@@ -371,10 +371,13 @@ ROOT&#x7684;&#x5B66;&#x4E60;&#x4E0D;&#x662F;&#x4E00;&#x671D;&#x4E00;&#x5915;&#x7
 <ul>
 <li><a href="#font-colorff00ff-211-%E7%9B%B4%E6%96%B9%E5%9B%BE%E6%A6%82%E8%BF%B0-font"> 2.1.1 &#x76F4;&#x65B9;&#x56FE;&#x6982;&#x8FF0; </a></li>
 <li><a href="#font-colorff00ff-212-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%88%9B%E5%BB%BA-%E5%A1%AB%E5%85%85-%E7%94%BB%E5%9B%BE-%E4%BF%9D%E5%AD%98-font"> 2.1.2 &#x76F4;&#x65B9;&#x56FE;&#x521B;&#x5EFA;-&#x586B;&#x5145;-&#x753B;&#x56FE;-&#x4FDD;&#x5B58; </a></li>
-<li><a href="#font-colorff00ff-213-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%93%8D%E4%BD%9C-font"> 2.1.3 &#x76F4;&#x65B9;&#x56FE;&#x7684;&#x64CD;&#x4F5C; </a></li>
-<li><a href="#font-colorff00ff-214-thstack-font"> 2.1.4 THStack </a></li>
-<li><a href="#font-colorff00ff-215-th2-th3-font"> 2.1.5 TH2, TH3 </a></li>
-<li><a href="#font-colorff00ff-215-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD%E4%B8%8E%E8%AE%BE%E7%BD%AE-font"> 2.1.5 &#x76F4;&#x65B9;&#x56FE;&#x5176;&#x4ED6;&#x529F;&#x80FD;&#x4E0E;&#x8BBE;&#x7F6E;  </a></li>
+<li><a href="#font-colorff00ff-213-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%94%BB%E5%9B%BE%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE-font"> 2.1.3 &#x76F4;&#x65B9;&#x56FE;&#x753B;&#x56FE;&#x5E38;&#x7528;&#x8BBE;&#x7F6E; </a></li>
+<li><a href="#font-colorff00ff-214-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE-font"> 2.1.4 &#x76F4;&#x65B9;&#x56FE;&#x5176;&#x4ED6;&#x8BBE;&#x7F6E;  </a></li>
+<li><a href="#font-colorff00ff-215-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%93%8D%E4%BD%9C-font"> 2.1.5 &#x76F4;&#x65B9;&#x56FE;&#x7684;&#x64CD;&#x4F5C; </a></li>
+<li><a href="#font-colorff00ff-216-thstack-font"> 2.1.6 THStack </a></li>
+<li><a href="#font-colorff00ff-217-tprofile-font"> 2.1.7 TProfile </a></li>
+<li><a href="#font-colorff00ff-218-th2-th3-font"> 2.1.8 TH2, TH3 </a></li>
+<li><a href="#font-colorff00ff-219-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%94%A8%E6%88%B7%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E7%95%A5-font"> 2.1.9 &#x76F4;&#x65B9;&#x56FE;&#x7528;&#x6237;&#x56FE;&#x5F62;&#x754C;&#x9762;(&#x7565;)  </a></li>
 </ul>
 </li>
 <li><a href="#font-color00bfff-22-graphs-%E7%94%BB%E5%9B%BE-font"> 2.2 Graphs &#x753B;&#x56FE;  </a>
@@ -1366,7 +1369,7 @@ Double_t Yellow  <span class="token operator">=</span> <span class="token punctu
 <p>&#x2003;</p>
 <h3 class="mume-header" id="font-color00bfff-19-inputoutput-font"><font color="#00BFFF"> 1.9 Input/Output  </font></h3>
 
-<hr>
+<p>&#x2003;</p>
 <h1 class="mume-header" id="font-colordc143c-%E4%BA%8C-root-%E5%8A%9F%E8%83%BD%E7%AF%87-font"><font color="#DC143C"> &#x4E8C;. ROOT &#x529F;&#x80FD;&#x7BC7; </font></h1>
 
 <h3 class="mume-header" id="font-color00bfff-21-histograms-%E7%9B%B4%E6%96%B9%E5%9B%BE-font"><font color="#00BFFF"> 2.1 Histograms &#x76F4;&#x65B9;&#x56FE;  </font></h3>
@@ -1405,75 +1408,428 @@ TH1I<span class="token operator">*</span> h1 <span class="token operator">=</spa
 TH2F<span class="token operator">*</span> h2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TH2F</span><span class="token punctuation">(</span><span class="token string">&quot;h2&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;h2 title&quot;</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token punctuation">,</span><span class="token number">0.0</span><span class="token punctuation">,</span><span class="token number">2.0</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1.5</span><span class="token punctuation">,</span><span class="token number">3.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 TH1D<span class="token operator">*</span> h3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TH3D</span><span class="token punctuation">(</span><span class="token string">&quot;h3&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;h3 title&quot;</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">0.0</span><span class="token punctuation">,</span><span class="token number">1.0</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2.0</span><span class="token punctuation">,</span><span class="token number">2.0</span><span class="token punctuation">,</span><span class="token number">50</span><span class="token punctuation">,</span><span class="token number">0.0</span><span class="token punctuation">,</span><span class="token number">3.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+
 <span class="token comment">// &#x65B9;&#x6CD5;2&#xFF1A;&#x514B;&#x9686;&#x4E00;&#x4E2A;&#x5DF2;&#x77E5;&#x76F4;&#x65B9;&#x56FE;</span>
 TH1<span class="token operator">*</span> hc <span class="token operator">=</span> <span class="token punctuation">(</span>TH1<span class="token operator">*</span><span class="token punctuation">)</span>h1<span class="token operator">-&gt;</span><span class="token function">Clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 
 <span class="token comment">// &#x65B9;&#x6CD5;3&#xFF1A;2-D &#x6216; 3-D &#x76F4;&#x65B9;&#x56FE;&#x4F5C;&#x6295;&#x5F71;</span>
 TH1<span class="token operator">*</span> hx <span class="token operator">=</span> h2<span class="token operator">-&gt;</span><span class="token function">ProjectionX</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x6295;&#x5F71;&#x5F97;&#x5230;&#x7684;&#x76F4;&#x65B9;&#x56FE;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x662F; TH1D</span>
 TH1<span class="token operator">*</span> hy <span class="token operator">=</span> h2<span class="token operator">-&gt;</span><span class="token function">ProjectionY</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x6295;&#x5F71;&#x5F97;&#x5230;&#x7684;&#x76F4;&#x65B9;&#x56FE;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x662F; TH1D</span>
 
+
 <span class="token comment">// &#x65B9;&#x6CD5;4&#xFF1A;&#x4ECE;&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6;&#x76F4;&#x65B9;&#x56FE; </span>
+TFile<span class="token operator">*</span> filein <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TFile</span><span class="token punctuation">(</span><span class="token string">&quot;histo.root&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+TH1F<span class="token operator">*</span> h1 <span class="token operator">=</span> <span class="token punctuation">(</span>TH1F<span class="token operator">*</span><span class="token punctuation">)</span>filein<span class="token operator">-&gt;</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">&quot;ObjectName&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+TF1F<span class="token operator">*</span> h1 <span class="token operator">=</span> <span class="token punctuation">(</span>TH1F<span class="token operator">*</span><span class="token punctuation">)</span>gROOT<span class="token operator">-&gt;</span><span class="token function">FindObject</span><span class="token punctuation">(</span><span class="token string">&quot;ObjectName&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//&#x5728;ROOT&#x73AF;&#x5883;&#x4E0B;&#x4F7F;&#x7528;</span>
 </pre><ul>
 <li><strong>Bin &#x7684;&#x8BBE;&#x7F6E;</strong></li>
 </ul>
 <pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token number">1.</span> Bin with &#x53EF;&#x4EE5;&#x662F;&#x5E38;&#x6570;<span class="token punctuation">,</span> &#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x6570;&#x7EC4;
 <span class="token comment">// &#x56FA;&#x5B9A; bin &#x5BBD; </span>
 <span class="token comment">// X &#x533A;&#x95F4;[0.0, 4.0]&#x88AB;&#x5206;&#x6210; 100 &#x4E2A;bin, &#x6BCF;&#x4E2A; bin &#x5BBD;&#x5EA6;&#x4E3A;(4.0-0.0)/100=0.04</span>
+<span class="token comment">// bin &#x533A;&#x95F4;&#x4E2A;&#x6570;&#x5FC5;&#x987B;&#x662F;&#x6574;&#x6570;, (4.0-0.0)/100 &#x8868;&#x793A;&#x7CBE;&#x5EA6;&#xFF01;</span>
 TH2<span class="token operator">*</span> h <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TH2D</span><span class="token punctuation">(</span>
    <span class="token comment">/* name  */</span>  <span class="token string">&quot;h2&quot;</span><span class="token punctuation">,</span>
    <span class="token comment">/* title */</span>  <span class="token string">&quot;Hist with constant bin width&quot;</span><span class="token punctuation">,</span>
    <span class="token comment">/* X-dimension */</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">4.0</span><span class="token punctuation">,</span>
    <span class="token comment">/* Y-dimension */</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3.5</span><span class="token punctuation">,</span> <span class="token number">1.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// &#x53EF;&#x53D8; bin &#x5BBD;</span>
+
+<span class="token number">2.</span> &#x53EF;&#x53D8; bin &#x5BBD;
 <span class="token comment">// &#x5982;&#x679C;&#x76F4;&#x65B9;&#x56FE;&#x6709; n &#x4E2A; bin &#x533A;&#x95F4;, &#x5219;&#x5171;&#x6709; n+1 &#x4E2A;&#x8FB9;&#x754C;</span>
 <span class="token comment">// &#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x65F6;, &#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x5FC5;&#x987B;&#x4E3A; n+1</span>
 <span class="token comment">// bin &#x533A;&#x95F4;&#x7684;&#x8FB9;&#x754C;&#x901A;&#x5E38;&#x4F7F;&#x7528; double &#x7C7B;&#x578B;</span>
+<span class="token keyword">const</span> Int_t NBINS <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+Double_t edges<span class="token punctuation">[</span>NBINS <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">,</span> <span class="token number">0.6</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// Bin 1 corresponds to range [0.0, 0.2]</span>
+<span class="token comment">// Bin 2 corresponds to range [0.2, 0.3] etc...</span>
+
+TH1<span class="token operator">*</span> h <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TH1D</span><span class="token punctuation">(</span>
+   <span class="token comment">/* name */</span> <span class="token string">&quot;h1&quot;</span><span class="token punctuation">,</span>
+   <span class="token comment">/* title */</span> <span class="token string">&quot;Hist with variable bin width&quot;</span><span class="token punctuation">,</span>
+   <span class="token comment">/* number of bins */</span> NBINS<span class="token punctuation">,</span>
+   <span class="token comment">/* edge array */</span> edges
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token number">3.</span>Re<span class="token operator">-</span>binning 
+<span class="token comment">// &#x4F7F;&#x7528; TH1::Rebin()&#x65B9;&#x6CD5;</span>
+<span class="token comment">// rebin &#x53EA;&#x80FD;&#x5C06; bin &#x533A;&#x95F4;&#x8D8A;&#x5206;&#x8D8A;&#x5BBD;.</span>
+<span class="token comment">// &#x5982;: &#x539F;&#x6765; bin=100, h1-&gt;Rebin(2), &#x5219; bin=50</span>
+h1<span class="token operator">-&gt;</span><span class="token function">Rebin</span><span class="token punctuation">(</span>Int_t n<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// n &#x4E3A;&#x6574;&#x6570;, &#x5B9E;&#x9645;&#x6709;&#x6548;&#x7684; rebin &#x5E94;&#x8BE5;&#x662F; n &gt;= 2</span>
 </pre><ul>
-<li>
-<p><strong>&#x586B;&#x5145;&#x76F4;&#x65B9;&#x56FE;</strong></p>
-</li>
-<li>
-<p><strong>&#x753B;&#x76F4;&#x65B9;&#x56FE;</strong></p>
-</li>
-<li>
-<p><strong>&#x4FDD;&#x5B58;&#x76F4;&#x65B9;&#x56FE;</strong></p>
-</li>
+<li><strong>&#x586B;&#x5145;&#x76F4;&#x65B9;&#x56FE;</strong></li>
 </ul>
-<h4 class="mume-header" id="font-colorff00ff-213-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%93%8D%E4%BD%9C-font"><font color="#FF00FF"> 2.1.3 &#x76F4;&#x65B9;&#x56FE;&#x7684;&#x64CD;&#x4F5C; </font></h4>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token number">1.</span> <span class="token function">Fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> &#x65B9;&#x6CD5;
+<span class="token comment">// &#x586B;&#x5145;&#x601D;&#x8DEF;: &#x4F8B;&#x5982;&#xFF0C;&#x7ED9;&#x5B9A; x &#x503C;, &#x5148;&#x8BA1;&#x7B97;&#x8BE5; x &#x503C;&#x5728;&#x90A3;&#x4E2A; bin &#x533A;&#x95F4;&#x5185;,</span>
+<span class="token comment">// &#x7136;&#x540E;&#x5728;&#x8BE5; bin &#x533A;&#x95F4;&#x5185;&#x8BA1;&#x6570; +1 &#x6216; &#x6839;&#x636E;&#x6743;&#x91CD;&#x589E;&#x52A0; </span>
+h1<span class="token operator">-&gt;</span><span class="token function">Fill</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+h1<span class="token operator">-&gt;</span><span class="token function">Fill</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// with weight</span>
+h2<span class="token operator">-&gt;</span><span class="token function">Fill</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+h2<span class="token operator">-&gt;</span><span class="token function">Fill</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+h3<span class="token operator">-&gt;</span><span class="token function">Fill</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+h3<span class="token operator">-&gt;</span><span class="token function">Fill</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h4 class="mume-header" id="font-colorff00ff-214-thstack-font"><font color="#FF00FF"> 2.1.4 THStack </font></h4>
 
-<h4 class="mume-header" id="font-colorff00ff-215-th2-th3-font"><font color="#FF00FF"> 2.1.5 TH2, TH3 </font></h4>
+<span class="token number">2.</span><span class="token function">AddBinContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> &#x65B9;&#x6CD5;
+<span class="token comment">//   &#x76F4;&#x63A5;&#x5728;&#x67D0;&#x4E2A; bin &#x4E0A; +1 &#x6216; &#x6839;&#x636E;&#x6743;&#x91CD;&#x589E;&#x52A0;</span>
+h1<span class="token operator">-&gt;</span><span class="token function">AddBinContent</span><span class="token punctuation">(</span>Int_t bin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+h1<span class="token operator">-&gt;</span><span class="token function">AddBinContent</span><span class="token punctuation">(</span>Int_t bin<span class="token punctuation">,</span> Double_t weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h4 class="mume-header" id="font-colorff00ff-215-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD%E4%B8%8E%E8%AE%BE%E7%BD%AE-font"><font color="#FF00FF"> 2.1.5 &#x76F4;&#x65B9;&#x56FE;&#x5176;&#x4ED6;&#x529F;&#x80FD;&#x4E0E;&#x8BBE;&#x7F6E;  </font></h4>
+
+<span class="token number">3.</span><span class="token function">SetBinContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//   replace the existing bin content</span>
+h1<span class="token operator">-&gt;</span><span class="token function">SetBinContent</span><span class="token punctuation">(</span>Int_t bin<span class="token punctuation">,</span> Double_t content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x53EF;&#x4EE5;&#x901A;&#x8FC7; GetBinContent() &#x8BFB;&#x53D6;&#x6BCF;&#x4E2A; bin &#x533A;&#x95F4;&#x5185;&#x7684;&#x8BA1;&#x6570;</span>
+<span class="token comment">// &#x867D;&#x7136; bin content &#x662F; double &#x578B;, &#x5F53;&#x5B9E;&#x9645;&#x5F80;&#x5F80;&#x662F;&#x6574;&#x6570;</span>
+Double_t bincontent <span class="token operator">=</span> h1<span class="token operator">-&gt;</span><span class="token function">GetBinContent</span><span class="token punctuation">(</span>bin<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// get the Y value of bin </span>
+
+
+<span class="token number">4.</span>&#x968F;&#x673A;&#x6570;&#x65B9;&#x6CD5;
+<span class="token comment">// &#x4F7F;&#x7528; root &#x5DF2;&#x6709;&#x7684;&#x968F;&#x673A;&#x6570;&#x5206;&#x5E03;</span>
+TH1D<span class="token operator">*</span> h1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TH1D</span><span class="token punctuation">(</span><span class="token string">&quot;h1&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Histo from a Gaussian&quot;</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+h1<span class="token operator">-&gt;</span><span class="token function">FillRandom</span><span class="token punctuation">(</span><span class="token string">&quot;gaus&quot;</span><span class="token punctuation">,</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x9ED8;&#x8BA4;&#x7684; gaus &#x5206;&#x5E03; mean=0, sigma=1</span>
+                             
+<span class="token comment">// &#x4ECE;&#x5DF2;&#x6709;&#x7684; histogram &#x751F;&#x6210;&#x968F;&#x673A;&#x6570;</span>
+TH1D<span class="token operator">*</span> h2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TH1D</span><span class="token punctuation">(</span><span class="token string">&quot;h2&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Histo from a existing histo&quot;</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+h2<span class="token operator">-&gt;</span><span class="token function">FillRandom</span><span class="token punctuation">(</span>h1<span class="token punctuation">,</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// TH1::GetRandomm() </span>
+<span class="token comment">// used to get a random number distributed according to</span>
+<span class="token comment">// the contents of a histogram</span>
+<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> generate a random number between <span class="token number">0</span> <span class="token operator">and</span> <span class="token function">1</span> <span class="token punctuation">(</span>&#x8BB0;&#x4E3A; r1<span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> Find the bin in the normalized integral <span class="token keyword">for</span> <span class="token function">r1</span>
+<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> Fill histogram channel 
+</pre><ul>
+<li><strong>Drawing&#x76F4;&#x65B9;&#x56FE;</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// Draw Options &#x8BF7;&#x89C1; 2.1.3 &#x76F4;&#x65B9;&#x56FE;&#x753B;&#x56FE;&#x5E38;&#x7528;&#x8BBE;&#x7F6E;</span>
+
+<span class="token comment">// 1.TH1::Draw</span>
+<span class="token comment">// 2.TH1::DrawClone()</span>
+<span class="token comment">// 3.TH1::DrawNormalized()</span>
+</pre><ul>
+<li><strong>&#x4FDD;&#x5B58;&#x76F4;&#x65B9;&#x56FE;</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// &#x5148;&#x5199;&#x5165; .root file, &#x5728;&#x4FDD;&#x5B58;</span>
+<span class="token comment">// 1.&#x5148;&#x521B;&#x5EFA; .root &#x6587;&#x4EF6;</span>
+<span class="token comment">// 2.&#x521B;&#x5EFA;&#x3001;&#x586B;&#x5145;&#x76F4;&#x65B9;&#x56FE;</span>
+<span class="token comment">// 3.&#x5C06;&#x76F4;&#x65B9;&#x56FE;&#x5199;&#x5165; .root &#x6587;&#x4EF6;</span>
+
+TFile<span class="token operator">*</span> <span class="token function">fileout</span><span class="token punctuation">(</span><span class="token string">&quot;/&#x8DEF;&#x5F84;/hist.root&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;new&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+TH1D<span class="token operator">*</span> h1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TH1D</span><span class="token punctuation">(</span><span class="token string">&quot;hgaus&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;hist from a gaussian&quot;</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+h1<span class="token operator">-&gt;</span><span class="token function">FillRandom</span><span class="token punctuation">(</span><span class="token string">&quot;gaus&quot;</span><span class="token punctuation">,</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// &#x586B;&#x5145;&#x76F4;&#x65B9;&#x56FE;</span>
+h1<span class="token operator">-&gt;</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// &#x5199;&#x5165;&#x76F4;&#x65B9;&#x56FE;</span>
+</pre><h4 class="mume-header" id="font-colorff00ff-213-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%94%BB%E5%9B%BE%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE-font"><font color="#FF00FF"> 2.1.3 &#x76F4;&#x65B9;&#x56FE;&#x753B;&#x56FE;&#x5E38;&#x7528;&#x8BBE;&#x7F6E; </font></h4>
 
 <ul>
-<li>&#x4ECE;&#x5DF2;&#x6709;root&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6;histogram</li>
+<li><strong>&#x753B;&#x56FE;&#x9009;&#x9879; - Draw Options</strong></li>
 </ul>
-<pre data-role="codeBlock" data-info="C++" class="language-cpp"> TFile <span class="token operator">*</span> in <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TFile</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- TH1F  <span class="token operator">*</span> h1 <span class="token operator">=</span> <span class="token punctuation">(</span>TH1F<span class="token operator">*</span><span class="token punctuation">)</span>in<span class="token operator">-&gt;</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">&quot;ObjectName&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- TF1F  <span class="token operator">*</span> h1 <span class="token operator">=</span> <span class="token punctuation">(</span>TH1F<span class="token operator">*</span><span class="token punctuation">)</span>gROOT<span class="token operator">-&gt;</span><span class="token function">FindObject</span><span class="token punctuation">(</span><span class="token string">&quot;ObjectName&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//&#x5728;ROOT&#x73AF;&#x5883;&#x4E0B;&#x4F7F;&#x7528;</span>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// draw options &#x5BF9;&#x5927;&#x5C0F;&#x5199;&#x4E0D;&#x654F;&#x611F;&#xFF01;</span>
+<span class="token comment">// &#x4E0B;&#x9762;&#x7684; draw option &#x9002;&#x7528;&#x4E8E;&#x6240;&#x6709;&#x7684;&#x76F4;&#x65B9;&#x56FE;</span>
+
+<span class="token string">&quot;AXIS&quot;</span><span class="token operator">:</span> Draw only the axis<span class="token punctuation">.</span>
+
+<span class="token string">&quot;HIST&quot;</span><span class="token operator">:</span> When a histogram has errors<span class="token punctuation">,</span> it is visualized by <span class="token keyword">default</span>
+   with error bars<span class="token punctuation">.</span> To visualize it without errors use `HIST`
+   together with the required <span class="token function">option</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>g<span class="token punctuation">.</span> <span class="token string">&quot;`HIST SAME C`&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+<span class="token string">&quot;SAME&quot;</span><span class="token operator">:</span> Superimpose on previous picture in the same pad<span class="token punctuation">.</span>
+
+<span class="token string">&quot;CYL&quot;</span><span class="token operator">:</span> Use cylindrical coordinates<span class="token punctuation">.</span>
+
+<span class="token string">&quot;POL&quot;</span><span class="token operator">:</span> Use polar coordinates<span class="token punctuation">.</span>
+
+<span class="token string">&quot;SPH&quot;</span><span class="token operator">:</span> Use spherical coordinates<span class="token punctuation">.</span>
+
+<span class="token string">&quot;PSR&quot;</span><span class="token operator">:</span> Use pseudo<span class="token operator">-</span>rapidity<span class="token operator">/</span>phi coordinates<span class="token punctuation">.</span>
+
+<span class="token string">&quot;LEGO&quot;</span><span class="token operator">:</span> Draw a lego plot with hidden line removal<span class="token punctuation">.</span>
+
+<span class="token string">&quot;LEGO1&quot;</span><span class="token operator">:</span> Draw a lego plot with hidden surface removal<span class="token punctuation">.</span>
+
+<span class="token string">&quot;LEGO2&quot;</span><span class="token operator">:</span> Draw a lego plot <span class="token keyword">using</span> colors to show the cell contents<span class="token punctuation">.</span>
+
+<span class="token string">&quot;SURF&quot;</span><span class="token operator">:</span> Draw a surface plot with hidden line removal<span class="token punctuation">.</span>
+
+<span class="token string">&quot;SURF1&quot;</span><span class="token operator">:</span> Draw a surface plot with hidden surface removal<span class="token punctuation">.</span>
+
+<span class="token string">&quot;SURF2&quot;</span><span class="token operator">:</span> Draw a surface plot <span class="token keyword">using</span> colors to show the cell contents<span class="token punctuation">.</span>
+
+<span class="token string">&quot;SURF3&quot;</span><span class="token operator">:</span> Same as `SURF` with a contour view on the top<span class="token punctuation">.</span>
+
+<span class="token string">&quot;SURF4&quot;</span><span class="token operator">:</span> Draw a surface plot <span class="token keyword">using</span> `Gouraud` shading<span class="token punctuation">.</span>
+
+<span class="token string">&quot;SURF5&quot;</span><span class="token operator">:</span> Same as `SURF3` but only the colored contour is drawn<span class="token punctuation">.</span>
+    Used with option `CYL` <span class="token punctuation">,</span> `SPH` <span class="token operator">or</span> `PSR` it allows to draw colored
+    contours on a sphere<span class="token punctuation">,</span> a cylinder <span class="token operator">or</span> in a pseudo rapidly space<span class="token punctuation">.</span> In
+    Cartesian <span class="token operator">or</span> polar coordinates<span class="token punctuation">,</span> option `SURF3` is used<span class="token punctuation">.</span>
+
+
+<span class="token comment">// &#x4E0B;&#x9762;&#x7684; draw option &#x4EC5;&#x9002;&#x7528;&#x4E8E; 1D &#x76F4;&#x65B9;&#x56FE;</span>
+
+<span class="token string">&quot;AH&quot;</span><span class="token operator">:</span> Draw the histogram<span class="token punctuation">,</span> but <span class="token operator">not</span> the axis labels <span class="token operator">and</span> tick marks
+
+<span class="token string">&quot;B&quot;</span><span class="token operator">:</span> Draw a bar chart
+
+<span class="token string">&quot;C&quot;</span><span class="token operator">:</span> Draw a smooth curve through the histogram bins
+
+<span class="token string">&quot;E&quot;</span><span class="token operator">:</span> Draw the error bars
+
+<span class="token string">&quot;E0&quot;</span><span class="token operator">:</span> Draw the error bars including bins with <span class="token number">0</span> contents
+
+<span class="token string">&quot;E1&quot;</span><span class="token operator">:</span> Draw the error bars with perpendicular lines at the edges
+
+<span class="token string">&quot;E2&quot;</span><span class="token operator">:</span> Draw the error bars with rectangles
+
+<span class="token string">&quot;E3&quot;</span><span class="token operator">:</span> Draw a fill area through the end points of the vertical
+            error bars
+
+<span class="token string">&quot;E4&quot;</span><span class="token operator">:</span> Draw a smoothed filled area through the end points of the error bars
+
+<span class="token string">&quot;L&quot;</span><span class="token operator">:</span> Draw a line through the bin contents
+
+<span class="token string">&quot;P&quot;</span><span class="token operator">:</span> Draw <span class="token function">a</span> <span class="token punctuation">(</span>poly<span class="token punctuation">)</span>marker at each bin <span class="token keyword">using</span> the histogram current marker style
+
+<span class="token string">&quot;P0&quot;</span><span class="token operator">:</span> Draw current marker at each bin including empty bins
+
+<span class="token string">&quot;PIE&quot;</span><span class="token operator">:</span> Draw a Pie Chart
+
+<span class="token string">&quot;*H&quot;</span><span class="token operator">:</span> Draw histogram with a  at each bin
+
+<span class="token string">&quot;LF2&quot;</span><span class="token operator">:</span> Draw histogram as with option <span class="token string">&quot;L&quot;</span> but with a fill
+    area<span class="token punctuation">.</span> Note that <span class="token string">&quot;L&quot;</span> also draws a fill area <span class="token keyword">if</span> the histogram fill
+    color is set but the fill area corresponds to the histogram
+    contour<span class="token punctuation">.</span>
+
+<span class="token string">&quot;9&quot;</span><span class="token operator">:</span> Force histogram to be drawn in high resolution mode<span class="token punctuation">.</span> By
+    <span class="token keyword">default</span><span class="token punctuation">,</span> the histogram is drawn in low resolution in <span class="token keyword">case</span> the
+    number of bins is greater than the number of pixels in the current
+    pad
+
+<span class="token string">&quot;][&quot;</span><span class="token operator">:</span> Draw histogram without the vertical lines <span class="token keyword">for</span> the first
+    <span class="token operator">and</span> the last bin<span class="token punctuation">.</span> Use it when superposing many histograms on the
+    same picture<span class="token punctuation">.</span>
+
+
+<span class="token comment">// &#x4E0B;&#x9762;&#x7684; draw option &#x4EC5;&#x9002;&#x7528;&#x4E8E; 2D &#x76F4;&#x65B9;&#x56FE;</span>
+
+<span class="token string">&quot;ARR&quot;</span><span class="token operator">:</span> Arrow mode<span class="token punctuation">.</span> Shows gradient between adjacent cells
+
+<span class="token string">&quot;BOX&quot;</span><span class="token operator">:</span> Draw a box <span class="token keyword">for</span> each cell with surface proportional to
+    contents
+
+<span class="token string">&quot;BOX1&quot;</span><span class="token operator">:</span> A sunken button is drawn <span class="token keyword">for</span> negative values<span class="token punctuation">,</span> a raised
+    one <span class="token keyword">for</span> positive values
+
+<span class="token string">&quot;COL&quot;</span><span class="token operator">:</span> Draw a box <span class="token keyword">for</span> each cell with a color scale varying with
+    contents
+
+<span class="token string">&quot;COLZ&quot;</span><span class="token operator">:</span> Same as <span class="token string">&quot;`COL`&quot;</span> with a drawn color palette
+
+<span class="token string">&quot;CONT&quot;</span><span class="token operator">:</span> Draw a contour <span class="token function">plot</span> <span class="token punctuation">(</span>same as `CONT0` <span class="token punctuation">)</span>
+
+<span class="token string">&quot;CONTZ&quot;</span><span class="token operator">:</span> Same as <span class="token string">&quot;`CONT`&quot;</span> with a drawn color palette
+
+<span class="token string">&quot;CONT0&quot;</span><span class="token operator">:</span> Draw a contour plot <span class="token keyword">using</span> surface colors to distinguish contours
+
+<span class="token string">&quot;CONT1&quot;</span><span class="token operator">:</span> Draw a contour plot <span class="token keyword">using</span> line styles to distinguish contours
+
+<span class="token string">&quot;CONT2&quot;</span><span class="token operator">:</span> Draw a contour plot <span class="token keyword">using</span> the same line style <span class="token keyword">for</span> all contours
+
+<span class="token string">&quot;CONT3&quot;</span><span class="token operator">:</span> Draw a contour plot <span class="token keyword">using</span> fill area colors
+
+<span class="token string">&quot;CONT4&quot;</span><span class="token operator">:</span> Draw a contour plot <span class="token keyword">using</span> surface <span class="token function">colors</span>
+    <span class="token punctuation">(</span>`SURF2` option at theta <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token string">&quot;CONT5&quot;</span><span class="token operator">:</span> Use Delaunay triangles to compute the contours
+
+<span class="token string">&quot;LIST&quot;</span><span class="token operator">:</span> Generate a list of <span class="token operator">*</span><span class="token operator">*</span>`TGraph`<span class="token operator">*</span><span class="token operator">*</span> objects <span class="token keyword">for</span> each contour
+
+<span class="token string">&quot;FB&quot;</span><span class="token operator">:</span> To be used with `LEGO` <span class="token operator">or</span> `SURFACE` <span class="token punctuation">,</span> suppress the
+    Front<span class="token operator">-</span>Box
+
+<span class="token string">&quot;BB&quot;</span><span class="token operator">:</span> To be used with `LEGO` <span class="token operator">or</span> `SURFACE` <span class="token punctuation">,</span> suppress the
+    Back<span class="token operator">-</span>Box
+
+<span class="token string">&quot;A&quot;</span><span class="token operator">:</span> To be used with `LEGO` <span class="token operator">or</span> `SURFACE` <span class="token punctuation">,</span> suppress the axis
+
+<span class="token string">&quot;SCAT&quot;</span><span class="token operator">:</span> Draw a scatter<span class="token operator">-</span><span class="token function">plot</span> <span class="token punctuation">(</span><span class="token keyword">default</span><span class="token punctuation">)</span>
+
+<span class="token string">&quot;SPEC&quot;</span><span class="token operator">:</span> Use <span class="token operator">*</span><span class="token operator">*</span>`TSpectrum2Painter`<span class="token operator">*</span><span class="token operator">*</span> tool <span class="token keyword">for</span> drawing
+
+<span class="token string">&quot;TEXT&quot;</span><span class="token operator">:</span> Draw bin contents as <span class="token function">text</span>
+    <span class="token punctuation">(</span>format set via `gStyle<span class="token operator">-&gt;</span>SetPaintTextFormat<span class="token punctuation">)</span>` <span class="token punctuation">.</span>
+
+<span class="token string">&quot;TEXTnn&quot;</span><span class="token operator">:</span> Draw bin contents as text at angle `nn` <span class="token punctuation">(</span> `<span class="token number">0</span><span class="token operator">&lt;</span>nn<span class="token operator">&lt;</span><span class="token number">90</span>` <span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+<span class="token string">&quot;[cutg]&quot;</span><span class="token operator">:</span> Draw only the sub<span class="token operator">-</span>range selected by the <span class="token operator">*</span><span class="token operator">*</span>`TCutG`<span class="token operator">*</span><span class="token operator">*</span>
+    name <span class="token string">&quot;`cutg`&quot;</span><span class="token punctuation">.</span>
+
+<span class="token string">&quot;Z&quot;</span><span class="token operator">:</span> The <span class="token string">&quot;Z&quot;</span> option can be specified with the options<span class="token operator">:</span> `BOX`<span class="token punctuation">,</span>
+    `COL`<span class="token punctuation">,</span> `CONT`<span class="token punctuation">,</span> `SURF`<span class="token punctuation">,</span> <span class="token operator">and</span> `LEGO` to display the color palette
+    with an axis indicating the value of the corresponding color on
+    the right side of the picture<span class="token punctuation">.</span>
+
+
+<span class="token comment">// &#x4E0B;&#x9762;&#x7684; draw option &#x4EC5;&#x9002;&#x7528;&#x4E8E; 3D &#x76F4;&#x65B9;&#x56FE;</span>
+
+ <span class="token string">&quot; &quot;</span> <span class="token operator">:</span> Draw a <span class="token number">3</span>D scatter plot<span class="token punctuation">.</span>
+
+<span class="token string">&quot;`BOX`&quot;</span><span class="token operator">:</span> Draw a box <span class="token keyword">for</span> each cell with volume proportional to
+    contents
+
+<span class="token string">&quot;LEGO&quot;</span><span class="token operator">:</span> Same as <span class="token string">&quot;`BOX`&quot;</span>
+
+<span class="token string">&quot;ISO&quot;</span><span class="token operator">:</span> Draw an iso surface
+
+<span class="token string">&quot;FB&quot;</span><span class="token operator">:</span> Suppress the Front<span class="token operator">-</span>Box
+
+<span class="token string">&quot;BB&quot;</span><span class="token operator">:</span> Suppress the Back<span class="token operator">-</span>Box
+
+<span class="token string">&quot;A&quot;</span><span class="token operator">:</span> Suppress the axis
+
 </pre><ul>
-<li>&#x521B;&#x5EFA;&#x5E76;&#x4FDD;&#x5B58;root&#x6587;&#x4EF6;</li>
+<li>
+<p><strong>Statistics Display</strong></p>
+</li>
+<li>
+<p><strong>&#x5750;&#x6807;&#x8F74;-&#x6807;&#x9898;&#x7B49;&#x8BBE;&#x7F6E;</strong></p>
+</li>
+<li>
+<p><strong>&#x8BEF;&#x5DEE;&#x9009;&#x9879; - Error Bars Options</strong></p>
+</li>
 </ul>
-<pre data-role="codeBlock" data-info="C++" class="language-cpp">h1<span class="token operator">-&gt;</span><span class="token function">GetNbinsX</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// get the number of bins in X axis</span>
-h1<span class="token operator">-&gt;</span><span class="token function">GetBinCenter</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// get the center of bin NO.i</span>
-h1<span class="token operator">-&gt;</span><span class="token function">GetBinContent</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// get the Y value of bin NO.i</span>
-h1<span class="token operator">-&gt;</span><span class="token function">GetEntries</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// get the number of entry</span>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// gStyle-&gt;SetErrorX(dx); //to control the size of the error along x</span>
+<span class="token comment">// gStyle-&gt;SetEndErrorSize(np); //to control the size of the lines </span>
+<span class="token comment">//                                at the end of error bars </span>
+
+<span class="token string">&quot;E&quot;</span>  Default<span class="token punctuation">.</span> Draw only error bars<span class="token punctuation">,</span> without markers
+
+<span class="token string">&quot;E0&quot;</span> Draw also bins with <span class="token number">0</span> <span class="token function">contents</span> <span class="token punctuation">(</span>turn off the symbols clipping<span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+<span class="token string">&quot;E1&quot;</span> Draw small lines at the end of error bars
+
+<span class="token string">&quot;E2&quot;</span> Draw error rectangles
+
+<span class="token string">&quot;E3&quot;</span> Draw a fill area through the end points of vertical error bars
+
+<span class="token string">&quot;E4&quot;</span> Draw a smoothed filled area through the end points of error bars
+
 </pre><ul>
-<li>&#x76F4;&#x65B9;&#x56FE;&#x6709;&#x7528;&#x7684;&#x7528;&#x6CD5;</li>
+<li><strong>&#x989C;&#x8272;&#x9009;&#x9879; - Color Options</strong></li>
 </ul>
-<pre data-role="codeBlock" data-info="C++" class="language-cpp">TH1F <span class="token operator">*</span>hist <span class="token operator">=</span> <span class="token punctuation">(</span>TH1F<span class="token operator">*</span><span class="token punctuation">)</span>h1<span class="token operator">-&gt;</span><span class="token function">Clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// &#x514B;&#x9686;&#x4E00;&#x4E2A;&#x76F4;&#x65B9;&#x56FE;</span>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"></pre><ul>
+<li>
+<p><strong>&#x6587;&#x672C;&#x9009;&#x9879; - Text Options</strong></p>
+</li>
+<li>
+<p><strong>&#x7B49;&#x9AD8;&#x7EBF;&#x9009;&#x9879; - Contour Options</strong></p>
+</li>
+<li>
+<p><strong>LEGO&#x9009;&#x9879;</strong></p>
+</li>
+<li>
+<p><strong>Surfac&#x9009;&#x9879;</strong></p>
+</li>
+<li>
+<p><strong>Bar&#x9009;&#x9879;</strong></p>
+</li>
+</ul>
+<h4 class="mume-header" id="font-colorff00ff-214-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE-font"><font color="#FF00FF"> 2.1.4 &#x76F4;&#x65B9;&#x56FE;&#x5176;&#x4ED6;&#x8BBE;&#x7F6E;  </font></h4>
+
+<ul>
+<li><strong>&#x6563;&#x70B9;&#x56FE;&#x9009;&#x9879; - Scatter Plot Options</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;2D &#x76F4;&#x65B9;&#x56FE;&#x662F;&#x6563;&#x70B9;&#x56FE;</span>
+<span class="token number">1.F</span><span class="token operator">or</span> each <span class="token function">cell</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token punctuation">,</span> a number of points proportional to 
+  the cell content are drawn<span class="token punctuation">.</span>
+<span class="token number">2.</span>A maximum of <span class="token number">500</span> points per cell are drawn<span class="token punctuation">.</span>
+<span class="token number">3.</span>If the maximum is above <span class="token number">500</span> contents are normalized to <span class="token number">500.</span>
+</pre><ul>
+<li><strong>&#x7BAD;&#x5934;&#x9009;&#x9879; - Arrow Option</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// The ARR option shows the gradient between adjacent cells.</span>
+<span class="token number">1.F</span><span class="token operator">or</span> each <span class="token function">cell</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span> an arrow is drawn<span class="token punctuation">.</span>
+<span class="token number">2.</span>The orientation of the arrow follows the cell gradient<span class="token punctuation">.</span>
+</pre><ul>
+<li><strong>BOX Option</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token number">1.F</span><span class="token operator">or</span> each <span class="token function">cell</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span> a box is drawn with surface proportional to contents<span class="token punctuation">.</span>
+<span class="token number">2.</span>The size of the box is proportional to the absolute value of the cell contents<span class="token punctuation">.</span>
+<span class="token number">3.</span>The cellls with negative contents are drawn with an X on top of the boxes<span class="token punctuation">.</span>
+<span class="token number">4.</span>With option `BOX1` a button is drawn <span class="token keyword">for</span> each cell with surface proportional to contents absolute value<span class="token punctuation">.</span>
+<span class="token number">5.</span>A sunken button is drawn <span class="token keyword">for</span> negative values<span class="token punctuation">,</span> a raised one <span class="token keyword">for</span> positive values<span class="token punctuation">.</span>
+</pre><ul>
+<li><strong>SPEC &#x9009;&#x9879;</strong></li>
+<li><strong>Miscellaneous &#x64CD;&#x4F5C;</strong></li>
+<li><strong>Alphanumeric Bin Labels</strong></li>
+</ul>
+<h4 class="mume-header" id="font-colorff00ff-215-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E6%93%8D%E4%BD%9C-font"><font color="#FF00FF"> 2.1.5 &#x76F4;&#x65B9;&#x56FE;&#x7684;&#x64CD;&#x4F5C; </font></h4>
+
+<ul>
+<li><strong>&#x76F4;&#x65B9;&#x56FE;&#x7684;&#x8FD0;&#x7B97;</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// &#x76F4;&#x65B9;&#x56FE;&#x7684;&#x52A0;&#x6CD5;&#x3001;&#x4E58;&#x6CD5;&#x3001;&#x9664;&#x6CD5;</span>
+<span class="token comment">// &#x975E;&#x6307;&#x9488;&#x624D;&#x80FD;&#x8FDB;&#x884C;&#x8FD0;&#x7B97;, &#x56E0;&#x6B64;&#x8FD0;&#x7B97;&#x7684;&#x7ED3;&#x679C;&#x5FC5;&#x987B;&#x662F;&#x975E;&#x6307;&#x9488;</span>
+
+<span class="token comment">// &#x975E;&#x6307;&#x9488;&#x5F62;&#x5F0F;</span>
+TH1D h1<span class="token punctuation">;</span> TH1D h2<span class="token punctuation">;</span>
+TH1D h3 <span class="token operator">=</span> h1 <span class="token operator">+</span> h2<span class="token punctuation">;</span>
+h1<span class="token punctuation">.</span><span class="token function">Scale</span><span class="token punctuation">(</span><span class="token keyword">const</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// h1&#x6539;&#x53D8;, &#x4E58;&#x4EE5;&#x4E00;&#x4E2A;&#x5E38;&#x6570;</span>
+TH1D h3<span class="token operator">=</span><span class="token number">8</span><span class="token operator">*</span>h1<span class="token punctuation">;</span>     <span class="token comment">// &#x65B0;h3, h3=h1*&#x5E38;&#x6570;&#xFF0C; h3&#x5FC5;&#x987B;&#x662F;&#x975E;&#x6307;&#x9488;&#x5F62;&#x5F0F;</span>
+TH1D h4<span class="token operator">=</span>h1<span class="token operator">*</span>h2<span class="token punctuation">;</span>    <span class="token comment">// &#x4E24;&#x4E2A;&#x76F4;&#x65B9;&#x56FE;&#x76F8;&#x4E58;&#xFF0C; h4&#x5FC5;&#x987B;&#x662F;&#x975E;&#x6307;&#x9488;&#x5F62;&#x5F0F;</span>
+
+
+<span class="token comment">// &#x6307;&#x9488;&#x5F62;&#x5F0F;</span>
+TH1D<span class="token operator">*</span> h1<span class="token punctuation">;</span> TH1D<span class="token operator">*</span> h2<span class="token punctuation">;</span>
+h1<span class="token operator">-&gt;</span><span class="token function">Scale</span><span class="token punctuation">(</span><span class="token keyword">const</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+TH1D h3<span class="token operator">=</span><span class="token number">8</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">*</span>h1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+TH1D h4<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">*</span>h1<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">*</span>h2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">// TH1 &#x81EA;&#x5E26;&#x7684; Add(), Multiply, Divide() &#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;</span>
+</pre><ul>
+<li><strong>&#x76F4;&#x65B9;&#x56FE;&#x5F52;&#x4E00;&#x5316;</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp">Double_t scale <span class="token operator">=</span> norm<span class="token operator">/</span>h<span class="token operator">-&gt;</span><span class="token function">Intergral</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x5F52;&#x4E00;&#x5316;&#x5230; norm</span>
+h<span class="token operator">-&gt;</span><span class="token function">Scale</span><span class="token punctuation">(</span>scale<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x6216;&#x8005;&#x76F4;&#x63A5;&#x4F7F;&#x7528;</span>
 h<span class="token operator">-&gt;</span><span class="token function">Scale</span><span class="token punctuation">(</span><span class="token number">1.</span><span class="token operator">/</span>h<span class="token operator">-&gt;</span><span class="token function">Integral</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// &#x5F52;&#x4E00;&#x5316;</span>
 </pre><ul>
-<li>&#x76F4;&#x65B9;&#x56FE;&#x7684;&#x753B;&#x56FE;&#x6280;&#x5DE7;</li>
+<li><strong>&#x76F4;&#x65B9;&#x56FE;&#x514B;&#x9686;</strong></li>
 </ul>
-<pre data-role="codeBlock" data-info="C++" class="language-cpp">hs<span class="token operator">-&gt;</span><span class="token function">GetXaxis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">SetNdivisions</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">505</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// &#x8BBE;&#x7F6E;&#x5750;&#x6807;&#x503C;&#x5206;&#x5EA6;&#x503C;</span>
-h<span class="token operator">-&gt;</span><span class="token function">SetStats</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                        <span class="token comment">// &#x5173;&#x95ED;&#x76F4;&#x65B9;&#x56FE;&#x53F3;&#x4E0A;&#x65B9;&#x663E;&#x793A;&#x7684;box</span>
-h<span class="token operator">-&gt;</span><span class="token function">SetOptStat</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                      <span class="token comment">//</span>
-h<span class="token operator">-&gt;</span><span class="token function">GetListOfFunctions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">Add</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">;</span> h<span class="token operator">-&gt;</span><span class="token function">Draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Draw the histo with the fit function</span>
-</pre><hr>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp">TH1D<span class="token operator">*</span> hclone <span class="token operator">=</span> <span class="token punctuation">(</span>TH1D<span class="token operator">*</span><span class="token punctuation">)</span>h<span class="token operator">-&gt;</span><span class="token function">Clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+hclone<span class="token operator">-&gt;</span><span class="token function">SetName</span><span class="token punctuation">(</span><span class="token string">&quot;hclone&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x514B;&#x9686;&#x540E;&#xFF0C;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x91CD;&#x547D;&#x540D;&#xFF0C;&#x5426;&#x5219;&#x6709;&#x4E24;&#x4E2A;&#x76F4;&#x65B9;&#x56FE;&#x540C;&#x540D;</span>
+</pre><ul>
+<li><strong>&#x76F4;&#x65B9;&#x56FE;&#x6295;&#x5F71;</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token comment">// &#x5E38;&#x7528;&#x7684;&#x6295;&#x5F71;&#x65B9;&#x5F0F;&#x6709;: TProjection &#x4E0E; TProfile &#x4E24;&#x79CD;</span>
+<span class="token comment">// &#x4EE5; 2D histogram &#x4E3A;&#x4F8B;</span>
+TH2D<span class="token operator">*</span> h2d<span class="token punctuation">;</span>
+
+<span class="token comment">// 1. TProjection</span>
+h2d<span class="token operator">-&gt;</span><span class="token function">ProjectionX</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Projection &#x662F;&#x5355;&#x7EAF;&#x7684;&#x6295;&#x5F71;</span>
+h2d<span class="token operator">-&gt;</span><span class="token function">ProjectionY</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+<span class="token comment">// 2. TProfile</span>
+h2d<span class="token operator">-&gt;</span><span class="token function">TProfileX</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Profile &#x7684;&#x7EB5;&#x5750;&#x6807;&#x662F; h2d &#x4E2D; Y &#x7684;&#x5E73;&#x5747;&#x503C;</span>
+h2d<span class="token operator">-&gt;</span><span class="token function">TProfileY</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><ul>
+<li><strong>&#x76F4;&#x65B9;&#x56FE;&#x53E0;&#x52A0;</strong></li>
+</ul>
+<h4 class="mume-header" id="font-colorff00ff-216-thstack-font"><font color="#FF00FF"> 2.1.6 THStack </font></h4>
+
+<h4 class="mume-header" id="font-colorff00ff-217-tprofile-font"><font color="#FF00FF"> 2.1.7 TProfile </font></h4>
+
+<h4 class="mume-header" id="font-colorff00ff-218-th2-th3-font"><font color="#FF00FF"> 2.1.8 TH2, TH3 </font></h4>
+
+<h4 class="mume-header" id="font-colorff00ff-219-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%94%A8%E6%88%B7%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E7%95%A5-font"><font color="#FF00FF"> 2.1.9 &#x76F4;&#x65B9;&#x56FE;&#x7528;&#x6237;&#x56FE;&#x5F62;&#x754C;&#x9762;(&#x7565;)  </font></h4>
+
+<p>&#x2003;</p>
 <h3 class="mume-header" id="font-color00bfff-22-graphs-%E7%94%BB%E5%9B%BE-font"><font color="#00BFFF"> 2.2 Graphs &#x753B;&#x56FE;  </font></h3>
 
 <blockquote>
@@ -1675,12 +2031,9 @@ root<span class="token punctuation">[</span><span class="token punctuation">]</s
    gr<span class="token operator">-&gt;</span><span class="token function">SetMarkerStyle</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
    gr<span class="token operator">-&gt;</span><span class="token function">Draw</span><span class="token punctuation">(</span><span class="token string">&quot;LP&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// and draw it without an axis</span>
 <span class="token punctuation">}</span>
-</pre><hr>
+</pre><p>&#x2003;</p>
 <h3 class="mume-header" id="font-color00bfff-23-fitting-%E6%8B%9F%E5%90%88-font"><font color="#00BFFF"> 2.3 Fitting &#x62DF;&#x5408;  </font></h3>
 
-<blockquote>
-<p><a href="https://root.cern.ch/root/htmldoc/guides/users-guide/ROOTUsersGuide.html#fitting-histograms">Link-to-Root-User&apos;s-Guide</a></p>
-</blockquote>
 <pre data-role="codeBlock" data-info="C++" class="language-cpp"> gStyle<span class="token operator">-&gt;</span><span class="token function">SetOptFit</span><span class="token punctuation">(</span>kTRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// &#x663E;&#x793A;&#x62DF;&#x5408;&#x53C2;&#x6570;</span>
  hist<span class="token operator">-&gt;</span><span class="token function">Fit</span><span class="token punctuation">(</span><span class="token string">&quot;gaus&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;V&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;E1&quot;</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token comment">// Fit(&quot;function name&quot;,&quot;fit options&quot;,&quot;drawing options&quot;,fit limits) </span>
@@ -1814,10 +2167,10 @@ ROOT::Fit::UnBInData  used for fitting vectors of data points (e.g. from a TTree
 <strong>2.3.8.2 MINUIT2</strong></p>
 <h4 class="mume-header" id="font-colorff00ff-239-%E5%88%A9%E7%94%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E6%8B%9F%E5%90%88-font"><font color="#FF00FF"> 2.3.9 &#x5229;&#x7528;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x62DF;&#x5408; </font></h4>
 
-<hr>
+<p>&#x2003;</p>
 <h3 class="mume-header" id="font-color00bfff-24-trees-%E6%A0%91-font"><font color="#00BFFF"> 2.4 Trees &#x6811;  </font></h3>
 
-<hr>
+<p>&#x2003;</p>
 <h1 class="mume-header" id="font-colordc143c-%E4%B8%89-root-%E6%8F%90%E9%AB%98%E7%AF%87-font"><font color="#DC143C"> &#x4E09;. ROOT &#x63D0;&#x9AD8;&#x7BC7; </font></h1>
 
 <h3 class="mume-header" id="font-color00bfff-31-folders-and-tasks-font"><font color="#00BFFF"> 3.1 Folders and Tasks  </font></h3>
