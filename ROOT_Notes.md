@@ -674,13 +674,13 @@ axis->SetLabelColor();
 axis->SetLabelFont();
 axis->SetLabelOffset();
 axis->SetLabelSize();
-axis->SetNdivisions();  // 设置坐标轴刻度
+axis->SetNdivisions();  // 设置坐标轴分度值等
 axis->SetNoExponent();
-axis->SetTickLength();
-axis->SetTitleOffset();
-axis->SetTitleSize();
-axis->SetRange();   //设置坐标轴范围,设置 bin 值
-axis->SetRangeUser();  //设置坐标轴范围,设置坐标值
+axis->SetTickLength();  //设置刻度线的长度
+axis->SetTitleOffset(); //设置标题的偏置，主要用于对齐与好看
+axis->SetTitleSize();   //设置标题的字体大小
+axis->SetRange();       //设置坐标轴范围,设置 bin 值
+axis->SetRangeUser();   //设置坐标轴范围,设置坐标值
 ```
 
 **1.8.5.2 坐标轴刻度 -- TAxis::SetNdivisions()**
@@ -715,7 +715,21 @@ if `xmin = xmax`, then negative.
 chopt = '+': tick marks are drawn on Positive side. (Default)  
 chopt = '-': tick marks are drawn on the negative side.
 chopt = '+-': tick marks are drawn on both sides of the axis.
-chopt = ‘U': unlabeled axis, default is labeled.
+chopt = 'U': unlabeled axis, default is labeled.
+
+// 对于直方图，有如下的设置
+//设置坐标轴的刻度尺
+gPad->SetTickx(); // tickd marks on the other side of x axis are drawn
+h->Draw("X+");    // x axis is drawn on the top side
+h->Draw("Y+");    // y axis is drawn on the right side
+
+// TPad::SetTicks()
+h->SetTicks(tx,ty);
+  //tx=ty=0  by defalt, the left Y axis and X bottom axis are drawn 
+  //tx = 1   ticks marks on the top    (inside)
+  //tx = 2   ticks marks and labels on the top
+  //ty = 1   ticks marks on the right  (inside)
+  //ty = 2   ticks marks and labels on the right
 ```
 
 **1.8.5.6 坐标标记**
@@ -990,7 +1004,9 @@ Double_t Yellow  = (1-Blue-Black)/(1-Black);
 # <font color=#DC143C> 二. ROOT 功能篇 </font>
 
 ### <font color=#00BFFF> 2.1 Histograms 直方图  </font>
+>+ 关于直方图的使用
 
+&emsp;
 #### <font color=#FF00FF> 2.1.1 直方图概述 </font>
 + **2.1.1.1 直方图数据类型**
 ```C++
@@ -1039,6 +1055,8 @@ TF1F* h1 = (TH1F*)gROOT->FindObject("ObjectName"); //在ROOT环境下使用
 
 + **Bin 的设置**
 ```C++
+// bin 值是从 1 开始的, 而 bin = 0 没有意义
+
 1. Bin with 可以是常数, 也可以是数组
 // 固定 bin 宽 
 // X 区间[0.0, 4.0]被分成 100 个bin, 每个 bin 宽度为(4.0-0.0)/100=0.04
@@ -1198,6 +1216,7 @@ h1->Write();   // 写入直方图
 
 "Y+"	The Y-axis is drawn on the right side of the plot
 
+
 // 下面的 draw option 仅适用于 1D 直方图
 
 "AH": Draw the histogram, but not the axis labels and tick marks
@@ -1308,7 +1327,7 @@ h1->Write();   // 写入直方图
 
  " " : Draw a 3D scatter plot.
 
-"`BOX`": Draw a box for each cell with volume proportional to
+"BOX": Draw a box for each cell with volume proportional to
     contents
 
 "LEGO": Same as "`BOX`"
@@ -1324,6 +1343,33 @@ h1->Write();   // 写入直方图
 ```
 
 + **Statistics Display**
+  >+ 直方图画图时，默认显示右上角带有统计值、平均值等的方框
+  >+ 可以使用 TH1::SetStats(kFalse) 关掉 statistics box
+  >+ 一旦 statistics box 画出来, 可以使用 gStyle->SetOptStat(mode)设置显示模式
+  >+ 因此, 有两种方法关掉 statistics box; 
+  h1->SetStats(kFalse);
+  gStyle->SetOptStat(0)
+```C++
+// mode 通过 9 个数字来控制
+// mode = ksiourmen  (default = 000001111)
+// 注意1: gStyle->SetOptStat(0) 关掉 statistics box
+// 注意2: 应使用 SetOptStat(1111)的形式， 而不是 SetOptStat(0001111)
+// 注意3: mode 也可以使用字母 nem... 等， 具体参见 Root User's Guides
+n = 1   the name of histogram is printed
+e = 1  the number of entries
+m = 1  the mean value
+m = 2  the mean and mean error values
+r = 1  the root mean square (RMS)
+r = 2  the RMS and RMS error
+u = 1  the number of underflows
+o = 1  the number of overflows
+i = 1  the integral of bins
+s = 1  the skewness
+s = 2  the skewness and the skewness error
+k = 1  the kurtosis
+k = 2  the kurtosis and the kurtosis error
+```
+
 
 
 + **Z Option: Display the Color Palette on the Pad**
@@ -1338,13 +1384,35 @@ hist2->Draw("LEGOZ");
 
 
 + **坐标轴-标题等设置**
-  >+ 当 small非常小(如 $1e^{-5}$), 使用以下方法可实现多个 subpad 相连的效果.
-  // 根据实际情况设置
-  gPad->SetBottomMargin(small);
-  gPad->SetTopMargin(small);
-  gPad->SetLeftMargin(small);
-  gPad->SetRightMargin(small);
-![效果图](ROOT/pictures/SSD_Coverage.png)
+```C++
+// 设置横纵坐标的标题
+h->GetXaxis()->SetTitle("X axis title");
+h->GetYaxis()->SetTitle("Y axis title");
+h->GetZaxis()->SetTitle("Z axis title");
+
+//设置坐标轴的刻度尺
+gPad->SetTickx(); // tickd marks on the other side of x axis are drawn
+h->Draw("X+");    // x axis is drawn on the top side
+h->Draw("Y+");    // y axis is drawn on the right side
+
+// TPad::SetTicks()
+h->SetTicks(tx,ty);
+  //tx=ty=0  by defalt, the left Y axis and X bottom axis are drawn 
+  //tx = 1   ticks marks on the top    (inside)
+  //tx = 2   ticks marks and labels on the top
+  //ty = 1   ticks marks on the right  (inside)
+  //ty = 2   ticks marks and labels on the right
+
+
+//当 small非常小(如 $1e^{-5}$), 使用以下方法可实现多个 subpad 相连的效果.
+// 根据实际情况设置
+gPad->SetBottomMargin(small);
+gPad->SetTopMargin(small);
+gPad->SetLeftMargin(small);
+gPad->SetRightMargin(small);
+```
+
+![效果图](ROOT/pictures/SSD_L2BCH12_L3CH06.png)
 
 + **误差选项 - Error Bars Options**
 ```C++
@@ -1505,9 +1573,41 @@ Text color = marker color
 ...
 ```
 
++ **一些有用的操作**
+```C++
+TH1::Smooth    
+// smooth the bin contents of a 1D histogram
 
-+ **Miscellaneous 操作**
+TH1::Integral(Option_t *opt)
+// integral of the bin contents in a given bin range
+// if the option "width" is specified， the integral is the sum of 
+// of the bin contents multiplied by the bin width in x
+
+TH1::GetEntries()
+// returns the the number of entries
+
+TH1::GetAsymmetry(TH1 *h2)
+// returns an histogram, containing the asymmetry of this histogram with h2
+// Asymmetry = (h1-h2)/(h1+h2);  // 其中 h1=this 
+
+```
+
+
 + **Alphanumeric Bin Labels**
+```C++
+// 直方图默认采用数字进行 bin 命名. 人们也可以使用非数字形式命名
+
+// 方法1: SetBinLabel     
+TAxis::SetBinLabel(bin,label);
+
+// 方法2: Fill
+hist1->Fill(somename,weight);
+hist2->Fill(x,somename,weight);
+...
+
+// 方法3: TTree::Draw
+// 参考代码: $ROOTSYS/tutorials/tree/cernstaff.C
+```
 
 
 
@@ -1544,7 +1644,6 @@ h3->Divide(h1,h2);
 h3->Divide(h1,h2,1.,1.,"B"); 
 // if h1 is a subset of h2, the content of h3 is binomially distributed
 // use option "B" to get the correct bin errors
- 
 
 ```
 
@@ -1581,14 +1680,82 @@ h2d->TProfileY();
 ```
 
 + **直方图叠加**
+![Superimposed histograms with different scales](ROOT/pictures/0300003A.png)
 
+```CPP
+void twoscales()
+{
+   TCanvas *c1 = new TCanvas("c1","different scales hists",600,400);
+   //create, fill and draw h1
+   gStyle->SetOptStat(kFALSE);
+   TH1F *h1 = new TH1F("h1","my histogram",100,-3,3);
+   for (Int_t i=0;i<10000;i++) h1->Fill(gRandom->Gaus(0,1));
+   h1->Draw();
+   c1->Update();
+   //create hint1 filled with the bins integral of h1
+   TH1F *hint1 = new TH1F("hint1","h1 bins integral",100,-3,3);
+   Float_t sum = 0;
+   for (Int_t i=1;i<=100;i++) {
+      sum += h1->GetBinContent(i);
+      hint1->SetBinContent(i,sum);
+   }
+   //scale hint1 to the pad coordinates
+   Float_t rightmax = 1.1*hint1->GetMaximum();
+   Float_t scale    = gPad->GetUymax()/rightmax;
+   hint1->SetLineColor(kRed);
+   hint1->Scale(scale);
+   hint1->Draw("same");
+   //draw an axis on the right side
+   TGaxis*axis = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
+                            gPad->GetUxmax(),gPad->GetUymax(),
+                            0,rightmax,510,"+L");
+   axis->SetLineColor(kRed);
+   axis->SetLabelColor(kRed);
+   axis->Draw();
+}
+```
 
 
 #### <font color=#FF00FF> 2.1.6 THStack </font>
+> 当需要将多个一维直方图画同时在一个 Pad 上面时, 可以使用 THStack 
+
+```C++
+// 通过 THStack::Add(TH1 *h) 方法添加直方图
+// 注意 hstack->Draw("nostack"); 的效果
+
+// 代码举例
+{
+   THStack hs("hs","test stacked histograms");
+   TH1F *h1 = new TH1F("h1","test hstack",100,-4,4);
+   h1->FillRandom("gaus",20000);
+   h1->SetFillColor(kRed);
+   hs.Add(h1);
+   TH1F *h2 = new TH1F("h2","test hstack",100,-4,4);
+   h2->FillRandom("gaus",15000);
+   h2->SetFillColor(kBlue);
+   hs.Add(h2);
+   TH1F *h3 = new TH1F("h3","test hstack",100,-4,4);
+   h3->FillRandom("gaus",10000);
+   h3->SetFillColor(kGreen);
+   hs.Add(h3);
+   TCanvas c1("c1","stacked hists",10,10,700,900);
+   c1.Divide (1,2);
+   c1.cd(1);
+   hs.Draw();
+   c1.cd(2);
+   hs->Draw("nostack");
+}
+```
 
 #### <font color=#FF00FF> 2.1.7 TProfile </font>
+>+ X 与 Y 两组数之间的关系可以用 2D 直方图或散点图表示出来
+>+ 很多时候， 2D直方图或散点图不那么令人满意, 尤其是数据点比较少的时候
+>+ 如果 Y 是 X 的某个未知的、单值的函数, profile 直方图比散点图精度高得多！
+>+ Profile 直方图显示: 对于X轴上的每个 bin，显示 Y 的平均值, 且数据点带有误差, 
+   误差大小为 X 轴上每个 bin 的 RMS
 
-#### <font color=#FF00FF> 2.1.8 TH2, TH3 </font>
+
+#### <font color=#FF00FF> 2.1.8 TH2, TH3, TH2Poly, TPie </font>
 
 + **Drawing a Sub-range of a 2-D Histogram**
 ```C++
@@ -1604,6 +1771,42 @@ h2->Draw("[cut1,-cut2],surf,same");
 // "surf" for all the bis inside cut1, and all the bins outside cut2
 ```
 
+
+
++ **TH2Poly** 
+  >+ TH2Poly 是一个二维直方图, 可以定义任意多边形
+  >+ 参考代码: $ROOTSYS/tutorials/hist/th2poly*.C
+
+
++ **TPie**
+```C++
+// 参考程序: $ROOTSYS/tutorials/graphics/piechart.C
+
+// TPie 的 draw options：
+"R"  Paint the labels along the central "R" adius of slices.
+
+"T"  Paint the labels in a direction "T" angent to circle that
+     describes the TPie.
+
+"3D"  Draw the pie-chart with a pseudo 3D effect.
+
+"NOL" No OutLine: do not draw the slices outlines; any property
+    over the slices line is ignored.
+
+
+// SetLabelFormat
+"%txt"   to print the text label associated with the slice
+
+"%val"   to print the numeric value of the slice
+
+"frac"   to print the relative fraction of this slice
+
+"perc"   to print the % of this slice
+
+```
+![The picture generated by tutorial macro piechart.C](ROOT/pictures/03000042.png)
+
+&emsp;
 #### <font color=#FF00FF> 2.1.9 直方图用户图形界面(略)  </font>
 
 
@@ -1674,7 +1877,7 @@ graph->SetMarkerStyle(style);  // 见 1.8.4.3 Markers
 ```
 
 
-**2.2.1.3 Graph Draw Options**
+**2.2.1.3 将多个 graph 画在一起**
 ```C++
 // 将两个/多个 graph 画在一起
 // 坐标轴只需要画一次
@@ -1998,8 +2201,9 @@ func->FixParameter();    // 固定某个参数
 **2.3.8.2 MINUIT2**
 
 
-#### <font color=#FF00FF> 2.3.9 利用神经网络进行数据拟合 </font>
+#### <font color=#FF00FF> 2.3.9 利用神经网络进行数据拟合(略) </font>
 
+#### <font color=#FF00FF> 2.3.10 RooFit 拟合 </font>
 
 
 
