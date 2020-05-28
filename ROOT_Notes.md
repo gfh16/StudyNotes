@@ -1029,6 +1029,7 @@ TProfile2D : two-dimensional profiles
 ```
 
 
+&emsp;
 #### <font color=#FF00FF> 2.1.2 直方图创建-填充-画图-保存 </font>
 + **创建直方图**
 ```C++
@@ -1136,6 +1137,13 @@ h1->FillRandom("gaus",10000); // 默认的 gaus 分布 mean=0, sigma=1
 TH1D* h2 = new TH1D("h2","Histo from a existing histo",100,-3,3);
 h2->FillRandom(h1,10000);
 
+// 使用 gRandom 产生 Gaus, Possion, Landau 等多种随机数
+for (int i = 0; i<10000; ++i) {
+double x = gRandom->Gaus(0,1);
+double y = gRandom->Gaus(1,2);
+h2->Fill(x,y);
+}
+
 // TH1::GetRandomm() 
 // used to get a random number distributed according to
 // the contents of a histogram
@@ -1153,7 +1161,6 @@ h2->FillRandom(h1,10000);
 // 3.TH1::DrawNormalized()
 ```
 
-
 + **保存直方图**
 ```C++
 // 先写入 .root file, 在保存
@@ -1167,8 +1174,9 @@ h1->FillRandom("gaus",10000);  // 填充直方图
 h1->Write();   // 写入直方图
 ```
 
-#### <font color=#FF00FF> 2.1.3 直方图画图常用设置 </font>
 
+&emsp;
+#### <font color=#FF00FF> 2.1.3 直方图画图常用设置 </font>
 
 + **画图选项 - Draw Options**
 ```C++
@@ -1528,11 +1536,7 @@ Text color = marker color
 ```
 
 
-
-
-
-
-
+&emsp;
 #### <font color=#FF00FF> 2.1.4 直方图其他设置  </font>
 
 + **散点图选项 - Scatter Plot Options**
@@ -1556,7 +1560,8 @@ Text color = marker color
 1.For each cell (i,j) a box is drawn with surface proportional to contents.
 2.The size of the box is proportional to the absolute value of the cell contents.
 3.The cellls with negative contents are drawn with an X on top of the boxes.
-4.With option `BOX1` a button is drawn for each cell with surface proportional to contents absolute value.
+4.With option `BOX1` a button is drawn for each cell with surface proportional to 
+  contents absolute value.
 5.A sunken button is drawn for negative values, a raised one for positive values.
 ```
 
@@ -1610,8 +1615,7 @@ hist2->Fill(x,somename,weight);
 ```
 
 
-
-
+&emsp;
 #### <font color=#FF00FF> 2.1.5 直方图的操作 </font>
 + **直方图的运算**
 ```C++
@@ -1716,6 +1720,7 @@ void twoscales()
 ```
 
 
+&emsp;
 #### <font color=#FF00FF> 2.1.6 THStack </font>
 > 当需要将多个一维直方图画同时在一个 Pad 上面时, 可以使用 THStack 
 
@@ -1747,14 +1752,108 @@ void twoscales()
 }
 ```
 
+
+&emsp;
 #### <font color=#FF00FF> 2.1.7 TProfile </font>
+
++ **什么是 Profile 直方图？**
 >+ X 与 Y 两组数之间的关系可以用 2D 直方图或散点图表示出来
 >+ 很多时候， 2D直方图或散点图不那么令人满意, 尤其是数据点比较少的时候
 >+ 如果 Y 是 X 的某个未知的、单值的函数, profile 直方图比散点图精度高得多！
 >+ Profile 直方图显示: 对于X轴上的每个 bin，显示 Y 的平均值, 且数据点带有误差, 
-   误差大小为 X 轴上每个 bin 的 RMS
+误差大小为 X 轴上每个 bin 的 RMS
 
 
++ **Profile 直方图的参数设置**
+```C++
+// TProfile 包含 8 个参数, 前 5 个参数与 TH1D 一致
+// 另外 3 个参数:  ylow， yup , 以及 Build Option
+TProfile(const char *name,const char *title,Int_t nbinsx,
+         Double_t xlow, Double_t xup, Double_t ylow, Double_t yup,
+         Option_t *option)
+
+// 只能使用 TProfile::Fill 来填充 profile histogram
+// 填充时, 先判断所填数据点的 Y 值是否在 ylow 与 yup 之间
+// 若是, 则填充; 若不是, 则放弃填充
+
+// Build Options
+// 不确定度如何计算？
+1.对于每个 bin, 假定 Y = values of data points, N = number of data points
+  为方便讨论, 对于第 j 个 bin, 作以下记号
+  E[j] = sum Y**2
+  L[j] = number of entries in bin j
+  H[j] = sum Y
+  h[j] = H[j] / L[j]
+  s[j] = sqrt[E[j] / L[j] - h[j]**2]
+  e[j] = s[j] / sqrt[L[j]]
+
+
+2.如果一个 bin 里面 N 个数据点都有相同的值 Y, 如整数的填充.
+  (1) 该 bin 的值 Y 的 spread = s[j] = 0
+
+
+3. build options
+
+' '   默认是空, 误差计算:
+      error = spread/sqrt(N)   for a non-zero spread
+      error = sqrt(Y)/sqrt(N)  for a spread of zero and some data points
+      error = 0                for no data points
+
+'s'   误差计算:
+      error = spread          for non-zero spread
+      error = sqrt(Y)         for a spread of zero and some data 
+      error = 0               for no data points
+
+'i'   误差计算:
+      error = spread/sqrt(N)  for non-zero spread
+      error = 1/sqrt(12*N)    for a spread of zero and some data 
+      error = 0               for no data points
+
+'G'   误差计算:
+      error = spread/sqrt(N)  for non-zero spread
+      error = sigma/sqrt(N)   for a spread of zero and some data 
+      error = 0               for no data points
+
+// option 'i' is used for integer Y values with the uncertainty of 
+// $\pm 0.5$, assuming the probability that Y takes any value between Y-0.5
+// and Y+0.5 is uniform (the same argument for Y uniformly distributed
+// between Y and Y+1)
+// An example is an ADC measurement. 
+
+// The '`G`' option is useful, if all Y variables are   distributed 
+// according to some known Gaussian of standard deviation Sigma. 
+// For example when all Y's are experimental quantities measured with 
+// the same instrument with precision Sigma.
+
+```
+
++ **Profile 直方图的使用技巧**
+```C++
+
+// 1. Drawing A Profile Without Error Bars
+profile->Draw("HIST");
+
+
+// 2. Create a Profile from a 2D Histogram
+profilex = h2->ProfileX();
+profiley = h2->ProfileY();
+
+
+// 3.Create a Histogram from a Profile
+TH1D *h1 = myProfile.ProjectionX();
+TH2D *h2 = myProfile.ProjectionXY();
+
+// 4.Generating a Profile from a TTree
+TTree::Draw("option")  // option = 'prof', 'profs'  
+
+```
+
++ **2D Profiles**
+>+ 很多时候, 2D profiles 比 3D 直方图更好用！
+
+
+
+&emsp;
 #### <font color=#FF00FF> 2.1.8 TH2, TH3, TH2Poly, TPie </font>
 
 + **Drawing a Sub-range of a 2-D Histogram**
@@ -1806,14 +1905,9 @@ h2->Draw("[cut1,-cut2],surf,same");
 ```
 ![The picture generated by tutorial macro piechart.C](ROOT/pictures/03000042.png)
 
+
 &emsp;
 #### <font color=#FF00FF> 2.1.9 直方图用户图形界面(略)  </font>
-
-
-
-
-
-
 
 
 
