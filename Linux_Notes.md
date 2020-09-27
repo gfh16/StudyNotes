@@ -80,8 +80,37 @@ nautilus -q
    deb-src http://mirrors.cqu.edu.cn/ubuntu/ trusty-proposed main restricted universe multiverse  
    deb-src http://mirrors.cqu.edu.cn/ubuntu/ trusty-backports main restricted universe multiverse  
     
-把上面的地址“全部“”复制到sources.list中。可根据个人情况选择更新源，个人觉得重庆大学更新源速度比较快，而且有各个版本ubuntu的更新源，比较推荐
+把上面的地址“全部“”复制到sources.list中。可根据个人情况选择更新源，个人觉得重庆大学
+更新源速度比较快，而且有各个版本ubuntu的更新源，比较推荐
     
 5. 更新源列表信息：  sudo apt-get update  
-   //必须执行这一步骤，在执行这一步时如有提示错误，则找到相关内容将其注释掉（可能会出现网站无法连接的情况，将相关网站注释掉即可），想省事儿可以在第三步把 sources.list中内容全部删除，然后将需要的更新源的地址复制进去即可。若在软件更新界面为刷新，可以尝试重启
+   //必须执行这一步骤，在执行这一步时如有提示错误，则找到相关内容将其注释掉
+   //（可能会出现网站无法连接的情况，将相关网站注释掉即可），想省事儿可以在第三步把
+   //sources.list中内容全部删除，然后将需要的更新源的地址复制进去即可。若在软件更新界面为刷新，可以尝试重启
+```
+
+
+### <font color=#00BFFF> Linux 下连接校内服务器 </font>
+```C++
+1.安装 openconnect
+$ sudo apt install openconnect
+
+2.下载http://www.infradead.org/openconnect/vpnc-script.html提供
+   的vpnc-script,并复制到/etc/vpnc/vpnc-script
+$ wget http://git.infradead.org/users/dwmw2/vpnc-scripts.git/blob_plain/HEAD:/vpnc-script
+$ sudo cp vpnc-script /etc/vpnc/vpnc-script
+
+3.连接校园网
+$ sudo openconnect --juniper -u [学号] [sslvpn url]
+# 如 sudo openconnect --juniper -u 20xxxxxxxx https://sslvpn.tsinghua.edu.cn/
+
+4.之后会要求输入密码，没有报错并最终显示类似ESP session established with serve,
+  表明校园网连接成功.
+
+5.打开新的窗口, 登录服务器 (ENPG的服务器)
+$ ssh -X username@166.111.26.233
+
+
+// 外网访问 ENPG 服务器
+ssh -X -p 4869 username@166.111.26.233
 ```

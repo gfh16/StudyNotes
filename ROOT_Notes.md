@@ -8,11 +8,11 @@
 <center> ROOT 教程 </font>
 ===========================
 
-> ROOT 是粒子物理与核物理数据分析的好工具！！！      
-> ROOT的学习不是一朝一夕的事情,需要反复反复再反复使用，才可能较好地掌握它.             
-这里是我学习使用ROOT的总结、感悟. 本文档的出发点是给初学者提供一种学习ROOT的思路如果C++基础好,学习ROOT会很快上手！这里简单介绍ROOT里面几个
-最常用到的类,以及这些类的基本操作方法对于一些重要的类,仔细研读源程序会
-有很大收获！                                
+>+ ROOT 是粒子物理与核物理数据分析的好工具！！！      
+>+ ROOT的学习不是一朝一夕的事情,需要反复反复再反复使用，才可能较好地掌握它.             
+这里是我学习使用ROOT的总结、感悟. 本文档的出发点是给初学者提供一种学习ROOT的思路. 
+如果C++基础好,学习ROOT会很快上手！这里简单介绍ROOT里面几个最常用到的类,以及这些
+类的基本操作方法对于一些重要的类,仔细研读源程序会有很大收获！                                
 
 
 > ROOT学习资料
@@ -122,50 +122,23 @@
 ### 附录： 配置环境变量
 
 ```C++
-#!/bin/bash
-#export cadmesh_DIR=/home/nuclearresearch/MyPrograms/CADMesh/install/lib/cmake/cadmesh-.
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/nuclearresearch/MyPrograms/CADMesh/install/lib
+// 环境变量配置举例
+// 来源与 /data/WorkEnvironment.sh (小秦智)
+{
+  alias useGeant4="source /data/CEE/NEW/fairsoft_may18p1_root6/installation/bin/geant4.sh"
+  alias useROOT="source /data/CEE/NEW/fairsoft_may18p1_root6/installation/bin/thisroot.sh"
 
-#for root setting
-#!/bin/bash
-#export ROOTSYS=$PACKAGES_PATH/root
-source  /home/sea/Packages/root6.18/root_install/bin/thisroot.sh
+  # Recommend useFROOT(not useROOT) for ROOT because of some library installed in FairSoft not ROOT
+  alias useFROOT="source /data/CEE/NEW/fairroot_v18.0.6-fairsoft_may18p1_root6/bin/FairRootConfig.sh"
 
-#######################################
-##for xerces-c-3.1.1
-#export XERCESC_LIBRARY=/usr/local/lib
-#export XERCESC_INCLUDE_DIR=/usr/local/include/xercesc
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+  export CEE_dir="/data/CEE/NEW/CeeRoot"
+  export ROOTEX_dir="/data/CEE/NEW/fairsoft_may18p1_root6/installation/share/doc/root/tutorials"
+  export G4EX_dir="/data/CEE/NEW/fairsoft_may18p1_root6/installation/share/Geant4-10.4.1/examples"
+  export FROOT_Template_dir="/data/CEE/NEW/fairroot_src_v18.0.6-fairsoft_may18p1_root6/templates/project_template"
 
-#################################################
-##for Geant4.9.6.p03
-#export Geant4_9_6_path=/home/gfh16/Packages/Geant4/geant4.9.6.p03-install
-#source $Geant4_9_6_path/bin/geant4.sh
-#source $Geant4_9_6_path/share/Geant4-9.6.3/geant4make/geant4make.sh
-
-
-####for data
-#export  G4ABLA3=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4ABLA3.0
-#export  G4EMLOW=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4EMLOW6.50
-#export  G4ENSDFSTATE=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4ENSDFSTATE2.1
-#export  G4NDL=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4NDL4.5
-#export  G4PII=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4PII1.3
-#export  G4NEUTRONXS=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4NEUTRONXS1.4
-#export  G4SAIDDATA=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4SAIDDAT1.1
-#export  G4TENDL=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4TENDL1.3
-#export  PhotonEvaporation=/home/gfh16/Geant4/geant4.9.6.p03-install/data/G4PhotonEvaporation4.3.2
-#export  RadioactiveDecay=/home/gfh16/Geant4/geant4.9.6.p03-install/data/RadioactiveDecay5.1.1
-#export  RealSurface=/home/gfh16/Geant4/geant4.9.6.p03-install/data/RealSurface1.0
-
-##for Geant4.9.6.p03// for /home/gfh16/Geant4
-#export Geant4_9_6_path=/home/gfh16/Packages/geant4/geant4.9.6.p03-install
-#source $Geant4_9_6_path/bin/geant4.sh
-#source $Geant4_9_6_path/share/Geant4-9.6.3/geant4make/geant4make.sh
-
-##for Geant4.9.6.p03// for /home/gfh16/Geant4
-#export Geant4_9_6_path=/home/gfh16/Packages/GEANT4/geant4.10.03.p01-install
-#source $Geant4_9_6_path/bin/geant4.sh
-#source $Geant4_9_6_path/share/Geant4-10.3.1/geant4make/geant4make.sh
+  export GARFIELD_HOME="/data/CEE/NEW/garfield"
+  alias usegarfield=". /data/CEE/NEW/garfield/build/setup.sh"    
+}
 ```
 
 
@@ -3101,6 +3074,7 @@ void tree1r()
    Double_t random;
    Int_t ev;
 
+// t1->SetMakeClass(1);  // 如果 branch 是用类来写的, 则需要加这条语句 
    t1->SetBranchAddress("px",&px);           // step4. SetBranchAddress
    t1->SetBranchAddress("py",&py);
    t1->SetBranchAddress("pz",&pz);
@@ -3202,14 +3176,29 @@ void TreeReaderSimple()
   TFile* myFile = TFile::Open("hsimple.root");
 
   TTreeReader myReader("ntuple", myFile);
-  TTreeReaderValue<Float_t> myPx(myReader, "px");
-  TTreeReaderValue<Float_t> myPy(myReader, "py");
+  TTreeReaderValue<Float_t> myPx(myReader,  "px");
+  TTreeReaderValue<Float_t> myPy(myReader,  "py");
+  TTreeReaderArray<Float_t> myarr(myReader, "arr"); // 读取数组
+
    while (myReader.Next()) {
-      myHist->Fill(*myPx + *myPy);
+      myHist->Fill(*myPx + *myPy);  // 注意: 对于非数组数据,一定要有 "*"
    }
    myHist->Draw();
 }
 ```
+
++ **读取 Tree 的方法总结**
+```C++
+// Tree 的读取通常有三种方式:
+
+// 1.SetBranchAdress
+
+// 2.TTreeReader
+
+// 3.MakeClass
+
+```
+
 
 
 &emsp;
