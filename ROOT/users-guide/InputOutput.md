@@ -1,3 +1,6 @@
+
+[toc]
+
 # Input/Output
 \index{I/O}
 

@@ -1,19 +1,13 @@
-C++ 实现技巧
-=============
 
-目录
-------
-[toc]
-
-
-
-#### 判断一个点是否在给定的多边形内
-[源代码链接](https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect)
+// 判断一个点是否在给定的多边形内
+//[源代码链接](https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect)
 ```C++
 
 // A C++ program to check if a given point lies inside a given polygon
 // Refer https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
 // for explanation of functions onSegment(), orientation() and doIntersect()
+
+
 #include <iostream>
 using namespace std;
 
@@ -145,14 +139,3 @@ int main()
 	return 0;
 }
 
-```
-
-
-#### 关于主函数m main(int argc, char** argv)
-```C++
-1. argc表示参数个数, char** argv是存储参数的指针数组
-2. 如果没有加任何参数，则argc=1, argv[0]="路径/myc.exe"
-3. 如果加了一个参数，argc为2，其实就是表示argv指针数组的大小
-      argv[0] 为"路径/myc.exe";
-      argv[1] 为 第一个参数
-```
