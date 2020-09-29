@@ -339,7 +339,7 @@ void Step1_DEEPoints_1st_CutsForDEELines()
 2. 在ROOT6中，‘DefineBehavior’等函数定义在命名空间ROOT::Internal中
 
 3. 解决办法：在 deedict.cxx 文件中，加入命名空间：
-   using namesapce ROOT::Internal;
+   using namespace ROOT::Internal;
 
 4. 至此，还可能出现 "未定义的引用" 问题， 解决方法如 Q1 所述。
 
