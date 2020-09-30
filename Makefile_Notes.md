@@ -943,3 +943,45 @@ clean:
 ```
 
 
+#### <font color=#FF00FF> 3.3 我的 Makefile </font>
+```shell
+## 定义文件路径
+DIR_INC := include/
+DIR_SRC := src/
+DIR_OBJ := obj/
+DIR_BIN := bin/
+
+## 定义编译参数
+CPP        := g++
+
+## 定义 ROOT 编译参数
+ROOTCFLAGS := -c -g -Wall `root-config --cflags`
+ROOTGLIBS  := `root-config --glibs`
+## 使用 TSpectrum, TMath::Interpolator
+ROOTLIBS   := -lSpectrum -lMathMore 
+
+TARGET     := main
+BIN_TARGET := ${DIR_BIN}${TARGET}
+
+SOURCES    := $(shell find $(DIR_SRC) -name "*.C") main.C
+INCLUDES   := $(shell find $(DIR_INC) -name "*.h")
+OBJECTS    := $(patsubst %.C, %.o, $(SOURCES))
+
+all: $(BIN_TARGET)
+
+
+$(BIN_TARGET): $(OBJECTS)
+	$(CPP) $(OBJECTS) $(ROOTGLIBS) $(ROOTLIBS) -o $@
+	rm -f $(OBJECTS)
+
+
+%.o : %.C $(INCLUDES)
+	$(CPP) $(ROOTCFLAGS) $< -o $@
+
+
+.PHONY: clean
+clean:
+	rm ./*~ ${BIN_TARGET}
+
+```
+
