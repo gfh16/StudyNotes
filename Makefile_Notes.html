@@ -305,6 +305,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#font-colorff00ff-31-%E4%BB%8E%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90%E8%AE%A4%E8%AF%86-makefile-font"> 3.1 &#x4ECE;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#x8BA4;&#x8BC6; Makefile </a></li>
 <li><a href="#font-colorff00ff-32-%E5%A6%82%E4%BD%95%E5%9C%A8-makefile-%E9%87%8C%E9%9D%A2%E9%93%BE%E6%8E%A5-root-font"> 3.2 &#x5982;&#x4F55;&#x5728; Makefile &#x91CC;&#x9762;&#x94FE;&#x63A5; ROOT </a></li>
+<li><a href="#font-colorff00ff-33-%E6%88%91%E7%9A%84-makefile-font"> 3.3 &#x6211;&#x7684; Makefile </a></li>
 </ul>
 </li>
 </ul>
@@ -1235,7 +1236,47 @@ $<span class="token punctuation">(</span>EXECUTABLE<span class="token punctuatio
 clean<span class="token operator">:</span>
 	rm <span class="token punctuation">.</span><span class="token comment">/*~ ./*.o ./test
 
-</span></pre>
+</span></pre><h4 class="mume-header" id="font-colorff00ff-33-%E6%88%91%E7%9A%84-makefile-font"><font color="#FF00FF"> 3.3 &#x6211;&#x7684; Makefile </font></h4>
+
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token comment">## &#x5B9A;&#x4E49;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</span>
+DIR_INC :<span class="token operator">=</span> include/
+DIR_SRC :<span class="token operator">=</span> src/
+DIR_OBJ :<span class="token operator">=</span> obj/
+DIR_BIN :<span class="token operator">=</span> bin/
+
+<span class="token comment">## &#x5B9A;&#x4E49;&#x7F16;&#x8BD1;&#x53C2;&#x6570;</span>
+CPP        :<span class="token operator">=</span> g++
+
+<span class="token comment">## &#x5B9A;&#x4E49; ROOT &#x7F16;&#x8BD1;&#x53C2;&#x6570;</span>
+ROOTCFLAGS :<span class="token operator">=</span> -c -g -Wall <span class="token variable"><span class="token variable">`</span>root-config --cflags<span class="token variable">`</span></span>
+ROOTGLIBS  :<span class="token operator">=</span> <span class="token variable"><span class="token variable">`</span>root-config --glibs<span class="token variable">`</span></span>
+<span class="token comment">## &#x4F7F;&#x7528; TSpectrum, TMath::Interpolator</span>
+ROOTLIBS   :<span class="token operator">=</span> -lSpectrum -lMathMore 
+
+TARGET     :<span class="token operator">=</span> main
+BIN_TARGET :<span class="token operator">=</span> <span class="token variable"><span class="token variable">$(</span>DIR_BIN<span class="token punctuation">}</span><span class="token variable">)</span></span><span class="token variable"><span class="token variable">$(</span>TARGET<span class="token variable">)</span></span>
+
+SOURCES    :<span class="token operator">=</span> <span class="token variable"><span class="token variable">$(</span>shell <span class="token function">find</span> <span class="token punctuation">$(</span>DIR_SRC<span class="token variable">)</span></span> -name <span class="token string">&quot;*.C&quot;</span><span class="token punctuation">)</span> main.C
+INCLUDES   :<span class="token operator">=</span> <span class="token variable"><span class="token variable">$(</span>shell <span class="token function">find</span> <span class="token punctuation">$(</span>DIR_INC<span class="token variable">)</span></span> -name <span class="token string">&quot;*.h&quot;</span><span class="token punctuation">)</span>
+OBJECTS    :<span class="token operator">=</span> <span class="token variable"><span class="token variable">$(</span>patsubst %.C, %.o, <span class="token punctuation">$(</span>SOURCES<span class="token variable">)</span></span><span class="token punctuation">)</span>
+
+all: <span class="token variable"><span class="token variable">$(</span>BIN_TARGET<span class="token variable">)</span></span>
+
+
+<span class="token variable"><span class="token variable">$(</span>BIN_TARGET<span class="token variable">)</span></span><span class="token keyword">:</span> <span class="token variable"><span class="token variable">$(</span>OBJECTS<span class="token variable">)</span></span>
+	<span class="token variable"><span class="token variable">$(</span>CPP<span class="token variable">)</span></span> <span class="token variable"><span class="token variable">$(</span>OBJECTS<span class="token variable">)</span></span> <span class="token variable"><span class="token variable">$(</span>ROOTGLIBS<span class="token variable">)</span></span> <span class="token variable"><span class="token variable">$(</span>ROOTLIBS<span class="token variable">)</span></span> -o <span class="token variable">$@</span>
+	<span class="token function">rm</span> -f <span class="token variable"><span class="token variable">$(</span>OBJECTS<span class="token variable">)</span></span>
+
+
+%.o <span class="token keyword">:</span> %.C <span class="token variable"><span class="token variable">$(</span>INCLUDES<span class="token variable">)</span></span>
+	<span class="token variable"><span class="token variable">$(</span>CPP<span class="token variable">)</span></span> <span class="token variable"><span class="token variable">$(</span>ROOTCFLAGS<span class="token variable">)</span></span> $<span class="token operator">&lt;</span> -o <span class="token variable">$@</span>
+
+
+.PHONY: clean
+clean:
+	<span class="token function">rm</span> ./*~ <span class="token variable">${BIN_TARGET}</span>
+
+</pre>
       </div>
       
       

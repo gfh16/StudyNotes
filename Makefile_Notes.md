@@ -961,7 +961,7 @@ ROOTGLIBS  := `root-config --glibs`
 ROOTLIBS   := -lSpectrum -lMathMore 
 
 TARGET     := main
-BIN_TARGET := ${DIR_BIN}${TARGET}
+BIN_TARGET := $(DIR_BIN})$(TARGET)
 
 SOURCES    := $(shell find $(DIR_SRC) -name "*.C") main.C
 INCLUDES   := $(shell find $(DIR_INC) -name "*.h")
