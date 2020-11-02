@@ -23,7 +23,7 @@
 > [5. 新版本Reference-Guide](https://root.cern/doc/master/annotated.html )  
 > [6. *旧版本Reference-Guide](https://root.cern.ch/root/html304/)
 > [7. ROOT 官网上的 cources 资料](https://root.cern/courses)
-
+> [8. ROOT 官网 ROOT Manual](https://root.cern/manual/)
 
 >  <font color=#DC143C >ROOT学习方法参考!!!</font>
 > 1. 入门阶段：建议阅读顺序，ROOT_for_beginners，杨振伟老师ROOT课程讲义, 完成里面的练习
