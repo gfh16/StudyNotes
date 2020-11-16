@@ -6,8 +6,16 @@
 
 
 <center> Geant4 教程 </center>
-===========================
+===============================
+
 >+ 安装使用 Geant4 应注意版本. 
+>+ Geant4 的学习材料可能比较多, 作为新手, 我打算从 geant4 官网的入门教程 "Book For Application DevelopersLogo" 着手, 结合 geant4 安装路径下的例子进行学习！
+
+> Geant4 学习资料
+> [1.Geant4 官网入门教程](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/)
+> [2.Geant4 官方论坛](https://geant4-forum.web.cern.ch/)
+> [3.Geant4 User's Guide (中文版)](https://cloud.tsinghua.edu.cn/f/592b15e0d13e4434a3c7/)
+> [4.工物系杨振伟老师讲义](https://cloud.tsinghua.edu.cn/d/90b1910754ef4f44a73c/)
 
 
 
@@ -17,10 +25,9 @@
 
 
 ## <font color=#DC143C> 附录: </font>
-
 ### <font color=#00BFFF> Geant4 的安装  </font>
 
-#### <font color=#FF00FF> 一. 安装前的准备（在终端中分别执行下面命令）</font>
+#### <font color=#FF00FF> Step1 - 安装前的准备（在终端中分别执行下面命令）</font>
 
 ```C++
 1. sudo apt-get install build-essential  ##  安装gcc等编译程序
@@ -40,7 +47,7 @@
 ```
 
 
-#### <font color=#FF00FF> 二. 安装xerces相关文件（在终端中分别执行下面命令）</font> 
+#### <font color=#FF00FF> Step2 - 安装xerces相关文件（在终端中分别执行下面命令）</font> 
 ```C++
 // 这是GDML相关的库，安装geant4zh之前必须安装xerces文件
  
@@ -58,8 +65,7 @@
 
 ```
 
-
-#### <font color=#FF00FF> 三. 开始安装geant4 (cmake 安装方法) </font>
+#### <font color=#FF00FF> Step3 - 开始安装geant4 (cmake 安装方法) </font>
  ```C++
 1. 在CERN官网下载geant4源文件（选择自己需要的版本，比如：geant4.10.03.p01），
     下载到指定文件夹，并解压：比如我的路径：
@@ -110,7 +116,7 @@
  ```
  
 
-#### <font color=#FF00FF> 四. 添加必要的数据包 </font>
+#### <font color=#FF00FF> Step4 - 添加必要的数据包 </font>
 ```C++
 1. 在http://geant4.web.cern.ch/geant4/support/download.shtml上下载Date file(*)  
 // 一定一定要注意，不同的版本不兼容，要找到你在安装的geant4版本下的数据包
@@ -118,10 +124,9 @@
 
 2. 在文件夹 /home/gfh16/Packages/GEANT4/geant4.10.03.p01-install/share/Geant4-10.3.1/ 
    下新建文件夹 data , 将下好的数据包复制到这里并解压
- ```
+```
  
- 
-#### <font color=#FF00FF> 五. 运行一个例子 </font>
+#### <font color=#FF00FF> Step5 - 运行一个例子 </font>
 ```C++
 1.新建一个目录, 作为 geant4 的工作目录. 用于编译、运行 geant4 的例子. 
     gfh@enpg~$： mkdir geant4
@@ -152,7 +157,13 @@
     /gun/particle e-
     /gun/energy 1 GeV
     /run/beamOn 100
- ```
+```
 
 
 
+
+## <font color=#DC143C> 一. Geant4 基础 -- 入门介绍 </font>
+
+## <font color=#DC143C> 二. Geant4 功能 -- 内容详解 </font>
+
+## <font color=#DC143C> 三. Geant4 例子 -- 从零基础开始 </font>
