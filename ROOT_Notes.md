@@ -3041,13 +3041,25 @@ void tree4w() {
    T->Draw("x","z>2");
    T->Write();
 }
-
 /*
 说明1: 如果不指定 'branchDescriptor', 则文本文件第一行需要有类似这样的字样:
       A/D : Table[2]/F:Ntracks/I:astring/C
 说明2: 因此推荐使用 'branchDescriptor'. 如 "x:y:z"
 说明3: 忽略以 "#" 开头的行
 */
+
+
+// 亦可使用 TNtuple
+{
+  gROOT->cd();
+
+  TNtuple* nt = new TNtuple("nt", "NTUPLE", "fg:CsINum:L2BNum:L2FNum:L1SNum");
+  nt->ReadFile("data/Test_Multi.dat");
+
+  TCanvas* cans1 = new TCanvas("cans1","cans1",800,600);
+  cans1->cd();
+  nt->Draw("L1SNum:L2FNum:L2BNum:CsINum","","PARA");
+}
 ```
 
 
