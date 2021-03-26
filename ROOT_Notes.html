@@ -285,7 +285,8 @@ pre[data-line] .line-highlight[data-end]:after {
 <a href="https://root.cern/doc/master/annotated.html">5. &#x65B0;&#x7248;&#x672C;Reference-Guide</a><br>
 <a href="https://root.cern.ch/root/html304/">6. *&#x65E7;&#x7248;&#x672C;Reference-Guide</a><br>
 <a href="https://root.cern/courses">7. ROOT &#x5B98;&#x7F51;&#x4E0A;&#x7684; cources &#x8D44;&#x6599;</a><br>
-<a href="https://root.cern/manual/">8. ROOT &#x5B98;&#x7F51; ROOT Manual</a></p>
+<a href="https://root.cern/manual/">8. ROOT &#x5B98;&#x7F51; ROOT Manual</a><br>
+<a href="https://root-forum.cern.ch/">9. ROOT &#x8BBA;&#x575B;</a></p>
 </blockquote>
 <blockquote>
 <p><font color="#DC143C">ROOT&#x5B66;&#x4E60;&#x65B9;&#x6CD5;&#x53C2;&#x8003;!!!</font></p>
@@ -3414,13 +3415,25 @@ split is not expandable.</li>
    T<span class="token operator">-&gt;</span><span class="token function">Draw</span><span class="token punctuation">(</span><span class="token string">&quot;x&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;z&gt;2&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
    T<span class="token operator">-&gt;</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-
 <span class="token comment">/*
 &#x8BF4;&#x660E;1: &#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A; &apos;branchDescriptor&apos;, &#x5219;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x7B2C;&#x4E00;&#x884C;&#x9700;&#x8981;&#x6709;&#x7C7B;&#x4F3C;&#x8FD9;&#x6837;&#x7684;&#x5B57;&#x6837;:
       A/D : Table[2]/F:Ntracks/I:astring/C
 &#x8BF4;&#x660E;2: &#x56E0;&#x6B64;&#x63A8;&#x8350;&#x4F7F;&#x7528; &apos;branchDescriptor&apos;. &#x5982; &quot;x:y:z&quot;
 &#x8BF4;&#x660E;3: &#x5FFD;&#x7565;&#x4EE5; &quot;#&quot; &#x5F00;&#x5934;&#x7684;&#x884C;
 */</span>
+
+
+<span class="token comment">// &#x4EA6;&#x53EF;&#x4F7F;&#x7528; TNtuple</span>
+<span class="token punctuation">{</span>
+  gROOT<span class="token operator">-&gt;</span><span class="token function">cd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  TNtuple<span class="token operator">*</span> nt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TNtuple</span><span class="token punctuation">(</span><span class="token string">&quot;nt&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;NTUPLE&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;fg:CsINum:L2BNum:L2FNum:L1SNum&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  nt<span class="token operator">-&gt;</span><span class="token function">ReadFile</span><span class="token punctuation">(</span><span class="token string">&quot;data/Test_Multi.dat&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  TCanvas<span class="token operator">*</span> cans1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TCanvas</span><span class="token punctuation">(</span><span class="token string">&quot;cans1&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;cans1&quot;</span><span class="token punctuation">,</span><span class="token number">800</span><span class="token punctuation">,</span><span class="token number">600</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  cans1<span class="token operator">-&gt;</span><span class="token function">cd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  nt<span class="token operator">-&gt;</span><span class="token function">Draw</span><span class="token punctuation">(</span><span class="token string">&quot;L1SNum:L2FNum:L2BNum:CsINum&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;PARA&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </pre><p>&#x2003;</p>
 <h4 class="mume-header" id="font-colorff00ff-246-tree-%E7%9A%84%E8%AF%BB%E5%8F%96font"><font color="#FF00FF">  2.4.6 Tree &#x7684;&#x8BFB;&#x53D6;</font></h4>
 
